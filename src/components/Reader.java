@@ -14,14 +14,14 @@ public class Reader {
 		try {
 			Scanner scanner = new Scanner(new File("rules.cf"));
 			
-			
+			while(scanner.hasNextLine()) {
+				rules.add(scanner.nextLine());
+			}
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading file rules.cf");
 		}
-		
-		
 		
 		return rules;
 	}

@@ -2,8 +2,11 @@ package antiSpamFilter;
 
 //TESTE1
 
+//TESTE2
+// TESTE 3
 
 //TESTE dia 30
+//Teste dia 6/11 ALmeida
 
 import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;

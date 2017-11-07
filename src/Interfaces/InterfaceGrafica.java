@@ -48,6 +48,11 @@ public class InterfaceGrafica extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					// new FrameAutomatica();
 					
+					
+					
+					
+					
+					
 				}
 			});
 			

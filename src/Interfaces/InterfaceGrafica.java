@@ -1,4 +1,4 @@
-package antiSpamFilter;
+package Interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -38,8 +38,7 @@ public class InterfaceGrafica extends JFrame{
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					//por para ir para a nova janela
-					
+					new FrameManual();
 				}
 			});
 			
@@ -54,10 +53,7 @@ public class InterfaceGrafica extends JFrame{
 			
 		}
 		
-		public void JanelaAutomatica(){
-			
-		}
-
+		
 		
 		public static void main (String[] args){
 			InterfaceGrafica ig = new InterfaceGrafica();

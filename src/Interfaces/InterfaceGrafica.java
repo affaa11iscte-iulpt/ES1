@@ -46,7 +46,7 @@ public class InterfaceGrafica extends JFrame{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// por para ir para outra janela
+					// new FrameAutomatica();
 					
 				}
 			});

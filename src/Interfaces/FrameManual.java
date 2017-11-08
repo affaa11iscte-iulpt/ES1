@@ -1,14 +1,19 @@
 package Interfaces;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class FrameManual extends JFrame {
 
@@ -16,7 +21,7 @@ public class FrameManual extends JFrame {
 	
 	public FrameManual(){
 		setTitle("Modo Manual");
-		setSize(250,250);
+		setSize(500,500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addComponentes();
 		setVisible(true);
@@ -32,14 +37,20 @@ public class FrameManual extends JFrame {
 	
 	private JPanel northPanel(){
 		JPanel panelNorth = new JPanel();
-		//panelNorth.setLayout(mgr);
-		JTable tabela = new JTable(5, 2);
-		JLabel regra = new JLabel("Regras:");
-		JLabel peso = new JLabel("Pesos:");
 		
-		panelNorth.add(regra);
-		panelNorth.add(peso);
-		panelNorth.add(tabela);
+		List<String> visibleColumns = new ArrayList<String>();
+
+        visibleColumns.add("Regras: ");
+        visibleColumns.add("Pesos: ");
+
+        DefaultTableModel tableModel = new DefaultTableModel(visibleColumns.toArray(),150);
+        JTable tabela = new JTable(tableModel);
+        
+        //tabela.setMinimumSize(new Dimension(600,200));
+		JScrollPane scrollArea = new JScrollPane(tabela);
+		
+		
+		panelNorth.add(scrollArea);
 		
 		return panelNorth;
 		

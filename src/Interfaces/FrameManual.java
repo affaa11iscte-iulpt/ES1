@@ -45,8 +45,7 @@ public class FrameManual extends JFrame {
 
         DefaultTableModel tableModel = new DefaultTableModel(visibleColumns.toArray(),150);
         JTable tabela = new JTable(tableModel);
-        
-        //tabela.setMinimumSize(new Dimension(600,200));
+
 		JScrollPane scrollArea = new JScrollPane(tabela);
 		
 		

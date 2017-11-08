@@ -10,6 +10,3 @@ Grupo 46
 AntiSpamConfigurationForBalancedProfessionalAndLeisureMailbox
 
 Link para um vídeo no youtube com a demonstração da aplicação final desenvolvida (ex: http://...)
-//TESTE ANDRE
-
-//TESTE Dia 6/11

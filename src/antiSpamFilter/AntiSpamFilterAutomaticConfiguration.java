@@ -7,7 +7,7 @@ package antiSpamFilter;
 //Teste dia 6/11 ALmeida------NOVO TESTE
 
 
-//Teste 8/11 andre
+//Teste 8/11 andre Penso que já está a funcionar.
 
 
 

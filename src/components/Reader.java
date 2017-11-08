@@ -8,7 +8,10 @@ import java.util.Scanner;
 
 public class Reader {
 	
-	
+	/**
+	 * 
+	 * @return List of rules
+	 */
 	public static List<String> readRules(){
 		List<String> rules = new ArrayList<String>();
 		try {

@@ -18,7 +18,7 @@ public class Reader {
 	public static List<String> readRules(){
 		List<String> rules = new ArrayList<String>();
 		try {
-			Scanner scanner = new Scanner(new File("rules.cf"));
+			Scanner scanner = new Scanner(new File("files/rules.cf"));
 			
 			while(scanner.hasNextLine()) {
 				rules.add(scanner.nextLine());

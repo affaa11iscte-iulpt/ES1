@@ -15,13 +15,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import components.Reader;
+
 public class FrameManual extends JFrame {
 
-
+	private DefaultTableModel tableModel;
 	
 	public FrameManual(){
 		setTitle("Modo Manual");
-		setSize(500,500);
+		setSize(500,600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addComponentes();
 		setVisible(true);
@@ -43,11 +45,12 @@ public class FrameManual extends JFrame {
         visibleColumns.add("Regras: ");
         visibleColumns.add("Pesos: ");
 
-        DefaultTableModel tableModel = new DefaultTableModel(visibleColumns.toArray(),150);
+        tableModel = new DefaultTableModel(visibleColumns.toArray(),0);
         JTable tabela = new JTable(tableModel);
-
+        
+        addRules();
+        
 		JScrollPane scrollArea = new JScrollPane(tabela);
-		
 		
 		panelNorth.add(scrollArea);
 		
@@ -92,5 +95,13 @@ public class FrameManual extends JFrame {
 		
 		
 		return panelSouth;
+	}
+	
+	public void addRules() {
+        List<String> rules = Reader.readRules();
+        
+		for(String s: rules) {
+        	tableModel.addRow(new String[] {s,""});
+        }
 	}
 }

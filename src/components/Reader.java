@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.uma.jmetal.util.fileinput.util.ReadDoubleDataFile;
+
 public class Reader {
 	
 	/**
+	 * Lê o ficheiro rules.cf e guarda todas as regras numa lista.
 	 * 
-	 * @return List of rules
+	 * @return Lista de regras
 	 */
 	public static List<String> readRules(){
 		List<String> rules = new ArrayList<String>();
@@ -28,4 +31,6 @@ public class Reader {
 		
 		return rules;
 	}
+	
+	
 }

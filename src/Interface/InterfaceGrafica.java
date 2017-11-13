@@ -1,4 +1,4 @@
-package Interfaces;
+package Interface;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class InterfaceGrafica extends JFrame{
-		
+	/**
+	 * Classe onde está implementada a Interface Gráfica
+	 * 
+	 * Foi criada de forma a poder selecionar a forma como vamos fazer o tratamento das regras, isto é, de forma manual ou automática.
+	 * @return Interface Gráfica
+	 */
 		public InterfaceGrafica(){
 			setTitle("METER TITULO");
 			setSize(250,100);
@@ -21,6 +26,11 @@ public class InterfaceGrafica extends JFrame{
 		public void open(){
 			setVisible(true);
 		}
+		
+		/** Função auxiiar com os componentes gráficos que compõe a interface 
+		 * 
+		 * Consoante o tipo de tratamento a ser escolhido, automático ou manual, a frame inicial dá origem a outra frame (instância das classes FrameManual e FrameAutomatica)
+		 */
 		
 		public void addComponentes(){
 			setLayout(new BorderLayout());

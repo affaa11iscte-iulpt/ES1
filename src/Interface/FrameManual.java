@@ -1,7 +1,4 @@
-package Interfaces;
-
-
-// teste almeida 
+package Interface;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -22,6 +19,8 @@ import components.Reader;
 
 public class FrameManual extends JFrame {
 
+	
+	
 	private DefaultTableModel tableModel;
 	
 	public FrameManual(){

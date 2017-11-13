@@ -39,7 +39,7 @@ public class FrameManual extends JFrame {
 		
 	}
 	
-	
+
 	private JPanel northPanel(){
 		JPanel panelNorth = new JPanel();
 		
@@ -99,7 +99,9 @@ public class FrameManual extends JFrame {
 		
 		return panelSouth;
 	}
-	
+	/**
+	 * Obtenção da lista de regras lidas na classe Reader e listagem das mesmas na interface manual
+	 */
 	public void addRules() {
         List<String> rules = Reader.readRules();
         

@@ -30,6 +30,10 @@ public class FrameManual extends JFrame {
 		addComponentes();
 		setVisible(true);
 	}
+	/** Função auxiiar com os componentes gráficos que compõe a FrameManual 
+	 * 
+	 * Esta Frame foi dividida em dois panéis: Norte e Sul
+	 */
 
 	private void addComponentes() {
 		setLayout(new BorderLayout());
@@ -39,9 +43,12 @@ public class FrameManual extends JFrame {
 	}
 	
 
+	/**
+	 * Função auxliar com o Painel Norte
+	 * Este painel é composto pela tabela onde vão ser listadas as regras e os respetivos pesos associados
+	 */
 	private JPanel northPanel(){
 		JPanel panelNorth = new JPanel();
-		
 		List<String> visibleColumns = new ArrayList<String>();
 
         visibleColumns.add("Regras: ");
@@ -60,7 +67,10 @@ public class FrameManual extends JFrame {
 		
 	}
 	
-	
+	/**
+	 * Função auxliar com o Painel Sul
+	 * Este painel tem os componentes gráficos que permite que seja possivel introduzir, através de JTextField, os pesos para as regras
+	 */
 	private JPanel southPanel(){
 		JPanel panelSouth = new JPanel();
 		panelSouth.setLayout(new GridLayout(3,1));

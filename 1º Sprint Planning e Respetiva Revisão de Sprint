@@ -9,6 +9,15 @@ Ordem de trabalhos:
 •	Elaboração do product Backlog, assim como, o Sprint Backlog.
 •	Distribuição de tarefas pelos elementos da equipa;
 
+Neste sprint foi acordado fazer o seguinte Sprint Backlog:
+
+  -Atualizar o ficheiro README.txt
+  -Desenho do mockup da interface gráfica 
+  -Leitura do ficheiro rules.cf
+  -Listar as regras na interface  
+  -Desenvolver a interface gráfica para o tratamento manual
+  - Fazer o JavaDoc de cada parte implementada
+
 
 
 Revisão do Sprint:

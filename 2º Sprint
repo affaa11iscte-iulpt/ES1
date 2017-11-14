@@ -1,0 +1,17 @@
+
+
+Sprint Planning
+(Inicio – 14/11/2017; Fim- 28/11/2017)
+
+
+Ordem de trabalhos:
+
+- Desenvolver a interface gráfica para o tratamento automático
+- Realizar o tratamento dos Falsos Positivos e Falsos Negativos
+-Desenvolver o algoritmo NSDA-II
+- Leitura dos e-mails spam.log e ham.log
+- Fazer o JavaDoc de cada parte implementada
+- Fazer os JUnit e testar as funcionalidades desenvolvidas
+
+
+

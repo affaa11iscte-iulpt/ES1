@@ -112,7 +112,7 @@ public class FrameManual extends JFrame {
 	 * Obtenção da lista de regras lidas na classe Reader e listagem das mesmas na interface manual
 	 */
 	public void addRules() {
-        List<String> rules = Reader.readRules();
+        List<String> rules = Reader.readRules("files/rules.cf");
         
 		for(String s: rules) {
         	tableModel.addRow(new String[] {s,""});

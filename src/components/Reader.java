@@ -15,10 +15,10 @@ public class Reader {
 	 * 
 	 * @return Lista de regras
 	 */
-	public static List<String> readRules(){
+	public static List<String> readRules(String file){
 		List<String> rules = new ArrayList<String>();
 		try {
-			Scanner scanner = new Scanner(new File("files/rules.cf"));
+			Scanner scanner = new Scanner(new File(file));
 			
 			while(scanner.hasNextLine()) {
 				rules.add(scanner.nextLine());
@@ -30,6 +30,10 @@ public class Reader {
 		}
 		
 		return rules;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Reader.readRules("files/rules.cf").size());
 	}
 	
 	

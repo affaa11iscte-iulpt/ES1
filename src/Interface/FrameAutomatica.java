@@ -17,55 +17,26 @@ import javax.swing.table.DefaultTableModel;
 
 import components.Reader;
 
-public class FrameManual extends JFrame {
+public class FrameAutomatica extends JFrame {
 
 	
 	
 	private DefaultTableModel tableModel;
 	
-	public FrameManual(){
-		setTitle("Modo Manual");
+	public FrameAutomatica(){
+		setTitle("Modo Automatico");
 		setSize(500,600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addComponentes();
 		//setLocationRelativeTo(null);
 		setVisible(true);
 	}
-	/** Função auxiiar com os componentes gráficos que compõe a FrameManual 
-	 * 
-	 * Esta Frame foi dividida em dois panéis: Norte e Sul
-	 */
-
+	
 	private void addComponentes() {
 		setLayout(new BorderLayout());
-		add(filePanel(), BorderLayout.NORTH);
 		add(northPanel(), BorderLayout.CENTER);
+		add(filePanel(), BorderLayout.NORTH);
 		add(southPanel(), BorderLayout.SOUTH);
-		
-	}
-	
-
-	/**
-	 * Função auxliar com o Painel Norte
-	 * Este painel é composto pela tabela onde vão ser listadas as regras e os respetivos pesos associados
-	 */
-	private JPanel northPanel(){
-		JPanel panelNorth = new JPanel();
-		List<String> visibleColumns = new ArrayList<String>();
-
-        visibleColumns.add("Regras: ");
-        visibleColumns.add("Pesos: ");
-
-        tableModel = new DefaultTableModel(visibleColumns.toArray(),0);
-        JTable tabela = new JTable(tableModel);
-        
-        addRules();
-        
-		JScrollPane scrollArea = new JScrollPane(tabela);
-		
-		panelNorth.add(scrollArea);
-		
-		return panelNorth;
 		
 	}
 	
@@ -84,17 +55,32 @@ public class FrameManual extends JFrame {
 		return filePanel;
 	}
 
+	private JPanel northPanel(){
+		JPanel panelNorth = new JPanel();
+		List<String> visibleColumns = new ArrayList<String>();
+
+        visibleColumns.add("Regras: ");
+        visibleColumns.add("Pesos: ");
+
+        tableModel = new DefaultTableModel(visibleColumns.toArray(),0);
+        JTable tabela = new JTable(tableModel);
+        tabela.setEnabled(false);
+        addRules();
+        
+		JScrollPane scrollArea = new JScrollPane(tabela);
+		
+		panelNorth.add(scrollArea);
+		
+		return panelNorth;
+		
+	}
 	
-	/**
-	 * Função auxliar com o Painel Sul
-	 * Este painel tem os componentes gráficos que permite que seja possivel introduzir, através de JTextField, os pesos para as regras
-	 */
 	private JPanel southPanel(){
 		JPanel panelSouth = new JPanel();
 		panelSouth.setLayout(new GridLayout(4,1));
 
 		JPanel subPanel1 = new JPanel();
-		JLabel calcular = new JLabel(" Calcular: ");
+		JLabel calcular = new JLabel(" Gerar Pesos com o Algoritmo: ");
 		JButton ok = new JButton("OK");
 		
 		
@@ -102,19 +88,21 @@ public class FrameManual extends JFrame {
 		subPanel1.add(ok);
 		
 		JPanel subPanel2 = new JPanel();
-		JLabel fp = new JLabel(" Falsos Positivos:  ");
-		JTextField textfield1 = new JTextField("   ");
-	
+		JLabel fp = new JLabel(" Falsos Positivos Gerados:  ");
+		//JTextField textfield1 = new JTextField("   ");
+		
+		
+		
 		subPanel2.add(fp);
-		subPanel2.add(textfield1);
+		//subPanel2.add(textfield1);
 		
 		JPanel subPanel3 = new JPanel();
-		JLabel fn = new JLabel(" Falsos Negativos:  ");
-		JTextField textfield2 = new JTextField("   ");
+		JLabel fn = new JLabel(" Falsos Negativos Gerados:  ");
+	//	JTextField textfield2 = new JTextField("   ");
 		
 		
 		subPanel3.add(fn);
-		subPanel3.add(textfield2);
+		//subPanel3.add(textfield2);
 		
 		JPanel subPanel4 = new JPanel();
 		JButton guardar = new JButton ("Guardar Configuração");

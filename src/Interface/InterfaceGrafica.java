@@ -16,64 +16,63 @@ public class InterfaceGrafica extends JFrame{
 	 * Foi criada de forma a poder selecionar a forma como vamos fazer o tratamento das regras, isto é, de forma manual ou automática.
 	 * @return Interface Gráfica
 	 */
-		public InterfaceGrafica(){
-			setTitle("METER TITULO");
-			setSize(250,100);
-			setDefaultCloseOperation(EXIT_ON_CLOSE);
-			addComponentes();
-		}
-		
-		public void open(){
-			setVisible(true);
-		}
-		
-		/** Função auxiiar com os componentes gráficos que compõe a interface 
-		 * 
-		 * Consoante o tipo de tratamento a ser escolhido, automático ou manual, a frame inicial dá origem a outra frame (instância das classes FrameManual e FrameAutomatica)
-		 */
-		
-		public void addComponentes(){
-			setLayout(new BorderLayout());
-			JPanel painel = new JPanel();
-			JLabel label1 = new JLabel("            Escolha o tipo de tratamento");
-			JButton automatico = new JButton("Automatico");
-			JButton manual = new JButton("Manual");
-			painel.add(automatico);
-			painel.add(manual);
-			add(label1,BorderLayout.NORTH);
-			add(painel, BorderLayout.SOUTH);
-			setLocationRelativeTo(null);
-			manual.addActionListener(new ActionListener(
-					) {
-				
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					new FrameManual();
-				}
-			});
-			
-			automatico.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// new FrameAutomatica();
-					
-					
-					
-					
-					
-					
-				}
-			});
-			
-		}
-		
-		
-		
-		public static void main (String[] args){
-			InterfaceGrafica ig = new InterfaceGrafica();
-			ig.open();
-			
-		}
+	public InterfaceGrafica(){
+		setTitle("METER TITULO");
+		setSize(250,100);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		addComponentes();
 	}
+
+	public void open(){
+		setVisible(true);
+	}
+
+	/** Função auxiiar com os componentes gráficos que compõe a interface 
+	 * 
+	 * Consoante o tipo de tratamento a ser escolhido, automático ou manual, a frame inicial dá origem a outra frame (instância das classes FrameManual e FrameAutomatica)
+	 */
+
+	public void addComponentes(){
+		setLayout(new BorderLayout());
+		JPanel painel = new JPanel();
+		JLabel label1 = new JLabel("            Escolha o tipo de tratamento");
+		JButton automatico = new JButton("Automatico");
+		JButton manual = new JButton("Manual");
+		painel.add(automatico);
+		painel.add(manual);
+		add(label1,BorderLayout.NORTH);
+		add(painel, BorderLayout.SOUTH);
+		setLocationRelativeTo(null);
+		manual.addActionListener(new ActionListener(
+				) {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new FrameManual();
+			}
+		});
+
+		automatico.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new FrameAutomatica();
+
+
+
+
+
+			}
+		});
+
+	}
+
+
+
+	public static void main (String[] args){
+		InterfaceGrafica ig = new InterfaceGrafica();
+		ig.open();
+
+	}
+}
 

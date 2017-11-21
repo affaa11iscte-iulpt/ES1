@@ -1,10 +1,9 @@
 package junits;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -34,9 +33,10 @@ class ReaderTest {
 
 	@Test
 	final void testReadRules() {
-		List<String> list = Reader.readRules("files/rules.cf");
+		Map<String, String> list = Reader.readRules("files/rules.cf");
+		System.out.println(list.size());
 		//335 é o número de regras da lista
-		assertSame(335, list.size());
+		assertTrue(335== list.size());
 		//Verificar se lê corretamente
 		assertTrue(list.get(18).equals("MIME_HTML_ONLY"));
 	}
@@ -45,7 +45,7 @@ class ReaderTest {
 	final void testEquals() {
 		fail("Not yet implemented"); // TODO
 	}
-
+	
 	@Test
 	final void testToString() {
 		fail("Not yet implemented"); // TODO

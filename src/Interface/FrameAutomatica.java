@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -117,13 +118,13 @@ public class FrameAutomatica extends JFrame {
 		return panelSouth;
 	}
 	/**
-	 * Obtenção da lista de regras lidas na classe Reader e listagem das mesmas na interface manual
+	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
 	 */
 	public void addRules() {
-        List<String> rules = Reader.readRules("files/rules.cf");
+        Map<String,String> rules = Reader.readRules("files/rules.cf");
         
-		for(String s: rules) {
-        	tableModel.addRow(new String[] {s,""});
+		for(Map.Entry<String, String> entry: rules.entrySet()) {
+        	tableModel.addRow(new String[] {entry.getKey(), entry.getValue()});
         }
 	}
 }

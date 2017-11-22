@@ -73,7 +73,7 @@ public class Reader {
 			e.printStackTrace();
 			System.out.println("Error reading " + file);
 		}
-		
+
 		return emails;
 	
 	}

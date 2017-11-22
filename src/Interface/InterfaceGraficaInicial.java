@@ -9,14 +9,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class InterfaceGrafica extends JFrame{
+public class InterfaceGraficaInicial extends JFrame{
 	/**
 	 * Classe onde está implementada a Interface Gráfica
 	 * 
 	 * Foi criada de forma a poder selecionar a forma como vamos fazer o tratamento das regras, isto é, de forma manual ou automática.
 	 * @return Interface Gráfica
 	 */
-	public InterfaceGrafica(){
+	public InterfaceGraficaInicial(){
 		setTitle("METER TITULO");
 		setSize(250,100);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -70,7 +70,7 @@ public class InterfaceGrafica extends JFrame{
 
 
 	public static void main (String[] args){
-		InterfaceGrafica ig = new InterfaceGrafica();
+		InterfaceGraficaInicial ig = new InterfaceGraficaInicial();
 		ig.open();
 
 	}

@@ -56,8 +56,7 @@ public abstract class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Reader.readRules(text1.getText());
-				addRules();
+				addRules(text1.getText());
 			}
 		});
 
@@ -145,8 +144,8 @@ public abstract class Frame extends JFrame {
 	/**
 	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
 	 */
-	public void addRules() {
-		Map<String,String> rules = Reader.readRules("files/rules.cf");
+	public void addRules(String file) {
+		Map<String,String> rules = Reader.readRules(file);
 
 		for(Map.Entry<String, String> entry: rules.entrySet()) {
 			tableModel.addRow(new String[] {entry.getKey(), entry.getValue()});

@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ import components.Reader;
 public abstract class Frame extends JFrame {
 
 	protected DefaultTableModel tableModel;
-
+	
 	public Frame(){
 		setSize(650,650);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -150,6 +151,21 @@ public abstract class Frame extends JFrame {
 		for(Map.Entry<String, String> entry: rules.entrySet()) {
 			tableModel.addRow(new String[] {entry.getKey(), entry.getValue()});
 		}
+	}
+	
+	/**
+	 * Devolve as regras e os respetivos pesos num HashMap, sendo que a chave é a regra
+	 * e o valor o peso.
+	 * @return Lista de regras com os pesos
+	 */
+	public Map<String, String> getRules(){
+		Map<String,String> rules = new HashMap<String, String>();
+		for(int line=0; line<tableModel.getRowCount(); line++) {
+				String rule = (String)tableModel.getValueAt(line, 0);
+				String value = (String)tableModel.getValueAt(line, 1);
+				rules.put(rule, value);
+		}
+		return rules;
 	}
 
 

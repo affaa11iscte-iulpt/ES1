@@ -1,7 +1,6 @@
 package Interface;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,16 +13,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import components.Control;
+import components.Email;
 
 public abstract class Frame extends JFrame {
 
 	protected DefaultTableModel tableModel;
+	private List<Email> emails = new ArrayList<Email>();	
 	
 	public Frame(){
 		setSize(650,650);
@@ -57,6 +56,7 @@ public abstract class Frame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				addRules(text1.getText());
+				carregar.setEnabled(false);
 			}
 		});
 
@@ -72,8 +72,9 @@ public abstract class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Control.readEmails(text2.getText(), true);
-
+				List<Email> spamEmails = Control.readEmails(text2.getText(), true);
+				emails.addAll(spamEmails);
+				carregar2.setEnabled(false);
 			}
 		});
 
@@ -91,8 +92,9 @@ public abstract class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Control.readEmails(text3.getText(), false);
-
+				List<Email> hamEmails = Control.readEmails(text3.getText(), false);
+				emails.addAll(hamEmails);
+				carregar3.setEnabled(false);
 			}
 		});
 

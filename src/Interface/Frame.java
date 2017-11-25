@@ -23,6 +23,9 @@ public abstract class Frame extends JFrame {
 
 	protected DefaultTableModel tableModel;
 	private List<Email> emails = new ArrayList<Email>();	
+	private JLabel fp = new JLabel(" Falsos Positivos Gerados:  ");
+	private JLabel fn = new JLabel(" Falsos Negativos Gerados:  ");
+	
 	
 	public Frame(){
 		setSize(650,650);
@@ -117,13 +120,9 @@ public abstract class Frame extends JFrame {
 
 
 		JPanel subPanel2 = new JPanel();
-		JLabel fp = new JLabel(" Falsos Positivos Gerados:  ");
-
 		subPanel2.add(fp);
 
 		JPanel subPanel3 = new JPanel();
-		JLabel fn = new JLabel(" Falsos Negativos Gerados:  ");
-
 		subPanel3.add(fn);
 
 
@@ -143,6 +142,17 @@ public abstract class Frame extends JFrame {
 
 		return panelSouth;
 	}
+	
+	public void setFP(int fp) {
+		this.fp = new JLabel(" Falsos Positivos Gerados:  " + fp);
+	}
+	
+	public void setFN(int fn) {
+		this.fn = new JLabel(" Falsos Negativos Gerados:  " + fn);
+	}
+	
+	
+	
 	/**
 	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
 	 */

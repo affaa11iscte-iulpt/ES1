@@ -46,7 +46,7 @@ public abstract class Frame extends JFrame {
 		JPanel subPanel1= new JPanel();
 		JLabel rules = new JLabel("rules.cf");
 		JButton carregar = new JButton("ok");
-		JTextField text1 = new JTextField("files\\rules.cf");
+		JTextField text1 = new JTextField("\\files\\rules.cf");
 		subPanel1.add(rules);
 		subPanel1.add(text1);
 		subPanel1.add(carregar);
@@ -62,7 +62,7 @@ public abstract class Frame extends JFrame {
 
 		JPanel subPanel2= new JPanel();
 		JLabel spam = new JLabel("spam.log");
-		JTextField text2 = new JTextField("files\\spam.log");
+		JTextField text2 = new JTextField("\\files\\spam.log");
 		JButton carregar2 = new JButton("ok");
 		subPanel2.add(spam);
 		subPanel2.add(text2);

@@ -8,7 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Reader {
+public class Control {
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Lê o ficheiro rules.cf e guarda todas as regras num map <String, String> 
@@ -79,9 +86,9 @@ public class Reader {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(Reader.readRules("files/rules.cf").size());
-		System.out.println(Reader.readEmails("files/spam.log", true).size());
-		System.out.println(Reader.readEmails("files/ham.log", false).size());
+		System.out.println(Control.readRules("files/rules.cf").size());
+		System.out.println(Control.readEmails("files/spam.log", true).size());
+		System.out.println(Control.readEmails("files/ham.log", false).size());
 	}
 	
 	

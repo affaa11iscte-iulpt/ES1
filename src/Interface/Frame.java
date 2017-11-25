@@ -19,7 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import components.Reader;
+import components.Control;
 
 public abstract class Frame extends JFrame {
 
@@ -72,7 +72,7 @@ public abstract class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Reader.readEmails(text2.getText(), true);
+				Control.readEmails(text2.getText(), true);
 
 			}
 		});
@@ -91,7 +91,7 @@ public abstract class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Reader.readEmails(text3.getText(), false);
+				Control.readEmails(text3.getText(), false);
 
 			}
 		});
@@ -145,7 +145,7 @@ public abstract class Frame extends JFrame {
 	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
 	 */
 	public void addRules(String file) {
-		Map<String,String> rules = Reader.readRules(file);
+		Map<String,String> rules = Control.readRules(file);
 
 		for(Map.Entry<String, String> entry: rules.entrySet()) {
 			tableModel.addRow(new String[] {entry.getKey(), entry.getValue()});

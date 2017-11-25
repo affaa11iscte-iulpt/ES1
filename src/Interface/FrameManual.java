@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import components.Reader;
+import components.Control;
 
 public class FrameManual extends Frame {
 

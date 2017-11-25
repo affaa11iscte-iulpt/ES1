@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import components.Reader;
+import components.Control;
 
 class ReaderTest {
 
@@ -33,7 +33,7 @@ class ReaderTest {
 
 	@Test
 	final void testReadRules() {
-		Map<String, String> list = Reader.readRules("files/rules.cf");
+		Map<String, String> list = Control.readRules("files/rules.cf");
 		System.out.println(list.size());
 		//335 é o número de regras da lista
 		assertTrue(335== list.size());

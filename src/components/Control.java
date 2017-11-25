@@ -21,7 +21,7 @@ public class Control {
 	 * Lê o ficheiro rules.cf e guarda todas as regras num map <String, String> 
 	 * em que o nome da regra corresponde à chave e o peso corresponde ao peso.
 	 * Caso não esteja nenhum peso definido no ficheiro, este ficará vazio.
-	 * 
+	 * @param file Nome do ficheiro
 	 * @return Lista de regras
 	 */
 	public static Map<String, String> readRules(String file){

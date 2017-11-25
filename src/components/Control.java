@@ -9,18 +9,72 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Control {
-	
-	
-	
-	
-	
-	
-	
+	private int fpos;
+	private int fneg;
 	
 	/**
-	 * Lê o ficheiro rules.cf e guarda todas as regras num map <String, String> 
-	 * em que o nome da regra corresponde à chave e o peso corresponde ao peso.
-	 * Caso não esteja nenhum peso definido no ficheiro, este ficará vazio.
+	 * Calcula o nÃºmero de falsos positivos e falsos negativos
+	 * @param Lista de emails e Mapa das regras
+	 * @return falsos positivos e falsos negativos
+	 */
+	public void calculate (List<Email> emails, Map<String, String> rules) {
+		fpos=0;
+		fneg=0;
+		
+		for (Email email : emails) {
+			if(email.getEmailType().equals("ham")){
+				if(isGreaterThan5(email, rules)) {
+					fpos++;
+				}
+				else if(email.getEmailType().equals("spam")){
+					if(isGreaterThan5(email, rules)) {
+						fneg++;
+					}
+				}
+
+			}
+				
+		}
+	}
+	/**
+	 * Devolve numero de falsos positivos
+	 * @return Integer
+	 */
+	public int getFpos() {
+		return fpos;
+	}
+	
+	/**
+	 * Devolve numero de falsos negativos
+	 * @return Integer
+	 */
+	public int getFneg() {
+		return fneg;
+	}
+	
+	
+	
+	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
+			int value=0;
+			
+			for(String rule: email.getEmailRules()) {
+				value = Integer.parseInt(rules.get(rule));
+			}
+			
+			if(value > 5) {
+				return true;
+			}
+		return false;
+	}
+
+
+
+
+
+	/**
+	 * Lï¿½ o ficheiro rules.cf e guarda todas as regras num map <String, String> 
+	 * em que o nome da regra corresponde ï¿½ chave e o peso corresponde ao peso.
+	 * Caso nï¿½o esteja nenhum peso definido no ficheiro, este ficarï¿½ vazio.
 	 * 
 	 * @return Lista de regras
 	 */
@@ -46,11 +100,11 @@ public class Control {
 	}
 	
 	/**
-	 * Lê o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
-	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, é criado um
-	 * email do tipo spam e adicionado à lista. Caso o parametro isSpam seja false,
-	 * é criado um Email do tipo spam e adicionado à lista de emails. Após a
-	 * criação do Email são adicionadas a regras associadas ao mesmo.
+	 * Lï¿½ o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
+	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, ï¿½ criado um
+	 * email do tipo spam e adicionado ï¿½ lista. Caso o parametro isSpam seja false,
+	 * ï¿½ criado um Email do tipo spam e adicionado ï¿½ lista de emails. Apï¿½s a
+	 * criaï¿½ï¿½o do Email sï¿½o adicionadas a regras associadas ao mesmo.
 	 * 
 	 * @param file
 	 * @param isSpam

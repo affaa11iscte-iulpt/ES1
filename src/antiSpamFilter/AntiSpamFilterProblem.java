@@ -39,6 +39,10 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    setUpperLimit(upperLimit);
 	  }
 
+	  /**
+	   * Calcula o número de falsos positivos e de falsos negativos 
+	   * @param DoubleSolution Vetor de doubles
+	   */
 	  public void evaluate(DoubleSolution solution){
 	    double aux, xi, xj;
 	    double[] falses = new double[getNumberOfObjectives()];

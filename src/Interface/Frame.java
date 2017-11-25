@@ -168,6 +168,10 @@ public abstract class Frame extends JFrame {
 		}
 		return rules;
 	}
+	
+	public List<Email> getEmails(){
+		return emails;
+	}
 
 
 }

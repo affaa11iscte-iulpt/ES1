@@ -17,7 +17,7 @@ public class Control {
 	 * @param Lista de emails e Mapa das regras
 	 * @return falsos positivos e falsos negativos
 	 */
-	public void calculate (List<Email> emails, Map<String, String> rules) {
+	public void calculateFP (List<Email> emails, Map<String, String> rules) {
 		fpos=0;
 		fneg=0;
 		

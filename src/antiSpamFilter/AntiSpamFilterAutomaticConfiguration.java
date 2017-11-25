@@ -34,14 +34,16 @@ import org.uma.jmetal.util.experiment.component.GenerateReferenceParetoSetAndFro
 import org.uma.jmetal.util.experiment.util.ExperimentAlgorithm;
 import org.uma.jmetal.util.experiment.util.ExperimentProblem;
 
+import components.Email;
+
 public class AntiSpamFilterAutomaticConfiguration {
   private static final int INDEPENDENT_RUNS = 5 ;
 
-  public static void start(Map<String, String> rules) throws IOException {
+  public static void start(List<Email> emails, Map<String, String> rules) throws IOException {
     String experimentBaseDirectory = "experimentBaseDirectory";
 
     List<ExperimentProblem<DoubleSolution>> problemList = new ArrayList<>();
-    problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem(rules)));
+    problemList.add(new ExperimentProblem<>(new AntiSpamFilterProblem(emails, rules)));
 
     List<ExperimentAlgorithm<DoubleSolution, List<DoubleSolution>>> algorithmList =
             configureAlgorithmList(problemList);

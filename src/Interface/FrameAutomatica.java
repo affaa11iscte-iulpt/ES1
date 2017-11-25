@@ -60,7 +60,7 @@ public class FrameAutomatica extends Frame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					AntiSpamFilterAutomaticConfiguration.start(getRules());
+					AntiSpamFilterAutomaticConfiguration.start(getEmails(), getRules());
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

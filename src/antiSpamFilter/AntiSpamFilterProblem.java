@@ -8,14 +8,18 @@ import java.util.Map;
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 
-public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+import components.Control;
+import components.Email;
 
+public class AntiSpamFilterProblem extends AbstractDoubleProblem {
+	  private List<Email> emails;
 	  private Map<String, String> rules;
 	
-	  public AntiSpamFilterProblem(Map<String, String> rules) {
+	  public AntiSpamFilterProblem(List<Email> emails, Map<String, String> rules) {
 	    // 335 é o número total de regras que contém o ficheiro rules.cf
 	    this(new Integer(rules.size()));
 	    this.rules = rules;
+	    this.emails = emails;
 	  }
 
 	  public AntiSpamFilterProblem(Integer numberOfVariables) {
@@ -51,18 +55,14 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    	j++;
 	    }
 
+	    Control control = new Control();
+	    control.calculateFP(emails, new_rules);
 	    //Falsos positivos
-	    falses[0] = 0.0;
-	    for (int var = 0; var < solution.getNumberOfVariables() - 1; var++) {
-		  falses[0] += Math.abs(values[0]); // Example for testing
-	    }
+	    falses[0] = control.getFpos();
 	    
 	    //Falsos negativos
-	    falses[1] = 0.0;
-	    for (int var = 0; var < solution.getNumberOfVariables(); var++) {
-	    	falses[1] += Math.abs(values[1]); // Example for testing
-	    }
-
+	    falses[1] = control.getFneg();
+	   
 	    solution.setObjective(0, falses[0]);
 	    solution.setObjective(1, falses[1]);
 	  }

@@ -13,6 +13,7 @@ public class Control {
 	private int fneg;
 	
 	/**
+<<<<<<< HEAD
 	 * Calcula o número de falsos positivos e falsos negativos
 	 * @param Lista de emails e Mapa das regras
 	 * @return falsos positivos e falsos negativos
@@ -76,6 +77,12 @@ public class Control {
 	 * em que o nome da regra corresponde � chave e o peso corresponde ao peso.
 	 * Caso n�o esteja nenhum peso definido no ficheiro, este ficar� vazio.
 	 * 
+=======
+	 * L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
+	 * em que o nome da regra corresponde � chave e o peso corresponde ao peso.
+	 * Caso n�o esteja nenhum peso definido no ficheiro, este ficar� vazio.
+	 * @param file Nome do ficheiro
+>>>>>>> branch 'master' of https://github.com/affaa11iscte-iulpt/ES1-2017-METIA-46-B.git
 	 * @return Lista de regras
 	 */
 	public static Map<String, String> readRules(String file){

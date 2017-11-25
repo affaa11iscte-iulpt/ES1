@@ -1,6 +1,8 @@
 package Interface;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,33 +23,16 @@ public class FrameAutomatica extends Frame {
 	public FrameAutomatica(){
 		super();
 		setTitle("Modo Automatico");
-		add(northPanel());
-	//	southPanel();
+		add(centerPanel(), BorderLayout.CENTER);
+
 	}
 
 
-//	public void southPanel(){
-//		JPanel panel= super.southPanel();
-//
-//		JPanel subPanel1 = new JPanel();
-//		JLabel calcular = new JLabel(" Gerar Pesos com o Algoritmo: ");
-//		JButton ok = new JButton("OK");
-//
-//
-//		subPanel1.add(calcular);
-//		subPanel1.add(ok);
-//		
-//		panel.add(subPanel1);
-//		
-//
-//	}
 
+	public JPanel centerPanel() {
 
-
-
-	public JPanel northPanel() {
-
-		JPanel panelNorth = new JPanel();
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BorderLayout());
 		List<String> visibleColumns = new ArrayList<String>();
 
 		visibleColumns.add("Regras: ");
@@ -60,9 +45,19 @@ public class FrameAutomatica extends Frame {
 
 		scrollArea.setPreferredSize(new Dimension(400,300));
 		tabela.setEnabled(false);
-		panelNorth.add(scrollArea);
 
-		return panelNorth;
+		JPanel subPanel = new JPanel();
+		JLabel label = new JLabel("Gerar Pesos com o Algoritmo: ");
+		JButton gerar = new JButton("ok");
+
+		subPanel.add(label);
+		subPanel.add(gerar);
+
+
+		centerPanel.add(scrollArea, BorderLayout.CENTER);
+		centerPanel.add(subPanel, BorderLayout.SOUTH);
+
+		return centerPanel;
 	}
 
 

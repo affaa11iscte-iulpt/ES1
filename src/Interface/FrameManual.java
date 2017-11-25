@@ -29,15 +29,16 @@ public class FrameManual extends Frame {
 	public FrameManual(){
 		super();
 		setTitle("Modo Manual");
-		add(northPanel());
+		add(centerPanel(), BorderLayout.CENTER);
 	}
 
 	
 	
 
-	public JPanel northPanel() {
+	public JPanel centerPanel() {
 
-		JPanel panelNorth = new JPanel();
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BorderLayout());
 		List<String> visibleColumns = new ArrayList<String>();
 
 		visibleColumns.add("Regras: ");
@@ -50,9 +51,20 @@ public class FrameManual extends Frame {
 		
 		scrollArea.setPreferredSize(new Dimension(400,300));
 		
-		panelNorth.add(scrollArea);
+		centerPanel.add(scrollArea);
 
-		return panelNorth;
+		JPanel subPanel = new JPanel();
+		JLabel label = new JLabel("Calcular: ");
+		JButton gerar = new JButton("ok");
+
+		subPanel.add(label);
+		subPanel.add(gerar);
+
+
+		centerPanel.add(scrollArea, BorderLayout.CENTER);
+		centerPanel.add(subPanel, BorderLayout.SOUTH);
+
+		return centerPanel;
 	}
 
 	

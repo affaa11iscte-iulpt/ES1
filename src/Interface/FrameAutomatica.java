@@ -3,6 +3,9 @@ package Interface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 
 
 public class FrameAutomatica extends Frame {
@@ -49,6 +54,18 @@ public class FrameAutomatica extends Frame {
 		JPanel subPanel = new JPanel();
 		JLabel label = new JLabel("Gerar Pesos com o Algoritmo: ");
 		JButton gerar = new JButton("ok");
+		
+		gerar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					AntiSpamFilterAutomaticConfiguration.start(getRules());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 
 		subPanel.add(label);
 		subPanel.add(gerar);

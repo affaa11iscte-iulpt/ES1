@@ -148,7 +148,7 @@ public class Interface extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				c = new Control();
 				System.out.println("criei");
-				c.calculateFP(emails,getRules() );
+				c.calculate(emails,getRules() );
 				setFp(c.getFpos());
 				setFn(c.getFneg());
 				

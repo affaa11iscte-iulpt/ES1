@@ -1,7 +1,10 @@
 package junits;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
@@ -11,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import components.Control;
+import components.Email;
+import components.Email.Type;
 
 class TesteControl {
 
@@ -31,8 +36,14 @@ class TesteControl {
 	}
 
 	@Test
-	final void testCalculateFP() {
-		fail("Not yet implemented"); // TODO
+	final void testCalculate() {
+		List<String> rulesOfEmail = Arrays.asList("BAYES_00","FREEMAIL_FROM","RDNS_NONE",
+				"FREEMAIL_REPLYTO_END_DIGIT","MSOE_MID_WRONG_CASE");
+		Email email = new Email("aa", Type.HAM);
+		for(String s: rulesOfEmail)
+			email.addRule(s);
+		
+		Control control = new Control();
 	}
 
 	@Test

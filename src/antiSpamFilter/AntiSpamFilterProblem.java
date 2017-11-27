@@ -60,7 +60,7 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    }
 
 	    Control control = new Control();
-	    control.calculateFP(emails, new_rules);
+	    control.calculate(emails, new_rules);
 	    //Falsos positivos
 	    falses[0] = control.getFpos();
 	    

@@ -71,7 +71,6 @@ public class Control {
 			}
 		return false;
 	}
-	//Almeida
 	
 	/**
 	 * 
@@ -79,14 +78,14 @@ public class Control {
 	 * @param rules
 	 * @return boolean
 	 */
-	private boolean isLessThan5(Email email, Map<String, String> rules) {
+	private boolean isLessThanMinus5(Email email, Map<String, String> rules) {
 		int value=0;
 		
 		for(String rule: email.getEmailRules()) {
 			value = Integer.parseInt(rules.get(rule));
 		}
 		
-		if(value <= 5) {
+		if(value <= -5) {
 			return true;
 		}
 	return false;
@@ -158,12 +157,6 @@ public class Control {
 
 		return emails;
 	
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(Control.readRules("files/rules.cf").size());
-		System.out.println(Control.readEmails("files/spam.log", true).size());
-		System.out.println(Control.readEmails("files/ham.log", false).size());
 	}
 	
 	

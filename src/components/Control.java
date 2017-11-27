@@ -71,6 +71,7 @@ public class Control {
 			}
 		return false;
 	}
+	//Almeida
 	
 	/**
 	 * 

@@ -5,10 +5,14 @@ import java.util.ArrayList;
 
 public class Email {
 	private String id;
-	private String type;
+	private Type type;
 	private ArrayList<String> emailRules;
 	
-	public Email(String id, String type) {
+	public enum Type {
+		HAM, SPAM;
+	}
+	
+	public Email(String id, Type type) {
 		this.id = id;
 		this.type = type;
 		this.emailRules = new ArrayList<String>();
@@ -18,7 +22,7 @@ public class Email {
 		return id;
 	}
 	
-	public String getEmailType() {
+	public Type getEmailType() {
 		return type;
 	}
 	

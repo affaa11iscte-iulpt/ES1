@@ -93,8 +93,6 @@ public class Interface extends JFrame {
 			}
 		});
 
-
-
 		JPanel fileSubPanel3= new JPanel();
 		JLabel ham = new JLabel("ham.log");
 		JButton ok3 = new JButton("ok");
@@ -149,7 +147,8 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c = new Control();
-				c.calculateFP(getEmails(),getRules() );
+				System.out.println("criei");
+				c.calculateFP(emails,getRules() );
 				setFp(c.getFpos());
 				setFn(c.getFneg());
 				
@@ -224,11 +223,11 @@ public class Interface extends JFrame {
 
 
 	public void setFp(int i) {
-		this.fp = new JLabel("Falsos Positivos Gerados: " + i);
+		this.fp.setText("Falsos Positivos Gerados: "+i);
 	}
 	
 	public void setFn(int i) {
-		this.fn = new JLabel("Falsos Negativos Gerados: " + i);;
+		this.fn.setText("Falsos Negativos Gerados: "+i);
 	}
 	/**
 	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
@@ -251,9 +250,14 @@ public class Interface extends JFrame {
 		Map<String,String> rules = new HashMap<String, String>();
 		for(int line=0; line<tableModel.getRowCount(); line++) {
 			String rule = (String)tableModel.getValueAt(line, 0);
-			String value = (String)tableModel.getValueAt(line, 1);
+			String value;
+			if(((String)tableModel.getValueAt(line, 1)).equals(""))
+				value = "0";
+			else
+				value = (String)tableModel.getValueAt(line, 1);
 			rules.put(rule, value);
 		}
+
 		return rules;
 	}
 

@@ -8,33 +8,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import components.Email.Type;
+
 public class Control {
-	private int fpos;
-	private int fneg;
+	private int fpos=0;
+	private int fneg=0;
 	
 	/**
 	 * Calcula o número de falsos positivos e falsos negativos
 	 * @param Lista de emails e Mapa das regras
 	 * @return falsos positivos e falsos negativos
 	 */
-	public void calculateFP (List<Email> emails, Map<String, String> rules) {
-		fpos=0;
-		fneg=0;
-		
+	public void calculateFP (List<Email> emails, Map<String, String> rules) {		
+		System.out.println("N emails: "+emails.size());
 		for (Email email : emails) {
-			if(email.getEmailType().equals("ham")){
+			if(email.getEmailType().equals(Type.HAM)){
 				if(isGreaterThan5(email, rules)) {
 					fpos++;
 				}
-				else if(email.getEmailType().equals("spam")){
-					if(isGreaterThan5(email, rules)) {
+				else if(email.getEmailType().equals(Type.SPAM)){
+					if(isLessThanMinus5(email, rules)) {
 						fneg++;
 					}
 				}
 
-			}
-				
+			}	
 		}
+		System.out.println(fpos+" "+fneg);
 	}
 	/**
 	 * Devolve numero de falsos positivos
@@ -61,11 +61,11 @@ public class Control {
 	
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
 			int value=0;
-			
 			for(String rule: email.getEmailRules()) {
-				value = Integer.parseInt(rules.get(rule));
+				System.out.println(rule);
+				value+= Integer.parseInt(rules.get(rule));
 			}
-			
+			System.out.println("oi "+value);
 			if(value > 5) {
 				return true;
 			}
@@ -82,7 +82,7 @@ public class Control {
 		int value=0;
 		
 		for(String rule: email.getEmailRules()) {
-			value = Integer.parseInt(rules.get(rule));
+			value += Integer.parseInt(rules.get(rule));
 		}
 		
 		if(value <= -5) {
@@ -137,12 +137,12 @@ public class Control {
 			Scanner scanner  = new Scanner(new File(file));
 			
 			while(scanner.hasNextLine()) {
-				String[] tokens = scanner.next().split(" ");
+				String[] tokens = scanner.nextLine().split("\t");
 				Email email;
 				if(isSpam == true) {
-					email = new Email(tokens[0], "spam");
+					email = new Email(tokens[0], Type.SPAM);
 				} else {
-					email = new Email(tokens[0], "ham");
+					email = new Email(tokens[0], Type.HAM);
 				}
 				for(int i = 1; i<tokens.length; i++) {
 					email.addRule(tokens[i]);

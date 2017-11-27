@@ -93,7 +93,7 @@ public class Control {
 }
 
 
-	/* * L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
+	/** L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
 	 * em que o nome da regra corresponde � chave e o peso corresponde ao peso.
 	 * Caso n�o esteja nenhum peso definido no ficheiro, este ficar� vazio.
 	 * @param file Nome do ficheiro

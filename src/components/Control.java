@@ -52,7 +52,12 @@ public class Control {
 		return fneg;
 	}
 	
-	
+	/**
+	 * 
+	 * @param email
+	 * @param rules
+	 * @return boolean
+	 */
 	
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
 			int value=0;
@@ -66,9 +71,28 @@ public class Control {
 			}
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param email
+	 * @param rules
+	 * @return boolean
+	 */
+	private boolean isLessThanMinus5(Email email, Map<String, String> rules) {
+		int value=0;
+		
+		for(String rule: email.getEmailRules()) {
+			value = Integer.parseInt(rules.get(rule));
+		}
+		
+		if(value <= -5) {
+			return true;
+		}
+	return false;
+}
 
 
-	/* * L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
+	/** L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
 	 * em que o nome da regra corresponde � chave e o peso corresponde ao peso.
 	 * Caso n�o esteja nenhum peso definido no ficheiro, este ficar� vazio.
 	 * @param file Nome do ficheiro
@@ -133,12 +157,6 @@ public class Control {
 
 		return emails;
 	
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(Control.readRules("files/rules.cf").size());
-		System.out.println(Control.readEmails("files/spam.log", true).size());
-		System.out.println(Control.readEmails("files/ham.log", false).size());
 	}
 	
 	

@@ -31,7 +31,10 @@ import components.Email;
 public class Interface extends JFrame {
 	protected DefaultTableModel tableModel;
 	private List<Email> emails = new ArrayList<Email>();	
-
+	private JLabel fp = new JLabel("Falsos Positivos Gerados: ");
+	private JLabel fn = new JLabel("Falsos Negativos Gerados: ");
+	private Control c;
+	
 	public Interface(){
 		setSize(700,700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -145,7 +148,11 @@ public class Interface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				c = new Control();
+				c.calculateFP(getEmails(),getRules() );
+				setFp(c.getFpos());
+				setFn(c.getFneg());
+				
 			}
 		});
 		tableSubPanel1.add(label);
@@ -158,7 +165,6 @@ public class Interface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				modoAutomatico.setSelected(false);
 
 			}
@@ -193,11 +199,9 @@ public class Interface extends JFrame {
 
 
 		JPanel modeSubPanel1 = new JPanel();
-		JLabel fp = new JLabel("Falsos Positivos Gerados: ");
 		modeSubPanel1.add(fp);
 
 		JPanel modeSubPanel2= new JPanel();
-		JLabel fn = new JLabel("Falsos Negativos Gerados: ");
 		modeSubPanel2.add(fn);
 
 		JPanel modeSubPanel3 = new JPanel();
@@ -219,6 +223,13 @@ public class Interface extends JFrame {
 	}
 
 
+	public void setFp(int i) {
+		this.fp = new JLabel("Falsos Positivos Gerados: " + i);
+	}
+	
+	public void setFn(int i) {
+		this.fn = new JLabel("Falsos Negativos Gerados: " + i);;
+	}
 	/**
 	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
 	 */

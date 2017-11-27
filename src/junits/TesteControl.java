@@ -1,7 +1,8 @@
 package junits;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.*;
+
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -36,7 +37,8 @@ class TesteControl {
 
 	@Test
 	final void testGetFpos() {
-		fail("Not yet implemented"); // TODO
+		Control control = new Control();
+		assertTrue(control.getFpos()==0);
 	}
 
 	@Test
@@ -47,7 +49,8 @@ class TesteControl {
 
 	@Test
 	final void testReadRules() {
-		fail("Not yet implemented"); // TODO
+		Map<String, String> list = Control.readRules("files/rules.cf");
+		assertTrue(list.size()==335);
 	}
 
 	@Test

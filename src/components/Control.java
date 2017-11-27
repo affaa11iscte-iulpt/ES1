@@ -52,7 +52,12 @@ public class Control {
 		return fneg;
 	}
 	
-	
+	/**
+	 * 
+	 * @param email
+	 * @param rules
+	 * @return boolean
+	 */
 	
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
 			int value=0;
@@ -66,6 +71,25 @@ public class Control {
 			}
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param email
+	 * @param rules
+	 * @return boolean
+	 */
+	private boolean isLessThan5(Email email, Map<String, String> rules) {
+		int value=0;
+		
+		for(String rule: email.getEmailRules()) {
+			value = Integer.parseInt(rules.get(rule));
+		}
+		
+		if(value <= 5) {
+			return true;
+		}
+	return false;
+}
 
 
 	/* * L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 

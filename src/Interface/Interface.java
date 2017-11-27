@@ -54,6 +54,10 @@ public class Interface extends JFrame {
 
 	}
 
+	/**
+	 * Criação do painel onde carrega os ficheiros escolhidos
+	 * return @JPanel
+	 */
 	private JPanel filePanel(){
 		JPanel filePanel = new JPanel();
 		filePanel.setLayout(new GridLayout(3,2));
@@ -121,6 +125,10 @@ public class Interface extends JFrame {
 
 	}
 
+	/**
+	 * Criação do painel onde especifica a tabela e trata o modo, isto é, automático e manual 
+	 * return @JPanel
+	 */
 	private JPanel tablePanel(){
 
 		JPanel tablePanel = new JPanel();
@@ -131,10 +139,12 @@ public class Interface extends JFrame {
 		visibleColumns.add("Pesos: ");
 
 		tableModel = new DefaultTableModel(visibleColumns.toArray(),0);
+		
 		JTable tabela = new JTable(tableModel);
 
 		JScrollPane scrollArea = new JScrollPane(tabela);
 
+		
 		scrollArea.setPreferredSize(new Dimension(400,300));
 
 		tablePanel.add(scrollArea);
@@ -147,7 +157,6 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c = new Control();
-				System.out.println("criei");
 				c.calculateFP(emails,getRules() );
 				setFp(c.getFpos());
 				setFn(c.getFneg());
@@ -165,6 +174,8 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				modoAutomatico.setSelected(false);
+			
+			
 
 			}
 		});
@@ -173,7 +184,6 @@ public class Interface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				tabela.setEnabled(false);
 				modoManual.setSelected(false);
 
@@ -192,6 +202,11 @@ public class Interface extends JFrame {
 		return tablePanel;
 	}
 
+	
+	/**
+	 * Criação do painel onde mostra os falsos positivos/negativos gerados e as opções de guardar e apagar as configurações
+	 * return @JPanel
+	 */
 	private JPanel modePanel(){
 		JPanel modePanel = new JPanel();
 		modePanel.setLayout(new GridLayout(5,1));
@@ -220,15 +235,26 @@ public class Interface extends JFrame {
 
 		return modePanel;
 	}
+	
 
 
+	/**
+	 * Altera o valor das labels dos falsos positivos quando este é calculado, recebe um inteiro (numero de falsos positivos), que vai ser o valor a adicionar na label 
+	 * @param i
+	 */
 	public void setFp(int i) {
 		this.fp.setText("Falsos Positivos Gerados: "+i);
 	}
 	
+	/**
+	 * Altera o valor das labels dos falsos negativos quando este é calculado, recebe um inteiro (numero de falsos negativos), que vai ser o valor a adicionar na label 
+	 * @param i
+	 */
 	public void setFn(int i) {
 		this.fn.setText("Falsos Negativos Gerados: "+i);
 	}
+	
+	
 	/**
 	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
 	 */
@@ -261,6 +287,7 @@ public class Interface extends JFrame {
 		return rules;
 	}
 
+	
 	public List<Email> getEmails(){
 		return emails;
 	}

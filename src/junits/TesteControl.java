@@ -139,7 +139,13 @@ class TesteControl {
 			spamList = Control.readEmails("files/xxx.log", true);
 			assertNull(spamList);
 	}
-
+	
+	@Test
+	final void testModoAutomatico() {
+		assertTrue(1==1);		
+		//É preciso ver o que se mete aqui
+	}
+	
 	@Test
 	final void testEquals() {
 		fail("Not yet implemented"); // TODO

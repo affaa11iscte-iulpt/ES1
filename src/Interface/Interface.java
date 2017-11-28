@@ -152,17 +152,7 @@ public class Interface extends JFrame {
 		JPanel tableSubPanel1 = new JPanel();
 		JLabel label = new JLabel("Calcular: ");
 		JButton calcular= new JButton("ok");
-		calcular.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				c = new Control();
-				c.calculate(emails,getRules() );
-				setFp(c.getFpos());
-				setFn(c.getFneg());
-				
-			}
-		});
+		
 		tableSubPanel1.add(label);
 		tableSubPanel1.add(calcular);
 
@@ -186,6 +176,24 @@ public class Interface extends JFrame {
 				modoManual.setSelected(false);
 
 
+			}
+		});
+		
+		calcular.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(modoManual.isSelected()) {
+					c = new Control();
+					System.out.println("entrei");
+					c.calculate(emails,getRules() );
+					setFp(c.getFpos());
+					setFn(c.getFneg());
+				}else if(modoAutomatico.isSelected()) {
+					c = new Control();
+					System.out.println("aqui");
+					c.modoAutomatico(emails, getRules());
+				}
 			}
 		});
 

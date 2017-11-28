@@ -44,6 +44,7 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	   * @param DoubleSolution Vetor de doubles
 	   */
 	  public void evaluate(DoubleSolution solution){
+		//System.out.println("Tratando");
 	    double aux, xi, xj;
 	    double[] falses = new double[getNumberOfObjectives()];
 	    double[] values = new double[getNumberOfVariables()];
@@ -54,13 +55,14 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    Map<String, String> new_rules = new HashMap<String, String>();
 	    
 	    int j=0;
-	    for(String key: this.rules.values()) {
-	    	new_rules.put(key, String.valueOf(values[j]));
+	    for(String key: this.rules.keySet()) {
+	    	new_rules.put(key, String.valueOf((int)values[j]));
 	    	j++;
 	    }
-
+	    //System.out.println(new_rules);
 	    Control control = new Control();
 	    control.calculate(emails, new_rules);
+	    //System.out.println("acabou");
 	    //Falsos positivos
 	    falses[0] = control.getFpos();
 	    

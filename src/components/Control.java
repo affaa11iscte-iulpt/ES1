@@ -2,12 +2,14 @@ package components;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import components.Email.Type;
 
 public class Control {
@@ -33,6 +35,7 @@ public class Control {
 		}
 		System.out.println(fpos+" "+fneg);
 	}
+	
 	/**
 	 * Devolve numero de falsos positivos
 	 * @return Integer
@@ -59,10 +62,9 @@ public class Control {
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
 		int value=0;
 		for(String rule: email.getEmailRules()) {
-			//System.out.println(rule);
 			value+= Integer.parseInt(rules.get(rule));
 		}
-		System.out.println("MAIOR "+value);
+		//System.out.println("MAIOR "+value);
 		if(value > 5) {
 			return true;
 		}
@@ -77,18 +79,19 @@ public class Control {
 	 */
 	private boolean isLessThanMinus5(Email email, Map<String, String> rules) {
 		int value=0;
-
+		int i=0;
 		for(String rule: email.getEmailRules()) {
-			value += Integer.parseInt(rules.get(rule));
+			//System.out.println(rule+" "+rules.get(rule));
+			if(rules.get(rule)!=null)
+				value += Integer.parseInt(rules.get(rule));
 		}
 
-		System.out.println("MENOR "+value);
+		//System.out.println("MENOR "+value);
 		if(value < -5) {
 			return true;
 		}
 		return false;
 	}
-
 
 	/** L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
 	 * em que o nome da regra corresponde � chave e o peso corresponde ao peso.
@@ -158,8 +161,11 @@ public class Control {
 
 	}
 
-	public static void main(String[] args) {
-		Control.readRules(null);
+	public void modoAutomatico(List<Email> emails, Map<String, String> rules) {
+		try {
+			AntiSpamFilterAutomaticConfiguration.start(emails, rules);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-
 }

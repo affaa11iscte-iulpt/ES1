@@ -30,10 +30,13 @@ import components.Email;
 
 public class Interface extends JFrame {
 	protected DefaultTableModel tableModel;
+	private boolean isEditable;
 	private List<Email> emails = new ArrayList<Email>();	
 	private JLabel fp = new JLabel("Falsos Positivos Gerados: ");
 	private JLabel fn = new JLabel("Falsos Negativos Gerados: ");
 	private Control c;
+	private Object[][] data;
+	private String[] colNomes={"Regras", "Pesos"};
 	
 	public Interface(){
 		setSize(700,700);
@@ -129,24 +132,26 @@ public class Interface extends JFrame {
 	 * Criação do painel onde especifica a tabela e trata o modo, isto é, automático e manual 
 	 * return @JPanel
 	 */
-	private JPanel tablePanel(){
 
+	private JPanel tablePanel(){
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BorderLayout());
-		List<String> visibleColumns = new ArrayList<String>();
-
-		visibleColumns.add("Regras: ");
-		visibleColumns.add("Pesos: ");
-
-		tableModel = new DefaultTableModel(visibleColumns.toArray(),0);
+		tableModel = new DefaultTableModel(data, colNomes);
+		JTable tabela = new JTable(tableModel){
 		
-		JTable tabela = new JTable(tableModel);
-
+			@Override
+			public boolean isCellEditable(int row, int column){
+				if(column!=0 && isEditable==true){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+		};
+		
 		JScrollPane scrollArea = new JScrollPane(tabela);
-
-		
 		scrollArea.setPreferredSize(new Dimension(400,300));
-
 		tablePanel.add(scrollArea);
 
 		JPanel tableSubPanel1 = new JPanel();
@@ -164,6 +169,7 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				modoAutomatico.setSelected(false);
+				isEditable=true;
 
 			}
 		});

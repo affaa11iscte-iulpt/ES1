@@ -13,7 +13,7 @@ import components.Email.Type;
 public class Control {
 	private int fpos=0;
 	private int fneg=0;
-	
+
 	/**
 	 * Calcula o número de falsos positivos e falsos negativos
 	 * @param Lista de emails e Mapa das regras
@@ -23,16 +23,13 @@ public class Control {
 		System.out.println("N emails: "+emails.size());
 		for (Email email : emails) {
 			if(email.getEmailType().equals(Type.HAM)){
-				if(isGreaterThan5(email, rules)) {
+				if(isGreaterThan5(email, rules))
 					fpos++;
-				}
-				else if(email.getEmailType().equals(Type.SPAM)){
-					if(isLessThanMinus5(email, rules)) {
-						fneg++;
-					}
-				}
+			}
+			else if(email.getEmailType().equals(Type.SPAM))
+				if(isLessThanMinus5(email, rules)) 
+					fneg++;
 
-			}	
 		}
 		System.out.println(fpos+" "+fneg);
 	}
@@ -43,7 +40,7 @@ public class Control {
 	public int getFpos() {
 		return fpos;
 	}
-	
+
 	/**
 	 * Devolve numero de falsos negativos
 	 * @return Integer
@@ -51,27 +48,27 @@ public class Control {
 	public int getFneg() {
 		return fneg;
 	}
-	
+
 	/**
 	 * 
 	 * @param email
 	 * @param rules
 	 * @return boolean
 	 */
-	
+
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
-			int value=0;
-			for(String rule: email.getEmailRules()) {
-				System.out.println(rule);
-				value+= Integer.parseInt(rules.get(rule));
-			}
-			System.out.println("oi "+value);
-			if(value > 5) {
-				return true;
-			}
+		int value=0;
+		for(String rule: email.getEmailRules()) {
+			//System.out.println(rule);
+			value+= Integer.parseInt(rules.get(rule));
+		}
+		System.out.println("MAIOR "+value);
+		if(value > 5) {
+			return true;
+		}
 		return false;
 	}
-	
+
 	/**
 	 * 
 	 * @param email
@@ -80,16 +77,17 @@ public class Control {
 	 */
 	private boolean isLessThanMinus5(Email email, Map<String, String> rules) {
 		int value=0;
-		
+
 		for(String rule: email.getEmailRules()) {
 			value += Integer.parseInt(rules.get(rule));
 		}
-		
-		if(value <= -5) {
+
+		System.out.println("MENOR "+value);
+		if(value < -5) {
 			return true;
 		}
-	return false;
-}
+		return false;
+	}
 
 
 	/** L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
@@ -102,7 +100,7 @@ public class Control {
 		Map<String, String> rules = new HashMap<String, String>();
 		try {
 			Scanner scanner = new Scanner(new File(file));
-			
+
 			while(scanner.hasNextLine()) {
 				String[] tokens = scanner.next().split(" ");
 				if(tokens.length==1)
@@ -110,16 +108,16 @@ public class Control {
 				else
 					rules.put(tokens[0], tokens[1]);
 			}
-			
+
 		} catch (NullPointerException | FileNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.out.println("Error reading file rules.cf");
 			return null;
 		}
-		
+
 		return rules;
 	}
-	
+
 	/**
 	 * L� o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
 	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, � criado um
@@ -136,7 +134,7 @@ public class Control {
 		List<Email> emails = new ArrayList<Email>();
 		try {
 			Scanner scanner  = new Scanner(new File(file));
-			
+
 			while(scanner.hasNextLine()) {
 				String[] tokens = scanner.nextLine().split("\t");
 				Email email;
@@ -150,18 +148,18 @@ public class Control {
 				}
 				emails.add(email);
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading " + file);
 		}
 
 		return emails;
-	
+
 	}
-	
+
 	public static void main(String[] args) {
 		Control.readRules(null);
 	}
-	
+
 }

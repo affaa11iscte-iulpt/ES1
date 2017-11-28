@@ -111,9 +111,10 @@ public class Control {
 					rules.put(tokens[0], tokens[1]);
 			}
 			
-		} catch (FileNotFoundException e) {
+		} catch (NullPointerException | FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading file rules.cf");
+			return null;
 		}
 		
 		return rules;
@@ -159,5 +160,8 @@ public class Control {
 	
 	}
 	
+	public static void main(String[] args) {
+		Control.readRules(null);
+	}
 	
 }

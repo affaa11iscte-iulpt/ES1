@@ -1,5 +1,6 @@
 package junits;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -61,7 +62,14 @@ class TesteControl {
 	@Test
 	final void testReadRules() {
 		Map<String, String> list = Control.readRules("files/rules.cf");
+		//Número de regras é de 335
 		assertTrue(list.size()==335);
+		//Caso o argumento seja nulo
+		list = Control.readRules(null);
+		assertNull(list);
+		//Caso o argumento seja inválido, por inexistência do ficheiro
+		list = Control.readRules("files/bababa.cf");
+		assertNull(list);
 	}
 
 	@Test

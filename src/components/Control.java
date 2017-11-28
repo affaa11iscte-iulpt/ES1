@@ -62,7 +62,8 @@ public class Control {
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
 		int value=0;
 		for(String rule: email.getEmailRules()) {
-			value+= Integer.parseInt(rules.get(rule));
+			if(rules.get(rule)!=null)
+				value+= Integer.parseInt(rules.get(rule));
 		}
 		//System.out.println("MAIOR "+value);
 		if(value > 5) {
@@ -105,7 +106,7 @@ public class Control {
 			Scanner scanner = new Scanner(new File(file));
 
 			while(scanner.hasNextLine()) {
-				String[] tokens = scanner.next().split(" ");
+				String[] tokens = scanner.nextLine().split(" ");
 				if(tokens.length==1)
 					rules.put(tokens[0], "");
 				else

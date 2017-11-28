@@ -39,11 +39,6 @@ class TesteControl {
 
 	@Test
 	final void testCalculate() {
-		
-	}
-
-	@Test
-	final void testGetFpos() {
 		Control control = new Control();
 		//No início, os falsos positivos são 0
 		assertTrue(control.getFpos()==0);
@@ -61,11 +56,11 @@ class TesteControl {
 		};
 		
 		List<String> rulesOfEmailA = Arrays.asList("BAYES_00","FREEMAIL_FROM","RDNS_NONE",
-				"FREEMAIL_REPLYTO_END_DIGIT","MSOE_MID_WRONG_CASE"); //6
+				"FREEMAIL_REPLYTO_END_DIGIT","MSOE_MID_WRONG_CASE", "NOT_RULE"); //6
 		List<String> rulesOfEmailB = Arrays.asList("RDNS_NONE","FREEMAIL_REPLYTO_END_DIGIT",
-				"MSOE_MID_WRONG_CASE","DATE_IN_PAST_24_48","T_LOTS_OF_MONEY"); //-6
+				"MSOE_MID_WRONG_CASE","DATE_IN_PAST_24_48","T_LOTS_OF_MONEY", "NOT_RULE"); //-6
 		
-		//Caso em que há 1 FP
+		//Caso em que há 1 FP e 1 FN
 		Email emailA = new Email("aa", Type.HAM);
 		Email emailB = new Email("bb", Type.SPAM);
 		for(String s: rulesOfEmailA)
@@ -75,11 +70,12 @@ class TesteControl {
 		
 		List<Email> emails = Arrays.asList(emailA, emailB);
 
-		control = new Control();
 		control.calculate(emails, rules);
 		assertTrue(control.getFpos()==1);
+		assertTrue(control.getFneg()==1);
+
 		
-		//Caso em que há 0 FP
+		//Caso em que há 0 FP e 0 FN
 				emailA = new Email("aa", Type.SPAM);
 				emailB = new Email("bb", Type.HAM);
 				for(String s: rulesOfEmailA)
@@ -91,59 +87,20 @@ class TesteControl {
 
 				control = new Control();
 				control.calculate(emails, rules);
-				assertTrue(control.getFpos()==0); //aquiiiiiiiiiiiiiiiiiiiii
+				assertTrue(control.getFpos()==0);
+				assertTrue(control.getFneg()==0);
+	}
+
+	@Test
+	final void testGetFpos() {
+		Control control = new Control();
+		assertTrue(control.getFpos()==0);
 	}
 
 	@Test
 	final void testGetFneg() {
 		Control control = new Control();
-		//No início, os falsos negativos são 0
 		assertTrue(control.getFneg()==0);
-		
-		Map<String, String> rules = new HashMap<String, String>() {
-			{
-		        put("BAYES_00","10");
-		        put("FREEMAIL_FROM","-5");
-		        put("RDNS_NONE","6");
-		        put("FREEMAIL_REPLYTO_END_DIGIT","2");
-		        put("MSOE_MID_WRONG_CASE","-7");
-		        put("DATE_IN_PAST_24_48","2");
-		        put("T_LOTS_OF_MONEY","-9");
-		}
-		};
-		
-		List<String> rulesOfEmailA = Arrays.asList("BAYES_00","FREEMAIL_FROM","RDNS_NONE",
-				"FREEMAIL_REPLYTO_END_DIGIT","MSOE_MID_WRONG_CASE"); //6
-		List<String> rulesOfEmailB = Arrays.asList("RDNS_NONE","FREEMAIL_REPLYTO_END_DIGIT",
-				"MSOE_MID_WRONG_CASE","DATE_IN_PAST_24_48","T_LOTS_OF_MONEY"); //-6
-		
-		//Caso em que há 1 FP
-		Email emailA = new Email("aa", Type.HAM);
-		Email emailB = new Email("bb", Type.SPAM);
-		for(String s: rulesOfEmailA)
-			emailA.addRule(s);
-		for(String s: rulesOfEmailB)
-			emailB.addRule(s);
-		
-		List<Email> emails = Arrays.asList(emailA, emailB);
-
-		control = new Control();
-		control.calculate(emails, rules);
-		assertTrue(control.getFneg()==1);
-		
-		//Caso em que há 0 FP
-				emailA = new Email("aa", Type.SPAM);
-				emailB = new Email("bb", Type.HAM);
-				for(String s: rulesOfEmailA)
-					emailA.addRule(s);
-				for(String s: rulesOfEmailB)
-					emailB.addRule(s);
-				
-				emails = Arrays.asList(emailA, emailB);
-
-				control = new Control();
-				control.calculate(emails, rules);
-				assertTrue(control.getFneg()==0);
 	}
 
 	@Test

@@ -161,7 +161,26 @@ class TesteControl {
 
 	@Test
 	final void testReadEmails() {
-		fail("Not yet implemented"); // TODO
+		List<Email> hamList = Control.readEmails("files/ham.log", false);
+		List<Email> spamList = Control.readEmails("files/spam.log", true);
+		//Numero de emails do tipo HAM é de 695
+		assertTrue(hamList.size()==695);
+		//Numero de emails do tipo SPAM é de 239
+		assertTrue(spamList.size()==239);
+		//Caso o argumento da localizacao do fiheiro seja nulo
+			//Ham
+			hamList = Control.readEmails(null, false);
+			assertNull(hamList);
+			//Spam
+			spamList = Control.readEmails(null, true);
+			assertNull(spamList);
+		//Caso o argumento da localizacao do ficheiro seja invalido, por inexistência do fichiero
+			//Ham
+			hamList = Control.readEmails("files/xxx.log", false);
+			assertNull(hamList);
+			//Spam
+			spamList = Control.readEmails("files/xxx.log", true);
+			assertNull(spamList);
 	}
 
 	@Test

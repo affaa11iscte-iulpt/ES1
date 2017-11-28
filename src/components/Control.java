@@ -170,4 +170,62 @@ public class Control {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<String> readAutomatic(String fileRF, String fileRS) {
+		int best_position=-1; //Posição do melhor vetor
+		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITÁRIO pq é Professional
+		int best_fpos=-1; //Valor do falso positivo mais baixo
+		try {
+			Scanner scanner = new Scanner(new File(fileRF));
+			
+			int line=1;
+			while(scanner.hasNextLine()) {
+				String[] tokens = scanner.nextLine().split(" ");
+				System.out.println(tokens[0]+" "+tokens[1]);
+				int[] falses = {(int)Double.parseDouble(tokens[0]), (int)Double.parseDouble(tokens[1])};
+				if(isBest(best_fneg, best_fpos, falses)) {
+					best_position=line;
+					best_fneg=falses[1];
+					best_fpos=falses[0];
+				}
+				line++;
+			}
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error reading  "+ fileRF);
+		}
+		
+		try {
+			Scanner scanner = new Scanner(new File(fileRS));
+			
+			int line=1;
+			while(scanner.hasNextLine()) {
+				if(line==best_position) {
+					String[] tokens = scanner.nextLine().split(" ");
+					List<String> values = new ArrayList<String>();
+					for(int i=0; i<tokens.length; i++)
+						values.add(tokens[i]);
+					fpos=best_fpos;
+					fneg=best_fneg;
+					return values;
+				}
+			}
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error reading  "+ fileRS);
+		}
+		
+		return null;
+	}
+	
+	public boolean isBest(int fneg, int fpos, int[] falses) {
+		if(fneg==-1 || fpos==-1)
+			return true;
+		
+		if(fneg >= falses[1])
+			if(fpos >= falses[0])
+				return true;
+		return false;
+	}
+	
 }

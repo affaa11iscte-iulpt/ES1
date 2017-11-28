@@ -199,6 +199,10 @@ public class Interface extends JFrame {
 					c = new Control();
 					System.out.println("aqui");
 					c.modoAutomatico(emails, getRules());
+					c.readAutomatic("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
+							"experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
+					setFp(c.getFpos());
+					setFn(c.getFneg());
 					System.out.println("ACABOUUUUUU");
 				}
 			}

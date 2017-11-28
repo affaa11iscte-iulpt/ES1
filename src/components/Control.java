@@ -22,7 +22,7 @@ public class Control {
 	 * @return falsos positivos e falsos negativos
 	 */
 	public void calculate (List<Email> emails, Map<String, String> rules) {		
-		System.out.println("N emails: "+emails.size());
+		//System.out.println("N emails: "+emails.size());
 		for (Email email : emails) {
 			if(email.getEmailType().equals(Type.HAM)){
 				if(isGreaterThan5(email, rules))
@@ -33,7 +33,7 @@ public class Control {
 					fneg++;
 
 		}
-		System.out.println(fpos+" "+fneg);
+		//System.out.println(fpos+" "+fneg);
 	}
 	
 	/**

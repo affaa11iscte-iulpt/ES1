@@ -193,6 +193,7 @@ public class Interface extends JFrame {
 					c = new Control();
 					System.out.println("aqui");
 					c.modoAutomatico(emails, getRules());
+					System.out.println("ACABOUUUUUU");
 				}
 			}
 		});

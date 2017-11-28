@@ -28,7 +28,7 @@ public class Control {
 				if(isGreaterThan5(email, rules))
 					fpos++;
 			}
-			else if(email.getEmailType().equals(Type.SPAM))
+			if(email.getEmailType().equals(Type.SPAM))
 				if(isLessThanMinus5(email, rules)) 
 					fneg++;
 

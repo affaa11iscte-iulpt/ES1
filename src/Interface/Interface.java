@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,7 +26,6 @@ import components.Email;
 
 
 //falta por as excepções nos modos (não se pode escolher o modo sem ficheiro)
-//tratar o modo por defeito
 //pesquisar regras
 
 public class Interface extends JFrame {
@@ -37,6 +37,9 @@ public class Interface extends JFrame {
 	private Control c;
 	private Object[][] data;
 	private String[] colNomes={"Regras", "Pesos"};
+	private JCheckBox modoManual= new JCheckBox("Modo Manual");
+	private JCheckBox modoAutomatico= new JCheckBox("Modo Automatico");
+	
 	
 	public Interface(){
 		setSize(700,700);
@@ -79,6 +82,8 @@ public class Interface extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				addRules(text1.getText());
 				ok1.setEnabled(false);
+				modoManual.setSelected(true);
+				modoAutomatico.setSelected(false);
 			}
 		});
 
@@ -162,10 +167,8 @@ public class Interface extends JFrame {
 		tableSubPanel1.add(calcular);
 
 		JPanel tableSubPanel2 = new JPanel();
-		JCheckBox modoManual= new JCheckBox("Modo Manual");
-		JCheckBox modoAutomatico= new JCheckBox("Modo Automatico");
+	
 		modoManual.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				modoAutomatico.setSelected(false);
@@ -180,6 +183,7 @@ public class Interface extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				tabela.setEnabled(false);
 				modoManual.setSelected(false);
+				
 
 
 			}
@@ -189,6 +193,7 @@ public class Interface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				if(modoManual.isSelected()) {
 					c = new Control();
 					System.out.println("entrei");
@@ -205,6 +210,7 @@ public class Interface extends JFrame {
 					setFn(c.getFneg());
 					System.out.println("ACABOUUUUUU");
 				}
+				
 			}
 		});
 

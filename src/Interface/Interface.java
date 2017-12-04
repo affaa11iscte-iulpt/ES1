@@ -24,23 +24,25 @@ import javax.swing.table.DefaultTableModel;
 import components.Control;
 import components.Email;
 
-
-//falta por as excepções nos modos (não se pode escolher o modo sem ficheiro)
 //pesquisar regras
+//rever as variaveis
 
 public class Interface extends JFrame {
 	protected DefaultTableModel tableModel;
-	private boolean isEditable;
+	private boolean isEditable=true;
 	private List<Email> emails = new ArrayList<Email>();	
 	private JLabel fp = new JLabel("Falsos Positivos Gerados: ");
 	private JLabel fn = new JLabel("Falsos Negativos Gerados: ");
+	private JButton ok1 = new JButton("ok");
+	private JButton ok2 = new JButton("ok");
+	private JButton ok3 = new JButton("ok");
 	private Control c;
 	private Object[][] data;
 	private String[] colNomes={"Regras", "Pesos"};
 	private JCheckBox modoManual= new JCheckBox("Modo Manual");
 	private JCheckBox modoAutomatico= new JCheckBox("Modo Automatico");
-	
-	
+
+
 	public Interface(){
 		setSize(700,700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -70,7 +72,6 @@ public class Interface extends JFrame {
 
 		JPanel fileSubPanel1= new JPanel();
 		JLabel rules = new JLabel("rules.cf");
-		JButton ok1 = new JButton("ok");
 		JTextField text1 = new JTextField("files\\rules.cf");
 		fileSubPanel1.add(rules);
 		fileSubPanel1.add(text1);
@@ -84,13 +85,13 @@ public class Interface extends JFrame {
 				ok1.setEnabled(false);
 				modoManual.setSelected(true);
 				modoAutomatico.setSelected(false);
+
 			}
 		});
 
 		JPanel fileSubPanel2= new JPanel();
 		JLabel spam = new JLabel("spam.log");
 		JTextField text2 = new JTextField("files\\spam.log");
-		JButton ok2 = new JButton("ok");
 		fileSubPanel2.add(spam);
 		fileSubPanel2.add(text2);
 		fileSubPanel2.add(ok2);
@@ -107,7 +108,6 @@ public class Interface extends JFrame {
 
 		JPanel fileSubPanel3= new JPanel();
 		JLabel ham = new JLabel("ham.log");
-		JButton ok3 = new JButton("ok");
 		JTextField text3 = new JTextField("files\\ham.log");
 		fileSubPanel3.add(ham);
 		fileSubPanel3.add(text3);
@@ -143,10 +143,10 @@ public class Interface extends JFrame {
 		tablePanel.setLayout(new BorderLayout());
 		tableModel = new DefaultTableModel(data, colNomes);
 		JTable tabela = new JTable(tableModel){
-		
+
 			@Override
 			public boolean isCellEditable(int row, int column){
-				if(column!=0 && isEditable==true){
+				if(column==1 && isEditable==true){
 					return true;
 				}
 				else{
@@ -154,7 +154,7 @@ public class Interface extends JFrame {
 				}
 			}
 		};
-		
+
 		JScrollPane scrollArea = new JScrollPane(tabela);
 		scrollArea.setPreferredSize(new Dimension(400,300));
 		tablePanel.add(scrollArea);
@@ -162,12 +162,12 @@ public class Interface extends JFrame {
 		JPanel tableSubPanel1 = new JPanel();
 		JLabel label = new JLabel("Calcular: ");
 		JButton calcular= new JButton("ok");
-		
+
 		tableSubPanel1.add(label);
 		tableSubPanel1.add(calcular);
 
 		JPanel tableSubPanel2 = new JPanel();
-	
+
 		modoManual.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -181,36 +181,37 @@ public class Interface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tabela.setEnabled(false);
+				isEditable=false;
 				modoManual.setSelected(false);
-				
+
 
 
 			}
 		});
-		
+
 		calcular.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				if(modoManual.isSelected()) {
-					c = new Control();
-					System.out.println("entrei");
-					c.calculate(emails,getRules() );
-					setFp(c.getFpos());
-					setFn(c.getFneg());
-				}else if(modoAutomatico.isSelected()) {
-					c = new Control();
-					System.out.println("aqui");
-					c.modoAutomatico(emails, getRules());
-					c.readAutomatic("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
-							"experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
-					setFp(c.getFpos());
-					setFn(c.getFneg());
-					System.out.println("ACABOUUUUUU");
+				if(ok1.isEnabled() || ok2.isEnabled() || ok3.isEnabled()){
+					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro");
 				}
-				
+				else{
+					if(modoManual.isSelected()) {
+						c = new Control();
+						c.calculate(emails,getRules() );
+						setFp(c.getFpos());
+						setFn(c.getFneg());
+					}else if(modoAutomatico.isSelected()) {
+						c = new Control();
+						c.modoAutomatico(emails, getRules());
+						c.readAutomatic("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
+								"experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
+						setFp(c.getFpos());
+						setFn(c.getFneg());
+
+					}
+				}
 			}
 		});
 
@@ -225,7 +226,7 @@ public class Interface extends JFrame {
 		return tablePanel;
 	}
 
-	
+
 	/**
 	 * Criação do painel onde mostra os falsos positivos/negativos gerados e as opções de guardar e apagar as configurações
 	 * return @JPanel
@@ -258,7 +259,7 @@ public class Interface extends JFrame {
 
 		return modePanel;
 	}
-	
+
 
 
 	/**
@@ -268,7 +269,7 @@ public class Interface extends JFrame {
 	public void setFp(int i) {
 		this.fp.setText("Falsos Positivos Gerados: "+i);
 	}
-	
+
 	/**
 	 * Altera o valor das labels dos falsos negativos quando este é calculado, recebe um inteiro (numero de falsos negativos), que vai ser o valor a adicionar na label 
 	 * @param i
@@ -276,8 +277,8 @@ public class Interface extends JFrame {
 	public void setFn(int i) {
 		this.fn.setText("Falsos Negativos Gerados: "+i);
 	}
-	
-	
+
+
 	/**
 	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
 	 */
@@ -310,7 +311,7 @@ public class Interface extends JFrame {
 		return rules;
 	}
 
-	
+
 	public List<Email> getEmails(){
 		return emails;
 	}
@@ -326,5 +327,3 @@ public class Interface extends JFrame {
 	}
 
 }
-
-

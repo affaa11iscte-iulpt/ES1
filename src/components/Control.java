@@ -39,7 +39,7 @@ public class Control {
 		}
 		//System.out.println(fpos+" "+fneg);
 	}
-	
+
 	/**
 	 * Devolve numero de falsos positivos
 	 * @return Integer
@@ -174,14 +174,14 @@ public class Control {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Map<String, String> readAutomatic(Map<String, String> rules, String fileRF, String fileRS) {
 		int best_position=-1; //Posição do melhor vetor
 		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITÁRIO pq é Professional
 		int best_fpos=-1; //Valor do falso positivo mais baixo
 		try {
 			Scanner scanner = new Scanner(new File(fileRF));
-			
+
 			int line=1;
 			while(scanner.hasNextLine()) {
 				String[] tokens = scanner.nextLine().split(" ");
@@ -198,12 +198,12 @@ public class Control {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRF);
 		}
-		
+
 		List<Integer> values = null;
-		
+
 		try {
 			Scanner scanner = new Scanner(new File(fileRS));
-			
+
 			int line=1;
 			while(scanner.hasNextLine()) {
 				if(line==best_position) {
@@ -219,30 +219,30 @@ public class Control {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRS);
 		}
-		
+
 		return changeListToMap(rules, values);
 	}
-	
+
 	private Map<String, String> changeListToMap(Map<String, String> rules, List<Integer> values){
 		Map<String, String> new_rules = new HashMap<String, String>(); 
 		int j=0;
 		for(String key: rules.keySet()) {
-		    	new_rules.put(key, String.valueOf(values.get(j)));
-		    	j++;
-		    }
+			new_rules.put(key, String.valueOf(values.get(j)));
+			j++;
+		}
 		return new_rules;
 	}
-	
+
 	public boolean isBest(int fneg, int fpos, int[] falses) {
 		if(fneg==-1 || fpos==-1)
 			return true;
-		
+
 		if(fneg >= falses[1])
 			if(fpos >= falses[0])
 				return true;
 		return false;
 	}
-	
+
 	public void saveConfigurations(String file, Map<String, String> rules) {
 		try {
 			PrintWriter pw = new PrintWriter(new FileOutputStream(file, false));
@@ -256,7 +256,35 @@ public class Control {
 			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
 		}
 	}
-	
-	
-	
+
+	public void removeRowFile(){
+		List<String> rules = new ArrayList<String>();
+		try {
+			Scanner scanner = new Scanner(new File("files/rules.cf"));
+
+			int line=1;
+			while(scanner.hasNextLine()) {
+				String[] tokens = scanner.nextLine().split(" ");
+				rules.add(tokens[0]);
+
+				line++;
+			}
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Error reading  rules.cf ");
+		}
+
+		try {
+			PrintWriter pw = new PrintWriter(new FileOutputStream("files/rules.cf", false));
+			for(String rule: rules)
+				pw.println(rule);
+			pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
+		}
+	}
+
 }
+
+

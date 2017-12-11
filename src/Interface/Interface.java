@@ -45,6 +45,7 @@ public class Interface extends JFrame {
 
 
 	public Interface(){
+		c= new Control();
 		setSize(700,700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addComponentes();
@@ -275,6 +276,7 @@ public class Interface extends JFrame {
 					modoManual.setSelected(false);
 				}
 			removeAllRowsOfTable();
+			c.removeRowFile();
 			
 
 			}
@@ -292,6 +294,10 @@ public class Interface extends JFrame {
 		return modePanel;
 	}
 
+	
+
+		
+	
 
 
 	/**
@@ -327,6 +333,13 @@ public class Interface extends JFrame {
 		removeAllRowsOfTable();
 		for(Map.Entry<String, String> entry: rules.entrySet()) {
 			tableModel.addRow(new String[] {entry.getKey(), entry.getValue()});
+		}
+	}
+	
+	private void cleanTable(Map<String, String> rules) {
+		removeAllRowsOfTable();
+		for(Map.Entry<String, String> entry: rules.entrySet()) {
+			tableModel.addRow(new String[] {entry.getKey(), ""});
 		}
 	}
 	

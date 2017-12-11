@@ -207,7 +207,7 @@ public class Interface extends JFrame {
 						setFn(c.getFneg());
 					}else if(modoAutomatico.isSelected()) {
 						c = new Control();
-						c.modoAutomatico(emails, getRules());
+						c.automaticMode(emails, getRules());
 						Map<String, String> rules = c.readAutomatic(getRules(), "experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
 								"experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
 						putRulesOnTable(rules);

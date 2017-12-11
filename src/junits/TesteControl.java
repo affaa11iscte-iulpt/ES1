@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -141,9 +142,53 @@ class TesteControl {
 	}
 	
 	@Test
-	final void testModoAutomatico() {
+	final void testAutomaticMode() {
+		List<Email> emails = new ArrayList<Email>();
+		emails.add(new Email("aaaaa", Type.HAM));
+		emails.add(new Email("bbbbb", Type.HAM));
+		emails.add(new Email("ccccc", Type.SPAM));
+		emails.add(new Email("ddddd", Type.HAM));
+		emails.add(new Email("eeeee", Type.SPAM));
+		emails.add(new Email("fffff", Type.SPAM));
+		emails.add(new Email("ggggg", Type.HAM));
+		
+		Map<String, String> rules = new HashMap<String, String>() {
+			{
+		        put("BAYES_00","10");
+		        put("FREEMAIL_FROM","-5");
+		        put("RDNS_NONE","6");
+		        put("FREEMAIL_REPLYTO_END_DIGIT","2");
+		        put("MSOE_MID_WRONG_CASE","-7");
+		        put("DATE_IN_PAST_24_48","2");
+		        put("T_LOTS_OF_MONEY","-9");
+		}
+		};
+		Control c = new Control();
+		c.automaticMode(emails, rules);
+
+		
 		assertTrue(1==1);		
 		//É preciso ver o que se mete aqui
+	}
+	
+	@Test
+	final void testReadAutomatic() {
+		Map<String, String> rules = new HashMap<String, String>() {
+			{
+		        put("BAYES_00","10");
+		        put("FREEMAIL_FROM","-5");
+		        put("RDNS_NONE","6");
+		        put("FREEMAIL_REPLYTO_END_DIGIT","2");
+		        put("MSOE_MID_WRONG_CASE","-7");
+		        put("DATE_IN_PAST_24_48","2");
+		        put("T_LOTS_OF_MONEY","-9");
+		}
+		};
+		
+		Control c = new Control();
+		assertNull(c.readAutomatic(rules, "aa", "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs"));
+		assertNull(c.readAutomatic(rules, "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf", "bbb"));
+
 	}
 	
 	@Test

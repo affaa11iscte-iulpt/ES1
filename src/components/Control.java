@@ -167,7 +167,7 @@ public class Control {
 
 	}
 
-	public void modoAutomatico(List<Email> emails, Map<String, String> rules) {
+	public void automaticMode(List<Email> emails, Map<String, String> rules) {
 		try {
 			AntiSpamFilterAutomaticConfiguration.start(emails, rules);
 		} catch (IOException e) {
@@ -197,6 +197,7 @@ public class Control {
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRF);
+			return null;
 		}
 
 		List<Integer> values = null;
@@ -218,6 +219,7 @@ public class Control {
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRS);
+			return null;
 		}
 
 		return changeListToMap(rules, values);

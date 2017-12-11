@@ -175,7 +175,7 @@ public class Control {
 		}
 	}
 	
-	public List<String> readAutomatic(String fileRF, String fileRS) {
+	public Map<String, String> readAutomatic(Map<String, String> rules, String fileRF, String fileRS) {
 		int best_position=-1; //Posição do melhor vetor
 		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITÁRIO pq é Professional
 		int best_fpos=-1; //Valor do falso positivo mais baixo
@@ -199,6 +199,8 @@ public class Control {
 			System.out.println("Error reading  "+ fileRF);
 		}
 		
+		List<String> values = null;
+		
 		try {
 			Scanner scanner = new Scanner(new File(fileRS));
 			
@@ -206,12 +208,11 @@ public class Control {
 			while(scanner.hasNextLine()) {
 				if(line==best_position) {
 					String[] tokens = scanner.nextLine().split(" ");
-					List<String> values = new ArrayList<String>();
+					values = new ArrayList<String>();
 					for(int i=0; i<tokens.length; i++)
 						values.add(tokens[i]);
 					fpos=best_fpos;
 					fneg=best_fneg;
-					return values;
 				}
 			}
 		}catch(FileNotFoundException e) {
@@ -219,7 +220,17 @@ public class Control {
 			System.out.println("Error reading  "+ fileRS);
 		}
 		
-		return null;
+		return changeListToMap(rules, values);
+	}
+	
+	private Map<String, String> changeListToMap(Map<String, String> rules, List<String> values){
+		Map<String, String> new_rules = new HashMap<String, String>(); 
+		int j=0;
+		for(String key: rules.keySet()) {
+		    	new_rules.put(key, values.get(j));
+		    	j++;
+		    }
+		return new_rules;
 	}
 	
 	public boolean isBest(int fneg, int fpos, int[] falses) {
@@ -243,5 +254,7 @@ public class Control {
 			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
 		}
 	}
+	
+	
 	
 }

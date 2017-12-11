@@ -205,8 +205,10 @@ public class Interface extends JFrame {
 					}else if(modoAutomatico.isSelected()) {
 						c = new Control();
 						c.modoAutomatico(emails, getRules());
-						c.readAutomatic("experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
+						Map<String, String> rules = c.readAutomatic(getRules(), "experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
 								"experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
+						putRulesOnTable(rules);
+						System.out.println(rules.size());
 						setFp(c.getFpos());
 						setFn(c.getFneg());
 
@@ -284,7 +286,10 @@ public class Interface extends JFrame {
 	 */
 	public void addRules(String file) {
 		Map<String,String> rules = Control.readRules(file);
-
+		putRulesOnTable(rules);
+	}
+	
+	private void putRulesOnTable(Map<String, String> rules) {
 		for(Map.Entry<String, String> entry: rules.entrySet()) {
 			tableModel.addRow(new String[] {entry.getKey(), entry.getValue()});
 		}

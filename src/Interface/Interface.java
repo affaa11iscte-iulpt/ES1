@@ -261,6 +261,25 @@ public class Interface extends JFrame {
 
 		JPanel modeSubPanel4 = new JPanel();
 		JButton reset = new JButton ("Reset Configuração");
+		reset.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ok1.setEnabled(true);
+				ok2.setEnabled(true);
+				ok3.setEnabled(true);
+				setFp(0);
+				setFn(0);
+				if(modoAutomatico.isSelected() || modoManual.isSelected()){
+					modoAutomatico.setSelected(false);
+					modoManual.setSelected(false);
+				}
+			removeAllRowsOfTable();
+			
+
+			}
+		});
+
 		modeSubPanel4.add(reset);
 
 

@@ -65,7 +65,7 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Criação do painel onde carrega os ficheiros escolhidos
+	 * Criaï¿½ï¿½o do painel onde carrega os ficheiros escolhidos
 	 * return @JPanel
 	 */
 	private JPanel filePanel(){
@@ -137,7 +137,7 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Criação do painel onde especifica a tabela e trata o modo, isto é, automático e manual 
+	 * Criaï¿½ï¿½o do painel onde especifica a tabela e trata o modo, isto ï¿½, automï¿½tico e manual 
 	 * return @JPanel
 	 */
 
@@ -233,7 +233,7 @@ public class Interface extends JFrame {
 
 
 	/**
-	 * Criação do painel onde mostra os falsos positivos/negativos gerados e as opções de guardar e apagar as configurações
+	 * Criaï¿½ï¿½o do painel onde mostra os falsos positivos/negativos gerados e as opï¿½ï¿½es de guardar e apagar as configuraï¿½ï¿½es
 	 * return @JPanel
 	 */
 	private JPanel modePanel(){
@@ -248,7 +248,7 @@ public class Interface extends JFrame {
 		modeSubPanel2.add(fn);
 
 		JPanel modeSubPanel3 = new JPanel();
-		JButton guardar = new JButton ("Guardar Configuração");
+		JButton guardar = new JButton ("Guardar Configuraï¿½ï¿½o");
 		modeSubPanel3.add(guardar);
 		
 		guardar.addActionListener(new ActionListener() {
@@ -261,7 +261,7 @@ public class Interface extends JFrame {
 		});
 
 		JPanel modeSubPanel4 = new JPanel();
-		JButton reset = new JButton ("Reset Configuração");
+		JButton reset = new JButton ("Reset Configuraï¿½ï¿½o");
 		reset.addActionListener(new ActionListener() {
 
 			@Override
@@ -301,7 +301,7 @@ public class Interface extends JFrame {
 
 
 	/**
-	 * Altera o valor das labels dos falsos positivos quando este é calculado, recebe um inteiro (numero de falsos positivos), que vai ser o valor a adicionar na label 
+	 * Altera o valor das labels dos falsos positivos quando este ï¿½ calculado, recebe um inteiro (numero de falsos positivos), que vai ser o valor a adicionar na label 
 	 * @param i
 	 */
 	public void setFp(int i) {
@@ -309,7 +309,7 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Altera o valor das labels dos falsos negativos quando este é calculado, recebe um inteiro (numero de falsos negativos), que vai ser o valor a adicionar na label 
+	 * Altera o valor das labels dos falsos negativos quando este ï¿½ calculado, recebe um inteiro (numero de falsos negativos), que vai ser o valor a adicionar na label 
 	 * @param i
 	 */
 	public void setFn(int i) {
@@ -318,7 +318,7 @@ public class Interface extends JFrame {
 
 
 	/**
-	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader
+	 * Obtenï¿½ï¿½o do HashMap de regras (com pesos associados) lidas na classe Reader
 	 */
 	public void addRules(String file) {
 		Map<String,String> rules = Control.readRules(file);
@@ -354,7 +354,7 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Devolve as regras e os respetivos pesos num HashMap, sendo que a chave é a regra
+	 * Devolve as regras e os respetivos pesos num HashMap, sendo que a chave ï¿½ a regra
 	 * e o valor o peso.
 	 * @return Lista de regras com os pesos
 	 */

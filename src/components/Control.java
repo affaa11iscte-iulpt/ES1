@@ -57,7 +57,7 @@ public class Control {
 	}
 
 	/**
-	 * 
+	 * percorre todas as regras e verifica se o seu peso é maior que 5
 	 * @param email
 	 * @param rules
 	 * @return boolean
@@ -77,30 +77,27 @@ public class Control {
 	}
 
 	/**
-	 * 
+	 * percorre todas as regras e verifica se o seu peso é menor que -5
 	 * @param email
 	 * @param rules
 	 * @return boolean
 	 */
 	private boolean isLessThanMinus5(Email email, Map<String, String> rules) {
 		int value=0;
-		int i=0;
 		for(String rule: email.getEmailRules()) {
-			//System.out.println(rule+" "+rules.get(rule));
 			if(rules.get(rule)!=null)
 				value += Integer.parseInt(rules.get(rule));
 		}
 
-		//System.out.println("MENOR "+value);
 		if(value < -5) {
 			return true;
 		}
 		return false;
 	}
 
-	/** L� o ficheiro rules.cf e guarda todas as regras num map <String, String> 
-	 * em que o nome da regra corresponde � chave e o peso corresponde ao peso.
-	 * Caso n�o esteja nenhum peso definido no ficheiro, este ficar� vazio.
+	/** Lê o ficheiro rules.cf e guarda todas as regras num map <String, String> 
+	 * em que o nome da regra corresponde à chave e o peso corresponde ao peso.
+	 * Caso não esteja nenhum peso definido no ficheiro, este ficará vazio.
 	 * @param file Nome do ficheiro
 	 * @return Lista de regras
 	 */
@@ -118,7 +115,6 @@ public class Control {
 			}
 
 		} catch (NullPointerException | FileNotFoundException e) {
-			//e.printStackTrace();
 			System.out.println("Error reading file rules.cf");
 			return null;
 		}
@@ -127,16 +123,16 @@ public class Control {
 	}
 
 	/**
-	 * L� o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
-	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, � criado um
-	 * email do tipo spam e adicionado � lista. Caso o parametro isSpam seja false,
-	 * � criado um Email do tipo spam e adicionado � lista de emails. Ap�s a
-	 * cria��o do Email s�o adicionadas a regras associadas ao mesmo.
+	 * Lê o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
+	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, é criado um
+	 * email do tipo spam e adicionado à lista. Caso o parametro isSpam seja false,
+	 * é criado um Email do tipo spam e adicionado à lista de emails. Após a
+	 * criação do Email são adicionadas a regras associadas ao mesmo.
 	 * 
-	 * @param file
-	 * @param isSpam
+	 * @param String
+	 * @param boolean
 	 * 
-	 * @return Lista de emails
+	 * @return List<Email>
 	 */
 	public static List<Email> readEmails(String file, boolean isSpam) {
 		List<Email> emails = new ArrayList<Email>();
@@ -158,7 +154,6 @@ public class Control {
 			}
 
 		} catch (NullPointerException |FileNotFoundException e) {
-			//e.printStackTrace();
 			System.out.println("Error reading " + file);
 			return null;
 		}
@@ -167,6 +162,11 @@ public class Control {
 
 	}
 
+	/**Função relativa ao modo automático
+	 * 
+	 * @param emails
+	 * @param rules
+	 */
 	public void automaticMode(List<Email> emails, Map<String, String> rules) {
 		try {
 			AntiSpamFilterAutomaticConfiguration.start(emails, rules);
@@ -175,9 +175,16 @@ public class Control {
 		}
 	}
 
+	/**
+	 * Lê as regras e atribui valores aos falsos positivos e falsos negativos
+	 * @param Map<String, String>
+	 * @param String
+	 * @param String
+	 * @returnMap<String, String>
+	 */
 	public Map<String, String> readAutomatic(Map<String, String> rules, String fileRF, String fileRS) {
-		int best_position=-1; //Posi��o do melhor vetor
-		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORIT�RIO pq � Professional
+		int best_position=-1; //Posição do melhor vetor
+		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITÁRIO porque é Professional
 		int best_fpos=-1; //Valor do falso positivo mais baixo
 		try {
 			Scanner scanner = new Scanner(new File(fileRF));
@@ -225,6 +232,12 @@ public class Control {
 		return changeListToMap(rules, values);
 	}
 
+	/**
+	 * Função para alterar uma lista para um mapa
+	 * @param Map<String, String>
+	 * @param List<Integer>
+	 * @return Map<String, String>
+	 */
 	private Map<String, String> changeListToMap(Map<String, String> rules, List<Integer> values){
 		Map<String, String> new_rules = new HashMap<String, String>(); 
 		int j=0;
@@ -235,6 +248,13 @@ public class Control {
 		return new_rules;
 	}
 
+	/**
+	 * Função que compara dois valores inteiros com os valores do vetor e verifica se são maiores ou não.
+	 * @param int
+	 * @param int
+	 * @param int[]
+	 * @return boolean
+	 */
 	public boolean isBest(int fneg, int fpos, int[] falses) {
 		if(fneg==-1 || fpos==-1)
 			return true;
@@ -245,6 +265,12 @@ public class Control {
 		return false;
 	}
 
+	/**
+	 * Função para guardar as configurações do ficheiro rules.cf
+	 * 
+	 * @param String 
+	 * @param Map<String, String>
+	 */
 	public void saveConfigurations(String file, Map<String, String> rules) {
 		try {
 			PrintWriter pw = new PrintWriter(new FileOutputStream(file, false));
@@ -255,10 +281,14 @@ public class Control {
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro ao guardar configura��o.");
+			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
 		}
 	}
 
+	/**
+	 * Função para colocar todos os pesos das regras do ficheiro rules.cf com o valor 0 e depois guardar a nova configuração.
+	 * 
+	 */
 	public void removeRowFile(){
 		List<String> rules = new ArrayList<String>();
 		try {
@@ -283,7 +313,7 @@ public class Control {
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro ao guardar configura��o.");
+			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
 		}
 	}
 

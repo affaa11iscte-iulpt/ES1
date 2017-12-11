@@ -39,6 +39,7 @@ public class Interface extends JFrame {
 	private Control c;
 	private Object[][] data;
 	private String[] colNomes={"Regras", "Pesos"};
+	private String fileRules;
 	private JCheckBox modoManual= new JCheckBox("Modo Manual");
 	private JCheckBox modoAutomatico= new JCheckBox("Modo Automatico");
 
@@ -81,7 +82,8 @@ public class Interface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addRules(text1.getText());
+				fileRules = text1.getText();
+				addRules(fileRules);
 				ok1.setEnabled(false);
 				modoManual.setSelected(true);
 				modoAutomatico.setSelected(false);
@@ -247,6 +249,15 @@ public class Interface extends JFrame {
 		JPanel modeSubPanel3 = new JPanel();
 		JButton guardar = new JButton ("Guardar Configuração");
 		modeSubPanel3.add(guardar);
+		
+		guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c.saveConfigurations(fileRules, getRules());
+				
+			}
+		});
 
 		JPanel modeSubPanel4 = new JPanel();
 		JButton reset = new JButton ("Reset Configuração");
@@ -282,17 +293,32 @@ public class Interface extends JFrame {
 
 
 	/**
-	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader e listagem das mesmas na interface manual
+	 * Obtenção do HashMap de regras (com pesos associados) lidas na classe Reader
 	 */
 	public void addRules(String file) {
 		Map<String,String> rules = Control.readRules(file);
 		putRulesOnTable(rules);
 	}
 	
+	/**
+	 * Listagem das regras na tabela da interface
+	 * @param rules Mapa de regras <Regra,Peso>
+	 */
 	private void putRulesOnTable(Map<String, String> rules) {
+		removeAllRowsOfTable();
 		for(Map.Entry<String, String> entry: rules.entrySet()) {
 			tableModel.addRow(new String[] {entry.getKey(), entry.getValue()});
 		}
+	}
+	
+	/**
+	 * Remove todas as linhas da tabela
+	 */
+	private void removeAllRowsOfTable() {
+		if(tableModel.getRowCount() > 0)
+		for (int i = tableModel.getRowCount() - 1; i > -1; i--) {
+	        tableModel.removeRow(i);
+	    }
 	}
 
 	/**

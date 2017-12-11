@@ -199,7 +199,7 @@ public class Control {
 			System.out.println("Error reading  "+ fileRF);
 		}
 		
-		List<String> values = null;
+		List<Integer> values = null;
 		
 		try {
 			Scanner scanner = new Scanner(new File(fileRS));
@@ -208,9 +208,9 @@ public class Control {
 			while(scanner.hasNextLine()) {
 				if(line==best_position) {
 					String[] tokens = scanner.nextLine().split(" ");
-					values = new ArrayList<String>();
+					values = new ArrayList<Integer>();
 					for(int i=0; i<tokens.length; i++)
-						values.add(tokens[i]);
+						values.add((int)Double.parseDouble(tokens[i]));
 					fpos=best_fpos;
 					fneg=best_fneg;
 				}
@@ -223,11 +223,11 @@ public class Control {
 		return changeListToMap(rules, values);
 	}
 	
-	private Map<String, String> changeListToMap(Map<String, String> rules, List<String> values){
+	private Map<String, String> changeListToMap(Map<String, String> rules, List<Integer> values){
 		Map<String, String> new_rules = new HashMap<String, String>(); 
 		int j=0;
 		for(String key: rules.keySet()) {
-		    	new_rules.put(key, values.get(j));
+		    	new_rules.put(key, String.valueOf(values.get(j)));
 		    	j++;
 		    }
 		return new_rules;
@@ -245,9 +245,11 @@ public class Control {
 	
 	public void saveConfigurations(String file, Map<String, String> rules) {
 		try {
-			PrintWriter pw = new PrintWriter(new FileOutputStream(file, true));
-			for(String rule: rules.keySet())
+			PrintWriter pw = new PrintWriter(new FileOutputStream(file, false));
+			for(String rule: rules.keySet()) {
 				pw.println(rule+" "+rules.get(rule));
+				System.out.println("Escrevendo");
+			}
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

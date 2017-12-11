@@ -2,12 +2,16 @@ package components;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import components.Email.Type;
@@ -226,6 +230,18 @@ public class Control {
 			if(fpos >= falses[0])
 				return true;
 		return false;
+	}
+	
+	public void saveConfigurations(String file, Map<String, String> rules) {
+		try {
+			PrintWriter pw = new PrintWriter(new FileOutputStream(file, true));
+			for(String rule: rules.keySet())
+				pw.println(rule+" "+rules.get(rule));
+			pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
+		}
 	}
 	
 }

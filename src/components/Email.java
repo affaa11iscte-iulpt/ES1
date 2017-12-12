@@ -44,7 +44,8 @@ public class Email {
 	 * @param rule
 	 */
 	public void addRule(String rule) {
-		emailRules.add(rule);
+		if(rule != null)
+			emailRules.add(rule);
 	}
 	
 	/**

@@ -1,6 +1,11 @@
 package junits;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -62,7 +67,13 @@ public class TesteEmail {
 
 	@Test
 	public final void testGetEmailRules() {
-		fail("Not yet implemented"); // TODO
+		Email email = new Email("xval_initial/9/_ham_/00370.65", Type.HAM);
+		email.addRule("FB_GVR");
+		email.addRule("HK_LOTTO");
+		ArrayList<String> rules = new ArrayList<String>();
+		rules.add("FB_GVR");
+		rules.add("HK_LOTTO");
+		assertEquals(rules, email.getEmailRules());
 	}
 
 	@Test

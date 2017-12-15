@@ -374,6 +374,10 @@ public class Interface extends JFrame {
 	}
 
 
+	/**
+	 * Devolve a lista de e-mails
+	 * @return List<Email>
+	 */
 	public List<Email> getEmails(){
 		return emails;
 	}

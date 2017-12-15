@@ -36,7 +36,11 @@ public class TesteEmail {
 
 	@Test
 	public final void testEmail() {
-		fail("Not yet implemented"); // TODO
+		Email email = new Email("xval_initial/9/_ham_/00370.65", Type.HAM);
+		String id = "xval_initial/9/_ham_/00370.65";
+		assertEquals(id, email.getId());
+		assertEquals(Type.HAM, email.getEmailType());
+		assertTrue(email.getEmailRules().isEmpty());
 	}
 
 	@Test
@@ -78,7 +82,9 @@ public class TesteEmail {
 
 	@Test
 	public final void testEquals() {
-		fail("Not yet implemented"); // TODO
+		Email email1 = new Email("xval_initial/9/_ham_/00370.65", Type.HAM);
+		Email email2 = new Email("xval_initial/9/_ham_/00370.65", Type.HAM);
+		assertEquals(email1, email2);
 	}
 
 	@Test

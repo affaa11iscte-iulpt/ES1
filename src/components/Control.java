@@ -363,7 +363,7 @@ public class Control {
 		List<String> rules = new ArrayList<String>();
 		Scanner scanner = null;
 		try {
-			scanner = new Scanner(new File("files/rules.cf"));
+			scanner = new Scanner(new File(file));
 
 			int line=1;
 			while(scanner.hasNextLine()) {
@@ -382,7 +382,7 @@ public class Control {
 
 		PrintWriter pw = null;
 		try {
-			pw = new PrintWriter(new FileOutputStream("files/rules.cf", false));
+			pw = new PrintWriter(new FileOutputStream(file, false));
 			for(String rule: rules)
 				pw.println(rule);
 			pw.close();

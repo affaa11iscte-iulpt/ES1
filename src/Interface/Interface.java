@@ -230,7 +230,7 @@ public class Interface extends JFrame {
 		JPanel fileSubPanel1= new JPanel();
 		labelRules = new JLabel("Ficheiro de Regras");
 		loadFile1 = new JButton("ok");
-		JTextField text1 = new JTextField("files\\rules.cf");
+		JTextField text1 = new JTextField("");
 		fileSubPanel1.add(labelRules);
 		fileSubPanel1.add(text1);
 		fileSubPanel1.add(loadFile1);
@@ -269,7 +269,7 @@ public class Interface extends JFrame {
 		});
 
 		JPanel fileSubPanel3= new JPanel();
-		labelHam = new JLabel("E-mails ");
+		labelHam = new JLabel("E-mails desejados");
 		loadFile3= new JButton("ok");
 		JTextField text3 = new JTextField("files\\ham.log");
 		fileSubPanel3.add(labelHam);
@@ -320,7 +320,7 @@ public class Interface extends JFrame {
 		modeSubPanel2.add(fn);
 
 		JPanel modeSubPanel3 = new JPanel();
-		JButton save = new JButton ("Guardar Configuraï¿½ï¿½o");
+		JButton save = new JButton ("Guardar Configuração");
 		modeSubPanel3.add(save);
 
 		save.addActionListener(new ActionListener() {
@@ -333,7 +333,7 @@ public class Interface extends JFrame {
 		});
 
 		JPanel modeSubPanel4 = new JPanel();
-		JButton reset = new JButton ("Reset Configuraï¿½ï¿½o");
+		JButton reset = new JButton ("Reset Configuração");
 		reset.addActionListener(new ActionListener() {
 
 			@Override

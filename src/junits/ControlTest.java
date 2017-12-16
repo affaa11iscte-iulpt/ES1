@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import components.Control;
 import components.Email;
@@ -28,26 +28,26 @@ import components.Email.Type;
  * Métrica Complexity
  */
 @SuppressWarnings("serial")
-class ControlTest {
+public class ControlTest {
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	public static void setUpBeforeClass() throws Exception {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception {
+	public static void tearDownAfterClass() throws Exception {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	final void testCalculate() {
+	public final void testCalculate() {
 		Control control = new Control();
 		//No início, os falsos positivos são 0
 		assertTrue(control.getFpos()==0);
@@ -101,19 +101,19 @@ class ControlTest {
 	}
 
 	@Test
-	final void testGetFpos() {
+	public final void testGetFpos() {
 		Control control = new Control();
 		assertTrue(control.getFpos()==0);
 	}
 
 	@Test
-	final void testGetFneg() {
+	public final void testGetFneg() {
 		Control control = new Control();
 		assertTrue(control.getFneg()==0);
 	}
 
 	@Test
-	final void testReadRules() {
+	public final void testReadRules() {
 		Map<String, String> list = Control.readRules("files/rules_example.cf");
 		//Número de regras é de 335
 		assertTrue(list.size()==335);
@@ -126,7 +126,7 @@ class ControlTest {
 	}
 
 	@Test
-	final void testReadEmails() {
+	public final void testReadEmails() {
 		List<Email> hamList = Control.readEmails("files/ham.log", false);
 		List<Email> spamList = Control.readEmails("files/spam.log", true);
 		//Numero de emails do tipo HAM é de 695
@@ -150,7 +150,7 @@ class ControlTest {
 	}
 
 	@Test
-	final void testAutomaticMode() {
+	public final void testAutomaticMode() {
 		List<Email> emails = new ArrayList<Email>();
 		emails.add(new Email("aaaaa", Type.HAM));
 		emails.add(new Email("bbbbb", Type.HAM));
@@ -178,7 +178,7 @@ class ControlTest {
 	}
 
 	@Test
-	final void testReadAutomatic() {
+	public final void testReadAutomatic() {
 		Map<String, String> rules = new HashMap<String, String>() {
 			{
 				put("BAYES_00","10");
@@ -208,7 +208,7 @@ class ControlTest {
 	}
 
 	@Test
-	final void testChangeListToMap() {
+	public final void testChangeListToMap() {
 		Map<String, String> rules = new HashMap<String, String>() {
 			{
 				put("BAYES_00","10");
@@ -242,7 +242,7 @@ class ControlTest {
 	}
 
 	@Test
-	final void testIsBest() {
+	public final void testIsBest() {
 		Control c = new Control();
 		assertTrue(c.isBest(-1, -1, new int[]{1,2}));
 		assertTrue(c.isBest(-1, 0, new int[]{1,2}));
@@ -257,7 +257,7 @@ class ControlTest {
 	}
 
 	@Test
-	final void testSaveConfigurations() {
+	public final void testSaveConfigurations() {
 		Map<String, String> rules = new HashMap<String, String>() {
 			{
 				put("BAYES_00","10");
@@ -276,12 +276,12 @@ class ControlTest {
 	}
 
 	@Test
-	final void testEquals() {
+	public final void testEquals() {
 		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	final void testToString() {
+	public final void testToString() {
 		fail("Not yet implemented"); // TODO
 	}
 

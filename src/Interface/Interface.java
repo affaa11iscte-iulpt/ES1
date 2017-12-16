@@ -59,7 +59,7 @@ public class Interface extends JFrame {
 	 * interface e toda a configuracao pode ser guardada ou apagada para uma nova
 	 * tentativa.
 	 */
-	
+
 	public Interface(){
 		c= new Control();
 		emails = new ArrayList<Email>();
@@ -103,7 +103,7 @@ public class Interface extends JFrame {
 	 * no ActionListener do botao s�o lancadas as JOptionPane caso os botoes da funcao filePanel nao estejam selecionados.
 	 * Para alem disso e nesse ActionListener que e calculado os Falsos Positivos e os falsos negativos consoante o modo.
 	 *  
-	 
+
 	 * 
 	 * @return JPanel tablePanel
 	 */
@@ -305,7 +305,7 @@ public class Interface extends JFrame {
 	 * 
 	 * return @JPanel modePanel
 	 */
-	
+
 	private JPanel savePanel(){
 		JPanel modePanel = new JPanel();
 		fp= new JLabel("Falsos Positivos Gerados: ");

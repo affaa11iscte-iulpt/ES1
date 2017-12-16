@@ -26,9 +26,7 @@ import components.Email;
 
 /*
  * FALTA
- * Quando é feito o RESET é preciso meter como defeito o manual pq as colunas não estão editáveis
- * Especificar que ficheiro falta quando não há ficheiro no JOptionPane
- * Titulo na frame
+ *
  * Melhorar javadoc
  */
 
@@ -45,6 +43,9 @@ public class Interface extends JFrame {
 	private JButton loadFile1 = new JButton("ok");
 	private JButton loadFile2 = new JButton("ok");
 	private JButton loadFile3 = new JButton("ok");
+	private JLabel labelRules;
+	private JLabel labelSpam;
+	private JLabel labelHam;
 	private Control c;
 	private Object[][] data;
 	private String[] colNomes={"Regras", "Pesos"};
@@ -56,6 +57,7 @@ public class Interface extends JFrame {
 	public Interface(){
 		c= new Control();
 		setSize(700,700);
+		setTitle("AntiSpam Filter");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addPanels();
 		setVisible(true);
@@ -87,7 +89,7 @@ public class Interface extends JFrame {
 		filePanel.setLayout(new GridLayout(3,2));
 
 		JPanel fileSubPanel1= new JPanel();
-		JLabel labelRules = new JLabel("rules.cf");
+		labelRules = new JLabel("Ficheiro de Regras");
 		JTextField text1 = new JTextField("files\\rules.cf");
 		fileSubPanel1.add(labelRules);
 		fileSubPanel1.add(text1);
@@ -99,15 +101,17 @@ public class Interface extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				fileRules = text1.getText();
 				addRules(fileRules);
+				isEditable=true;
 				loadFile1.setEnabled(false);
 				manualMode.setSelected(true);
 				autoMode.setSelected(false);
+				
 
 			}
 		});
 
 		JPanel fileSubPanel2= new JPanel();
-		JLabel labelSpam = new JLabel("spam.log");
+	 labelSpam = new JLabel("E-mails indesejados");
 		JTextField text2 = new JTextField("files\\spam.log");
 		fileSubPanel2.add(labelSpam);
 		fileSubPanel2.add(text2);
@@ -124,7 +128,7 @@ public class Interface extends JFrame {
 		});
 
 		JPanel fileSubPanel3= new JPanel();
-		JLabel labelHam = new JLabel("ham.log");
+		 labelHam = new JLabel("E-mails ");
 		JTextField text3 = new JTextField("files\\ham.log");
 		fileSubPanel3.add(labelHam);
 		fileSubPanel3.add(text3);
@@ -211,8 +215,15 @@ public class Interface extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(loadFile1.isEnabled() || loadFile2.isEnabled() || loadFile3.isEnabled()){
-					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro");
+				if(loadFile1.isEnabled()){ 
+					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelRules.getText());
+				}
+				else if(loadFile2.isEnabled()){
+					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelSpam.getText());
+					
+				}
+				else if(loadFile3.isEnabled()){
+					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelHam.getText());
 				}
 				else{
 					if(manualMode.isSelected()) {

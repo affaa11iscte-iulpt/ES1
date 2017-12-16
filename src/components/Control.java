@@ -20,6 +20,7 @@ import components.Email.Type;
  * FALTA
  * JUnit do automaticMode (????)
  * JUnit do saveConfiguration (????)
+ * Fim
  */
 
 @SuppressWarnings({ "resource", "unused" })

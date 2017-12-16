@@ -83,8 +83,8 @@ public class Interface extends JFrame {
 
 
 	}
-	
-	
+
+
 	/**
 	 * Criacao do painel onde especifica a tabela e trata o modo, isto e, automatico e manual 
 	 * return @JPanel
@@ -234,6 +234,7 @@ public class Interface extends JFrame {
 
 		JPanel fileSubPanel2= new JPanel();
 		labelSpam = new JLabel("E-mails indesejados");
+		loadFile2=	new JButton("ok");
 		JTextField text2 = new JTextField("files\\spam.log");
 		fileSubPanel2.add(labelSpam);
 		fileSubPanel2.add(text2);
@@ -251,6 +252,7 @@ public class Interface extends JFrame {
 
 		JPanel fileSubPanel3= new JPanel();
 		labelHam = new JLabel("E-mails ");
+		loadFile3= new JButton("ok");
 		JTextField text3 = new JTextField("files\\ham.log");
 		fileSubPanel3.add(labelHam);
 		fileSubPanel3.add(text3);
@@ -353,7 +355,12 @@ public class Interface extends JFrame {
 
 
 	/**
-	 * Obtencao do HashMap de regras (com pesos associados) lidas na classe Reader
+	 * 	Funcao que recebe o caminho do ficheiro em que se encontram listadas as regras
+	 *  e cria um Map, que agrupa as regras com os respetivos pesos atraves da funcao readRules()
+	 *  da classe control. Apos a criacacao do Map, este e dado como parametro a funcao putRulesOnTable()
+	 *  para que as regras e respetivos pesos sejam adicionado a JTable
+	 *  
+	 * @param file - caminho do ficheiro onde se encontram listadas as regras
 	 */
 	public void addRules(String file) {
 		Map<String,String> rules = Control.readRules(file);
@@ -361,7 +368,10 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Listagem das regras na tabela da interface
+	 * Funcao que recebe um Map de regras com os respetivos pesos associados, removendo, em primeiro lugar,
+	 * tudo o que esta contido na tableModel. Posteriormente adiciona linhas a tabela com as regras e pesos
+	 * contidos no Map.
+	 * 
 	 * @param rules Mapa de regras <Regra,Peso>
 	 */
 	private void putRulesOnTable(Map<String, String> rules) {

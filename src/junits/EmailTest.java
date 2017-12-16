@@ -20,7 +20,7 @@ import components.Email.Type;
  * FALTA
  * Métrica Complexity
  */
-public class TesteEmail {
+public class EmailTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

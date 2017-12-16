@@ -28,7 +28,7 @@ import components.Email.Type;
  * Métrica Complexity
  */
 @SuppressWarnings("serial")
-class TesteControl {
+class ControlTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

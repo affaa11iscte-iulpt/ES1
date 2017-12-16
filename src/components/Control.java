@@ -22,6 +22,12 @@ import components.Email.Type;
  * JUnit do saveConfiguration (????)
  */
 
+/**
+ * Controi um novo Control que permite o cálculo de falsos negativos e
+ * falsos positivos, leitura e a escrita nos respetivos ficheiros auxiliares,
+ * quer no modo automático, quer no modo manual.
+ *
+ */
 @SuppressWarnings({ "resource", "unused" })
 public class Control {
 	private int fpos=0;

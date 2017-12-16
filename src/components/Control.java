@@ -16,6 +16,13 @@ import javax.swing.JOptionPane;
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import components.Email.Type;
 
+/*
+ * FALTA
+ * JUnit do automaticMode (????)
+ * JUnit do saveConfiguration (????)
+ * Melhorar javadoc
+ */
+
 @SuppressWarnings({ "resource", "unused" })
 public class Control {
 	private int fpos=0;
@@ -116,7 +123,8 @@ public class Control {
 			}
 
 		} catch (NullPointerException | FileNotFoundException e) {
-			System.out.println("Error reading file rules.cf");
+			System.out.println("Error reading "+file);
+			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
 		}
 
@@ -156,6 +164,7 @@ public class Control {
 
 		} catch (NullPointerException |FileNotFoundException e) {
 			System.out.println("Error reading " + file);
+			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
 		}
 
@@ -171,8 +180,9 @@ public class Control {
 	public void automaticMode(List<Email> emails, Map<String, String> rules) {
 		try {
 			AntiSpamFilterAutomaticConfiguration.start(emails, rules);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
 		}
 	}
 
@@ -205,6 +215,7 @@ public class Control {
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRF);
+			JOptionPane.showMessageDialog(null, "Ficheiro "+fileRF+" não existe.");
 			return null;
 		}
 
@@ -229,6 +240,8 @@ public class Control {
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRS);
+			JOptionPane.showMessageDialog(null, "Ficheiro "+fileRS+" não existe.");
+
 			return null;
 		}
 		return changeListToMap(rules, values);
@@ -290,7 +303,7 @@ public class Control {
 	 * Função para colocar todos os pesos das regras do ficheiro rules.cf com o valor 0 e depois guardar a nova configuração.
 	 * 
 	 */
-	public void removeRowFile(){
+	public void removeRowFile(String file){
 		List<String> rules = new ArrayList<String>();
 		try {
 			Scanner scanner = new Scanner(new File("files/rules.cf"));
@@ -304,7 +317,8 @@ public class Control {
 			}
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("Error reading  rules.cf ");
+			System.out.println("Error reading "+file);
+			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 		}
 
 		try {

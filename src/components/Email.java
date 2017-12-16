@@ -2,6 +2,10 @@ package components;
 
 import java.util.ArrayList;
 
+/*
+ * FALTA
+ * Melhorar javadoc
+ */
 public class Email {
 	private String id;
 	private Type type;

@@ -16,6 +16,10 @@ import org.junit.Test;
 import components.Email;
 import components.Email.Type;
 
+/*
+ * FALTA
+ * Métrica Complexity
+ */
 public class TesteEmail {
 
 	@BeforeClass

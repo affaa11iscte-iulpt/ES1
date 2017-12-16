@@ -24,7 +24,13 @@ import javax.swing.table.DefaultTableModel;
 import components.Control;
 import components.Email;
 
-
+/*
+ * FALTA
+ * Quando é feito o RESET é preciso meter como defeito o manual pq as colunas não estão editáveis
+ * Especificar que ficheiro falta quando não há ficheiro no JOptionPane
+ * Titulo na frame
+ * Melhorar javadoc
+ */
 
 public class Interface extends JFrame {
 	/**
@@ -285,7 +291,7 @@ public class Interface extends JFrame {
 					manualMode.setSelected(false);
 				}
 				removeAllRowsOfTable();
-				c.removeRowFile();
+				c.removeRowFile(fileRules);
 
 
 			}

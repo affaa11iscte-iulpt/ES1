@@ -23,6 +23,10 @@ import components.Control;
 import components.Email;
 import components.Email.Type;
 
+/*
+ * FALTA
+ * Métrica Complexity
+ */
 @SuppressWarnings("serial")
 class TesteControl {
 

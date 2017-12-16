@@ -11,53 +11,74 @@ public class Email {
 	private Type type;
 	private ArrayList<String> emailRules;
 
+	/**
+	 * Type{ HAM, SPAM; }
+	 * 
+	 * Enumerado que define o tipo de email (HAM ou SPAM)
+	 *
+	 */
 	public enum Type {
 		HAM, SPAM;
 	}
-	
+
 	/**
-	 * Contrutor da classe Email que recebe um id e um typo (HAM ou SPAM)
-	 * @param id
-	 * @param type
+	 * public Email(String id, Type type)
+	 * 
+	 * Constroi um novo Email com um id unico e um tipo associado que podera ser HAM ou SPAM.
+	 * 
+	 * @param id - identificacao do email
+	 * @param type - tipo de email
 	 */
 	public Email(String id, Type type) {
 		this.id = id;
 		this.type = type;
 		this.emailRules = new ArrayList<String>();
 	}
-	
+
 	/**
-	 * Getter do ID do email
-	 * @return id
+	 * public String getId()
+	 * 
+	 * Retorna o id do Email
+	 * 
+	 * @return id - identificacao do email
 	 */
 	public String getId() {
 		return id;
 	}
-	
+
 	/**
-	 * Getter do tipo do email
-	 * @return type
+	 * public Type getEmailType()
+	 * 
+	 * Retorna o tipo do email
+	 * 
+	 * @return type - tipo de email
 	 */
 	public Type getEmailType() {
 		return type;
 	}
-	
+
 	/**
-	 * Associacao de uma regra a um email. Adicao da regra a lista de regras do email
-	 * @param rule
+	 * public void addRule(String rule)
+	 * 
+	 * Adiciona uma regra a lista de regras associadas ao email
+	 * 
+	 * @param rule - regra que se pretende adicionar a lista
 	 */
 	public void addRule(String rule) {
 		if(rule != null)
 			emailRules.add(rule);
 	}
-	
+
 	/**
-	 * Getter da lista de regras associadas ao email
-	 * @return
+	 * public ArrayList<String> getEmailRules()
+	 * 
+	 * Retorna a lista de regras associadas ao email
+	 * 
+	 * @return emailRules - lista de regras
 	 */
 	public ArrayList<String> getEmailRules() {
 		return emailRules;
 	}
-	
+
 
 }

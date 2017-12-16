@@ -274,8 +274,8 @@ public class ControlTest {
 		};
 
 		Control c = new Control();
-		c.saveConfigurations("files\rules_example2.cf", rules);
-		c.saveConfigurations(null, rules);
+		assertTrue(c.saveConfigurations("files\\rules_example2.cf", rules));
+		assertFalse(c.saveConfigurations(null, rules));
 		//c.saveConfigurations("aaaaa", rules);
 	}
 
@@ -283,8 +283,9 @@ public class ControlTest {
 	public final void testRemoveRowFile() {
 		//ATENÇÃO MELHORAR VER COM O PROF
 		Control c = new Control();
-		c.removeRowFile("files\rules_example2.cf");
-		c.removeRowFile(null);
+		assertTrue(c.removeRowFile("files\\rules.cf"));
+		assertFalse(c.removeRowFile(null));
+		assertFalse(c.removeRowFile("aaaaaa.cf"));
 	}
 	
 	@Test

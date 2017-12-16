@@ -2,8 +2,6 @@ package components;
 
 import java.util.ArrayList;
 
-import components.Email.Type;
-
 /*
  * FALTA
  * Melhorar javadoc

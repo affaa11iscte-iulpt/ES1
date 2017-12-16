@@ -1,6 +1,5 @@
 package components;
 
-import java.awt.Point;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import components.Email.Type;
@@ -340,7 +337,7 @@ public class Control {
 	 * @param file nome do ficheiro
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
 	 */
-	public void saveConfigurations(String file, Map<String, String> rules) {
+	public boolean saveConfigurations(String file, Map<String, String> rules) {
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(new FileOutputStream(file, false));
@@ -350,8 +347,10 @@ public class Control {
 			pw.close();
 		} catch (NullPointerException | FileNotFoundException e) {
 			e.printStackTrace();
+			return false;
 			//JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
 		}
+		return true;
 	}
 
 	/**
@@ -359,7 +358,7 @@ public class Control {
 	 * 
 	 *
 	 */
-	public void removeRowFile(String file){
+	public boolean removeRowFile(String file){
 		List<String> rules = new ArrayList<String>();
 		Scanner scanner = null;
 		try {
@@ -373,11 +372,11 @@ public class Control {
 				line++;
 			}
 			scanner.close();
-		}catch(FileNotFoundException e) {
+		}catch(NullPointerException | FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading "+file);
 			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
-			return;
+			return false;
 		}
 
 		PrintWriter pw = null;
@@ -389,8 +388,9 @@ public class Control {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			//JOptionPane.showMessageDialog(null, "Erro ao guardar configuraÃ§Ã£o.");
-			return;
+			return false;
 		}
+		return true;
 	}
 
 }

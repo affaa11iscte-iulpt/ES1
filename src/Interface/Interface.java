@@ -62,7 +62,6 @@ public class Interface extends JFrame {
 
 	public Interface(){
 		c= new Control();
-		emails = new ArrayList<Email>();
 		setSize(700,700);
 		setTitle("AntiSpam Filter");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -230,7 +229,8 @@ public class Interface extends JFrame {
 		JPanel fileSubPanel1= new JPanel();
 		labelRules = new JLabel("Ficheiro de Regras");
 		loadFile1 = new JButton("ok");
-		JTextField text1 = new JTextField("");
+		JTextField text1 = new JTextField();
+		text1.setPreferredSize(new Dimension(100,30));
 		fileSubPanel1.add(labelRules);
 		fileSubPanel1.add(text1);
 		fileSubPanel1.add(loadFile1);
@@ -240,12 +240,12 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				fileRules = text1.getText();
-				addRules(fileRules);
-				isEditable=true;
-				loadFile1.setEnabled(false);
-				manualMode.setSelected(true);
-				autoMode.setSelected(false);
-
+				if(addRules(fileRules)){
+					isEditable=true;
+					loadFile1.setEnabled(false);
+					manualMode.setSelected(true);
+					autoMode.setSelected(false);
+				}
 
 			}
 		});
@@ -253,7 +253,8 @@ public class Interface extends JFrame {
 		JPanel fileSubPanel2= new JPanel();
 		labelSpam = new JLabel("E-mails indesejados");
 		loadFile2=	new JButton("ok");
-		JTextField text2 = new JTextField("files\\spam.log");
+		JTextField text2 = new JTextField();
+		text2.setPreferredSize(new Dimension(100,30));
 		fileSubPanel2.add(labelSpam);
 		fileSubPanel2.add(text2);
 		fileSubPanel2.add(loadFile2);
@@ -263,15 +264,18 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				List<Email> spamEmails = Control.readEmails(text2.getText(), true);
-				emails.addAll(spamEmails);
-				loadFile2.setEnabled(false);
+				if(spamEmails!=null){
+					emails.addAll(spamEmails);
+					loadFile2.setEnabled(false);
+				}
 			}
 		});
 
 		JPanel fileSubPanel3= new JPanel();
 		labelHam = new JLabel("E-mails desejados");
 		loadFile3= new JButton("ok");
-		JTextField text3 = new JTextField("files\\ham.log");
+		JTextField text3 = new JTextField();
+		text3.setPreferredSize(new Dimension(100,30));
 		fileSubPanel3.add(labelHam);
 		fileSubPanel3.add(text3);
 		fileSubPanel3.add(loadFile3);
@@ -281,8 +285,10 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				List<Email> hamEmails = Control.readEmails(text3.getText(), false);
-				emails.addAll(hamEmails);
-				loadFile3.setEnabled(false);
+				if(hamEmails != null){
+					emails.addAll(hamEmails);
+					loadFile3.setEnabled(false);
+				}
 			}
 		});
 
@@ -388,9 +394,13 @@ public class Interface extends JFrame {
 	 *  
 	 * @param file - caminho do ficheiro onde se encontram listadas as regras
 	 */
-	public void addRules(String file) {
+	public boolean addRules(String file) {
 		Map<String,String> rules = Control.readRules(file);
-		putRulesOnTable(rules);
+		if(rules!=null){
+			putRulesOnTable(rules);
+			return true;
+		}
+		return false;
 	}
 
 	/**

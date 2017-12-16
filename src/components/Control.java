@@ -20,7 +20,6 @@ import components.Email.Type;
  * FALTA
  * JUnit do automaticMode (????)
  * JUnit do saveConfiguration (????)
- * Melhorar javadoc
  */
 
 @SuppressWarnings({ "resource", "unused" })
@@ -29,19 +28,18 @@ public class Control {
 	private int fneg=0;
 
 	/**
-	 * Calcula o número de falsos positivos e o número de falsos negativos
+	 * Calcula o numero de falsos positivos e o numero de falsos negativos
 	 * guardado-os nos atributos da classe fpos e fneg.
 	 * 
-	 * Este método percorre a lista de emails e dependendo se esses emails
-	 * foram do tipo HAM ou do tipo SPAM, vai calcular o número de falsos
-	 * positivos e o número de falsos negativos consoante os pesos que estão
-	 * atribuidos às respetivas regras no HashMap de regras.
+	 * Este metodo percorre a lista de emails e dependendo se esses emails
+	 * foram do tipo HAM ou do tipo SPAM, vai calcular o numero de falsos
+	 * positivos e o numero de falsos negativos consoante os pesos que estao
+	 * atribuidos as respetivas regras no HashMap de regras.
 	 * 
 	 * @param emails uma lista de emails
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
 	 */
 	public void calculate (List<Email> emails, Map<String, String> rules) {		
-		//System.out.println("N emails: "+emails.size());
 		for (Email email : emails) {
 			if(email.getEmailType().equals(Type.HAM)){
 				if(isGreaterThan5(email, rules))
@@ -50,22 +48,20 @@ public class Control {
 			if(email.getEmailType().equals(Type.SPAM))
 				if(isLessThanMinus5(email, rules)) 
 					fneg++;
-
 		}
-		//System.out.println(fpos+" "+fneg);
 	}
 
 	/**
-	 * Devolve o número de falsos positivos
-	 * @return int número de falsos positivos
+	 * Devolve o numero de falsos positivos
+	 * @return int numero de falsos positivos
 	 */
 	public int getFpos() {
 		return fpos;
 	}
 
 	/**
-	 * Devolve o número de falsos negativos
-	 * @return int número de falsos negativos
+	 * Devolve o numero de falsos negativos
+	 * @return int numero de falsos negativos
 	 */
 	public int getFneg() {
 		return fneg;
@@ -75,13 +71,13 @@ public class Control {
 	 * Devolve verdadeiro caso o total dos pesos correspondente a um dado
 	 * email seja superior a 5 e falso caso seja menor.
 	 * 
-	 * Esta função percorre a lista de regras de um email e, para cada uma
+	 * Esta funcao percorre a lista de regras de um email e, para cada uma
 	 * dessas regras, vai obter o peso respetivo que se encontra no Map
-	 * das regras. Esse peso é acumulativo.
+	 * das regras. Esse peso e acumulativo.
 	 * 
-	 * @param email que será usado
+	 * @param email que sera usado
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
-	 * @return true se o total de pesos for maior que 5; falso caso contrário 
+	 * @return true se o total de pesos for maior que 5; falso caso contrario 
 	 */
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
 		int value=0;
@@ -89,7 +85,6 @@ public class Control {
 			if(rules.get(rule)!=null)
 				value+= Integer.parseInt(rules.get(rule));
 		}
-		//System.out.println("MAIOR "+value);
 		if(value > 5) {
 			return true;
 		}
@@ -100,13 +95,13 @@ public class Control {
 	 * Devolve verdadeiro caso o total dos pesos correspondente a um dado
 	 * email seja inferior a -5 e falso caso seja maior.
 	 * 
-	 * Esta função percorre a lista de regras de um email e, para cada uma
+	 * Esta funcao percorre a lista de regras de um email e, para cada uma
 	 * dessas regras, vai obter o peso respetivo que se encontra no Map
-	 * das regras. Esse peso é cumulativo.
+	 * das regras. Esse peso e cumulativo.
 	 * 
-	 * @param email que será usado
+	 * @param email que sera usado
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
-	 * @return true se o total de pesos for menor que -5; falso caso contrário 
+	 * @return true se o total de pesos for menor que -5; falso caso contrario 
 	 */
 	private boolean isLessThanMinus5(Email email, Map<String, String> rules) {
 		int value=0;
@@ -122,13 +117,13 @@ public class Control {
 	}
 
 	/** Permite ler um ficheiro de regras da estrutura "REGRAS PESO"
-	 * e guarda as informações num Map em que a chave é a regra
-	 * e o valor é o peso.
+	 * e guarda as informacoes num Map em que a chave e a regra
+	 * e o valor e o peso.
 	 * 
-	 * A função começa por ler o ficheiro e percorrer as suas linhas
-	 * até não existirem mais. Por cada linha que exista irá separar
-	 * a regra e o peso e guardar num Map. Caso o ficheiro não possua
-	 * um peso atribuido a uma regra, este ficará em branco.
+	 * A funcao começa por ler o ficheiro e percorrer as suas linhas
+	 * ate nao existirem mais. Por cada linha que exista vai separar
+	 * a regra e o peso e guardar num Map. Caso o ficheiro nao possua
+	 * um peso atribuido a uma regra, este fica em branco.
 	 * 
 	 * @param file de regras para ler
 	 * @return Map<String, String> um mapa que tem como chave a regra 
@@ -157,11 +152,11 @@ public class Control {
 	}
 
 	/**
-	 * Lé o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
-	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, é criado um
-	 * email do tipo spam e adicionado Ã  lista. Caso o parametro isSpam seja false,
-	 * Ã© criado um Email do tipo spam e adicionado à lista de emails. Após a
-	 * criação do Email são adicionadas a regras associadas ao mesmo.
+	 * Le o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
+	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, e criado um
+	 * email do tipo spam e adicionado a lista. Caso o parametro isSpam seja false,
+	 * cria-se um Email do tipo spam e adicionado a lista de emails. Apos a
+	 * criacao do Email sao adicionadas a regras associadas ao mesmo.
 	 * 
 	 * @param String
 	 * @param boolean
@@ -197,9 +192,9 @@ public class Control {
 
 	}
 
-	/**Inicia o filtro AntiSpamFilter no modo automático.
+	/**Inicia o filtro AntiSpamFilter no modo automatico.
 	 * 
-	 * @param emails lista de emails que irão servir de base no cálculo
+	 * @param emails lista de emails que irao servir de base no calculo
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
 	 */
 	public void automaticMode(List<Email> emails, Map<String, String> rules) {
@@ -212,15 +207,15 @@ public class Control {
 	}
 
 	/**
-	 * Lé as regras e atribui valores aos falsos positivos e falsos negativos
+	 * Le as regras e atribui valores aos falsos positivos e falsos negativos
 	 * @param Map<String, String>
 	 * @param String
 	 * @param String
 	 * @returnMap<String, String>
 	 */
 	public Map<String, String> readAutomatic(Map<String, String> rules, String fileRF, String fileRS) {
-		int best_position=-1; //PosiÃ§Ã£o do melhor vetor
-		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITÃ�RIO porque Ã© Professional
+		int best_position=-1; //Posicao do melhor vetor
+		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITARIO porque e Professional
 		int best_fpos=-1; //Valor do falso positivo mais baixo
 		try {
 			Scanner scanner = new Scanner(new File(fileRF));
@@ -228,7 +223,6 @@ public class Control {
 			int line=1;
 			while(scanner.hasNextLine()) {
 				String[] tokens = scanner.nextLine().split(" ");
-				//System.out.println(tokens[0]+" "+tokens[1]);
 				int[] falses = {(int)Double.parseDouble(tokens[0]), (int)Double.parseDouble(tokens[1])};
 				if(isBest(best_fneg, best_fpos, falses)) {
 					best_position=line;
@@ -293,14 +287,14 @@ public class Control {
 
 	/**
 	 * Devolve verdadeiro caso os pesos provenientes do vetor sejam melhores
-	 * que os que estão nas restantes variáveis, respetivamente, tendo em
-	 * conta que será dada uma prioridade aos falsos negativos.
+	 * que os que estao nas restantes variaveis, respetivamente, tendo em
+	 * conta que sera dada uma prioridade aos falsos negativos.
 	 * 
-	 * Devido à prioridade dada aos falsos negativos, será primeiro analisado
-	 * se o novo falso negativo, que está na segunda posição do vetor, é menor
-	 * que a variável fneg. Caso seja verdadeiro, irá verificar se o falso
-	 * positivo do vetor é menor que a variável fpos. Caso isto tudo seja devolve
-	 * true. Caso contrário false.
+	 * Devido a prioridade dada aos falsos negativos, sera primeiro analisado
+	 * se o novo falso negativo, que esta na segunda posição do vetor, e menor
+	 * que a variavel fneg. Caso seja verdadeiro, ira verificar se o falso
+	 * positivo do vetor e menor que a variável fpos. Caso isto tudo seja devolve
+	 * true. Caso contrario false.
 	 * 
 	 * Caso os valores iniciais do fneg ou do fpos sejam -1, devolve true.
 	 * 
@@ -308,7 +302,7 @@ public class Control {
 	 * @param int falsos positivos
 	 * @param int[] com os falsos positivos e falsos negativos, respetivamente
 	 * @return true caso os valores do vetor sejam mais adequados; false caso
-	 * contrário
+	 * contrario
 	 */
 	public boolean isBest(int fneg, int fpos, int[] falses) {
 		if(fneg==-1 || fpos==-1)
@@ -321,10 +315,10 @@ public class Control {
 	}
 
 	/**
-	 * Guarda as configurações das regras provenientes do mapa, em que a chave
-	 * é a regra e o valor é o peso, num dado ficheiro file.
+	 * Guarda as configuracoes das regras provenientes do mapa, em que a chave
+	 * e a regra e o valor e o peso, num dado ficheiro file.
 	 * 
-	 * Percorre o mapa todo e, para cada peso, obtém o peso correspondente e
+	 * Percorre o mapa todo e, para cada peso, obtem o peso correspondente e
 	 * escreve no ficheiro da forma "REGRA PESO".
 	 * 
 	 * @param file nome do ficheiro
@@ -344,8 +338,9 @@ public class Control {
 	}
 
 	/**
-	 * Função para colocar todos os pesos das regras do ficheiro rules.cf com o valor 0 e depois guardar a nova configuração.
+	 * Funcao para colocar todos os pesos das regras do ficheiro rules.cf com o valor 0 e depois guardar a nova configuracao.
 	 * 
+	 *
 	 */
 	public void removeRowFile(String file){
 		List<String> rules = new ArrayList<String>();

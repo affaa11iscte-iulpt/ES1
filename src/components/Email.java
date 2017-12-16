@@ -2,6 +2,8 @@ package components;
 
 import java.util.ArrayList;
 
+import components.Email.Type;
+
 /*
  * FALTA
  * Melhorar javadoc
@@ -79,6 +81,10 @@ public class Email {
 	public ArrayList<String> getEmailRules() {
 		return emailRules;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Email [ id=" + id + "; tipo=" + type + " ]";  
+	}
 
 }

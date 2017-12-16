@@ -39,9 +39,9 @@ public class Interface extends JFrame {
 	private List<Email> emails = new ArrayList<Email>();	
 	private JLabel fp = new JLabel("Falsos Positivos Gerados: ");
 	private JLabel fn = new JLabel("Falsos Negativos Gerados: ");
-	private JButton loadFile1 = new JButton("ok");
-	private JButton loadFile2 = new JButton("ok");
-	private JButton loadFile3 = new JButton("ok");
+	private JButton loadFile1;
+	private JButton loadFile2;
+	private JButton loadFile3;
 	private JLabel labelRules;
 	private JLabel labelSpam;
 	private JLabel labelHam;
@@ -49,8 +49,8 @@ public class Interface extends JFrame {
 	private Object[][] data;
 	private String[] colNomes={"Regras", "Pesos"};
 	private String fileRules;
-	private JCheckBox manualMode= new JCheckBox("Modo Manual");
-	private JCheckBox autoMode= new JCheckBox("Modo Automatico");
+	private JCheckBox autoMode;
+	private JCheckBox manualMode;
 
 
 	public Interface(){
@@ -67,92 +67,24 @@ public class Interface extends JFrame {
 	}
 
 	/** 	
-	 * Funcao para juntar todos os paineis da interface
+	 * Esta funcao junta todos os paines que constituem a interface, nomeadamente
+	 * o painel para carregar os ficheiros, o painel onde é desenhada a tabela
+	 * e os modos automatico e manual e por fim o painel onde e possivel guardar e fazer
+	 * reset da configuracao.
+	 * 
+	 * 
 	 **/
 
 	public void addPanels(){
 		setLayout(new BorderLayout());
 		add(filePanel(), BorderLayout.NORTH);
 		add(tablePanel(), BorderLayout.CENTER);
-		add(modePanel(), BorderLayout.SOUTH);
+		add(savePanel(), BorderLayout.SOUTH);
 
 
 	}
-
-	/**
-	 * Criacao do painel onde carrega os ficheiros escolhidos
-	 * return @JPanel
-	 */
-	private JPanel filePanel(){
-		JPanel filePanel = new JPanel();
-		filePanel.setLayout(new GridLayout(3,2));
-
-		JPanel fileSubPanel1= new JPanel();
-		labelRules = new JLabel("Ficheiro de Regras");
-		JTextField text1 = new JTextField("files\\rules.cf");
-		fileSubPanel1.add(labelRules);
-		fileSubPanel1.add(text1);
-		fileSubPanel1.add(loadFile1);
-		loadFile1.addActionListener(new ActionListener(
-				) {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				fileRules = text1.getText();
-				addRules(fileRules);
-				isEditable=true;
-				loadFile1.setEnabled(false);
-				manualMode.setSelected(true);
-				autoMode.setSelected(false);
-				
-
-			}
-		});
-
-		JPanel fileSubPanel2= new JPanel();
-	 labelSpam = new JLabel("E-mails indesejados");
-		JTextField text2 = new JTextField("files\\spam.log");
-		fileSubPanel2.add(labelSpam);
-		fileSubPanel2.add(text2);
-		fileSubPanel2.add(loadFile2);
-		loadFile2.addActionListener(new ActionListener(
-				) {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				List<Email> spamEmails = Control.readEmails(text2.getText(), true);
-				emails.addAll(spamEmails);
-				loadFile2.setEnabled(false);
-			}
-		});
-
-		JPanel fileSubPanel3= new JPanel();
-		 labelHam = new JLabel("E-mails ");
-		JTextField text3 = new JTextField("files\\ham.log");
-		fileSubPanel3.add(labelHam);
-		fileSubPanel3.add(text3);
-		fileSubPanel3.add(loadFile3);
-		loadFile3.addActionListener(new ActionListener(
-				) {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				List<Email> hamEmails = Control.readEmails(text3.getText(), false);
-				emails.addAll(hamEmails);
-				loadFile3.setEnabled(false);
-			}
-		});
-
-
-
-		filePanel.add(fileSubPanel1);
-		filePanel.add(fileSubPanel2);
-		filePanel.add(fileSubPanel3);
-
-		return filePanel;
-
-	}
-
+	
+	
 	/**
 	 * Criacao do painel onde especifica a tabela e trata o modo, isto e, automatico e manual 
 	 * return @JPanel
@@ -188,6 +120,8 @@ public class Interface extends JFrame {
 		tableSubPanel1.add(calculate);
 
 		JPanel tableSubPanel2 = new JPanel();
+		autoMode = new JCheckBox("Modo Automatico");
+		manualMode = new JCheckBox ("Modo Manual");
 
 		manualMode.addActionListener(new ActionListener() {
 			@Override
@@ -219,7 +153,7 @@ public class Interface extends JFrame {
 				}
 				else if(loadFile2.isEnabled()){
 					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelSpam.getText());
-					
+
 				}
 				else if(loadFile3.isEnabled()){
 					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelHam.getText());
@@ -258,10 +192,95 @@ public class Interface extends JFrame {
 
 
 	/**
+	 * Esta funcao cria um painel onde e possivel carregar os ficheiros pretendidos para
+	 * o calculo dos falsos positivos e dos falsos negativos.
+	 * 
+	 * Por cada ficheiro e criado um sub painel onde e adicionado a label com o nome do
+	 * ficheiro com o respetivo botao. Neste botao e feito o ActionListener onde define
+	 * que por defeito esta o modo manual e que nesse modo e possivel editar a tabela da
+	 * interface, para alem disso carrega o respetivo ficheiro ao invocar a funcao criada para
+	 * esse efeito.
+	 * 
+	 * Por fim todos os sub paineis sao adicionados ao painel principal.
+	 * 
+	 * return @JPanel filePanel
+	 */
+	private JPanel filePanel(){
+		JPanel filePanel = new JPanel();
+		filePanel.setLayout(new GridLayout(3,2));
+
+		JPanel fileSubPanel1= new JPanel();
+		labelRules = new JLabel("Ficheiro de Regras");
+		loadFile1 = new JButton("ok");
+		JTextField text1 = new JTextField("files\\rules.cf");
+		fileSubPanel1.add(labelRules);
+		fileSubPanel1.add(text1);
+		fileSubPanel1.add(loadFile1);
+		loadFile1.addActionListener(new ActionListener(
+				) {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				fileRules = text1.getText();
+				addRules(fileRules);
+				isEditable=true;
+				loadFile1.setEnabled(false);
+				manualMode.setSelected(true);
+				autoMode.setSelected(false);
+
+
+			}
+		});
+
+		JPanel fileSubPanel2= new JPanel();
+		labelSpam = new JLabel("E-mails indesejados");
+		JTextField text2 = new JTextField("files\\spam.log");
+		fileSubPanel2.add(labelSpam);
+		fileSubPanel2.add(text2);
+		fileSubPanel2.add(loadFile2);
+		loadFile2.addActionListener(new ActionListener(
+				) {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				List<Email> spamEmails = Control.readEmails(text2.getText(), true);
+				emails.addAll(spamEmails);
+				loadFile2.setEnabled(false);
+			}
+		});
+
+		JPanel fileSubPanel3= new JPanel();
+		labelHam = new JLabel("E-mails ");
+		JTextField text3 = new JTextField("files\\ham.log");
+		fileSubPanel3.add(labelHam);
+		fileSubPanel3.add(text3);
+		fileSubPanel3.add(loadFile3);
+		loadFile3.addActionListener(new ActionListener(
+				) {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				List<Email> hamEmails = Control.readEmails(text3.getText(), false);
+				emails.addAll(hamEmails);
+				loadFile3.setEnabled(false);
+			}
+		});
+
+		filePanel.add(fileSubPanel1);
+		filePanel.add(fileSubPanel2);
+		filePanel.add(fileSubPanel3);
+
+		return filePanel;
+
+	}
+
+
+
+	/**
 	 * Criacao do painel onde mostra os falsos positivos/negativos gerados e as opcoes de guardar e apagar as configuracoes
 	 * return @JPanel
 	 */
-	private JPanel modePanel(){
+	private JPanel savePanel(){
 		JPanel modePanel = new JPanel();
 		modePanel.setLayout(new GridLayout(5,1));
 

@@ -24,10 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import components.Control;
 import components.Email;
 
-/*
- * FALTA
- * Melhorar javadoc
- */
+
 
 public class Interface extends JFrame {
 	/**
@@ -53,6 +50,16 @@ public class Interface extends JFrame {
 	private JCheckBox manualMode;
 
 
+	/**
+	 * Constroi a interface onde vao estar os caminhos para os ficheiros,
+	 * bem como a apresentacao de todos os pesos e regras em forma de tabela,
+	 * onde e possivel editar valores para que se calcule o numero de falsos 
+	 * positivos e falsos negativos. Estes valores podem ser obtidos atraves de
+	 * uma configuracao automatica ou manual. Os resultados sao apresentados nesta
+	 * interface e toda a configuracao pode ser guardada ou apagada para uma nova
+	 * tentativa.
+	 */
+	
 	public Interface(){
 		c= new Control();
 		emails = new ArrayList<Email>();
@@ -69,7 +76,7 @@ public class Interface extends JFrame {
 
 	/** 	
 	 * Esta funcao junta todos os paineis que constituem a interface, nomeadamente
-	 * o painel para carregar os ficheiros, o painel onde é desenhada a tabela
+	 * o painel para carregar os ficheiros, o painel onde ï¿½ desenhada a tabela
 	 * e os modos automatico e manual e por fim o painel onde e possivel guardar e fazer
 	 * reset da configuracao.
 	 * 
@@ -88,12 +95,12 @@ public class Interface extends JFrame {
 
 	/**
 	 * 
-	 * Esta funcao cria um painel, onde é desenhada uma tabela do tipo DefaulTableModel,
-	 *  com 2 colunas (Regras e Pesos) e com a junção de uma scroll area. 
-	 * São criados sub Paineis, o primeiro tem o modo automatico e o manual onde neste e permitido editar uma coluna
+	 * Esta funcao cria um painel, onde ï¿½ desenhada uma tabela do tipo DefaulTableModel,
+	 *  com 2 colunas (Regras e Pesos) e com a junï¿½ï¿½o de uma scroll area. 
+	 * Sï¿½o criados sub Paineis, o primeiro tem o modo automatico e o manual onde neste e permitido editar uma coluna
 	 * esse controlo e definido pela variavel isEditable; Estes modos estao definidos em
 	 * JCheckBox onde esta definido que so e possivel ter um modo em simultaneo. O outro subPanel define o botao e a label,
-	 * no ActionListener do botao são lancadas as JOptionPane caso os botoes da funcao filePanel nao estejam selecionados.
+	 * no ActionListener do botao sï¿½o lancadas as JOptionPane caso os botoes da funcao filePanel nao estejam selecionados.
 	 * Para alem disso e nesse ActionListener que e calculado os Falsos Positivos e os falsos negativos consoante o modo.
 	 *  
 	 
@@ -313,7 +320,7 @@ public class Interface extends JFrame {
 		modeSubPanel2.add(fn);
 
 		JPanel modeSubPanel3 = new JPanel();
-		JButton save = new JButton ("Guardar Configuração");
+		JButton save = new JButton ("Guardar Configuraï¿½ï¿½o");
 		modeSubPanel3.add(save);
 
 		save.addActionListener(new ActionListener() {
@@ -326,7 +333,7 @@ public class Interface extends JFrame {
 		});
 
 		JPanel modeSubPanel4 = new JPanel();
-		JButton reset = new JButton ("Reset Configuração");
+		JButton reset = new JButton ("Reset Configuraï¿½ï¿½o");
 		reset.addActionListener(new ActionListener() {
 
 			@Override

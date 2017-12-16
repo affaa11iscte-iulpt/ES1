@@ -131,8 +131,9 @@ public class Control {
 	 */
 	public static Map<String, String> readRules(String file){
 		Map<String, String> rules = new HashMap<String, String>();
+		Scanner scanner = null;
 		try {
-			Scanner scanner = new Scanner(new File(file));
+			scanner = new Scanner(new File(file));
 
 			while(scanner.hasNextLine()) {
 				String[] tokens = scanner.nextLine().split(" ");
@@ -141,11 +142,14 @@ public class Control {
 				else
 					rules.put(tokens[0], tokens[1]);
 			}
+			scanner.close();
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Error reading "+file);
 			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
+		}finally {
+			scanner.close();
 		}
 
 		return rules;
@@ -165,8 +169,9 @@ public class Control {
 	 */
 	public static List<Email> readEmails(String file, boolean isSpam) {
 		List<Email> emails = new ArrayList<Email>();
+		Scanner scanner = null;
 		try {
-			Scanner scanner  = new Scanner(new File(file));
+			scanner  = new Scanner(new File(file));
 
 			while(scanner.hasNextLine()) {
 				String[] tokens = scanner.nextLine().split("\t");
@@ -181,11 +186,14 @@ public class Control {
 				}
 				emails.add(email);
 			}
+			scanner.close();
 
 		} catch (NullPointerException |FileNotFoundException e) {
 			System.out.println("Error reading " + file);
 			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
+		} finally{
+			scanner.close();
 		}
 
 		return emails;
@@ -217,8 +225,9 @@ public class Control {
 		int best_position=-1; //Posicao do melhor vetor
 		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITARIO porque e Professional
 		int best_fpos=-1; //Valor do falso positivo mais baixo
+		Scanner scanner = null;
 		try {
-			Scanner scanner = new Scanner(new File(fileRF));
+			scanner = new Scanner(new File(fileRF));
 
 			int line=1;
 			while(scanner.hasNextLine()) {
@@ -236,12 +245,14 @@ public class Control {
 			System.out.println("Error reading  "+ fileRF);
 			JOptionPane.showMessageDialog(null, "Ficheiro "+fileRF+" não existe.");
 			return null;
+		}finally {
+			scanner.close();
 		}
 
 		List<Integer> values = null;
 
 		try {
-			Scanner scanner = new Scanner(new File(fileRS));
+			scanner = new Scanner(new File(fileRS));
 
 			int line=1;
 			while(scanner.hasNextLine()) {
@@ -262,6 +273,8 @@ public class Control {
 			JOptionPane.showMessageDialog(null, "Ficheiro "+fileRS+" não existe.");
 
 			return null;
+		}finally {
+			scanner.close();
 		}
 		return changeListToMap(rules, values);
 	}
@@ -325,15 +338,17 @@ public class Control {
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
 	 */
 	public void saveConfigurations(String file, Map<String, String> rules) {
+		PrintWriter pw = null;
 		try {
-			PrintWriter pw = new PrintWriter(new FileOutputStream(file, false));
+			pw = new PrintWriter(new FileOutputStream(file, false));
 			for(String rule: rules.keySet()) {
 				pw.println(rule+" "+rules.get(rule));
 			}
-			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
+		}finally {
+			pw.close();
 		}
 	}
 
@@ -344,8 +359,9 @@ public class Control {
 	 */
 	public void removeRowFile(String file){
 		List<String> rules = new ArrayList<String>();
+		Scanner scanner = null;
 		try {
-			Scanner scanner = new Scanner(new File("files/rules.cf"));
+			scanner = new Scanner(new File("files/rules.cf"));
 
 			int line=1;
 			while(scanner.hasNextLine()) {
@@ -358,16 +374,23 @@ public class Control {
 			e.printStackTrace();
 			System.out.println("Error reading "+file);
 			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			return;
+		}finally {
+			scanner.close();
 		}
 
+		PrintWriter pw = null;
 		try {
-			PrintWriter pw = new PrintWriter(new FileOutputStream("files/rules.cf", false));
+			pw = new PrintWriter(new FileOutputStream("files/rules.cf", false));
 			for(String rule: rules)
 				pw.println(rule);
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Erro ao guardar configuraÃ§Ã£o.");
+			return;
+		}finally {
+			pw.close();
 		}
 	}
 

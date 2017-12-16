@@ -36,7 +36,7 @@ public class Interface extends JFrame {
 	private static final long serialVersionUID = 1L;
 	protected DefaultTableModel tableModel;
 	private boolean isEditable=true;
-	private List<Email> emails = new ArrayList<Email>();	
+	private List<Email> emails;	
 	private JLabel fp ;
 	private JLabel fn ;
 	private JButton loadFile1;
@@ -47,7 +47,7 @@ public class Interface extends JFrame {
 	private JLabel labelHam;
 	private Control c;
 	private Object[][] data;
-	private String[] colNomes={"Regras", "Pesos"};
+	private String[] colNomes = {"Regras", "Pesos"};
 	private String fileRules;
 	private JCheckBox autoMode;
 	private JCheckBox manualMode;
@@ -55,6 +55,7 @@ public class Interface extends JFrame {
 
 	public Interface(){
 		c= new Control();
+		emails = new ArrayList<Email>();
 		setSize(700,700);
 		setTitle("AntiSpam Filter");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

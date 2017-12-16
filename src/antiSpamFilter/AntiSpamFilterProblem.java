@@ -12,7 +12,11 @@ import components.Control;
 import components.Email;
 
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
-	  private List<Email> emails;
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<Email> emails;
 	  private Map<String, String> rules;
 	
 	  public AntiSpamFilterProblem(List<Email> emails, Map<String, String> rules) {
@@ -45,7 +49,6 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	   */
 	  public void evaluate(DoubleSolution solution){
 		//System.out.println("Tratando");
-	    double aux, xi, xj;
 	    double[] falses = new double[getNumberOfObjectives()];
 	    double[] values = new double[getNumberOfVariables()];
 	    for (int i = 0; i < solution.getNumberOfVariables(); i++) {

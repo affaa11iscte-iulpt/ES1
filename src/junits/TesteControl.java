@@ -23,6 +23,7 @@ import components.Control;
 import components.Email;
 import components.Email.Type;
 
+@SuppressWarnings("serial")
 class TesteControl {
 
 	@BeforeAll
@@ -169,8 +170,6 @@ class TesteControl {
 		Control c = new Control();
 		c.automaticMode(emails, rules);
 
-
-		assertTrue(1==1);		
 		//É preciso ver o que se mete aqui
 	}
 

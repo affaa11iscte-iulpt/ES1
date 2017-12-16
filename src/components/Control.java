@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import antiSpamFilter.AntiSpamFilterAutomaticConfiguration;
 import components.Email.Type;
 
+@SuppressWarnings({ "resource", "unused" })
 public class Control {
 	private int fpos=0;
 	private int fneg=0;

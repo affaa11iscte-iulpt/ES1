@@ -27,6 +27,10 @@ import components.Email;
 
 
 public class Interface extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected DefaultTableModel tableModel;
 	private boolean isEditable=true;
 	private List<Email> emails = new ArrayList<Email>();	
@@ -145,6 +149,7 @@ public class Interface extends JFrame {
 	 * return @JPanel
 	 */
 
+	@SuppressWarnings("serial")
 	private JPanel tablePanel(){
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BorderLayout());
@@ -335,6 +340,7 @@ public class Interface extends JFrame {
 	 *Reescreve a tabela 
 	 *
 	 **/
+	@SuppressWarnings("unused")
 	private void cleanTable(Map<String, String> rules) {
 		removeAllRowsOfTable();
 		for(Map.Entry<String, String> entry: rules.entrySet()) {

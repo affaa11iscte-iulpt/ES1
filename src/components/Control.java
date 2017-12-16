@@ -129,7 +129,7 @@ public class Control {
 	 * um peso atribuido a uma regra, este fica em branco.
 	 * 
 	 * @param file de regras para ler
-	 * @return Map<String, String> um mapa que tem como chave a regra 
+	 * @return rules um mapa que tem como chave a regra 
 	 * e como valor o seu peso
 	 */
 	public static Map<String, String> readRules(String file){
@@ -158,15 +158,16 @@ public class Control {
 
 	/**
 	 * Le o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
-	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, e criado um
+	 * ArrayList. Caso o parametro isSpam assuma o valor true, e criado um
 	 * email do tipo spam e adicionado a lista. Caso o parametro isSpam seja false,
 	 * cria-se um Email do tipo spam e adicionado a lista de emails. Apos a
 	 * criacao do Email sao adicionadas a regras associadas ao mesmo.
 	 * 
-	 * @param String
-	 * @param boolean
+	 * @param file ficheiro com as regras
+	 * @param isSpam booleano que indica se o ficheiro é do tipo spam; falso 
+	 * caso contrário
 	 * 
-	 * @return List<Email>
+	 * @return emails lista de emails
 	 */
 	public static List<Email> readEmails(String file, boolean isSpam) {
 		List<Email> emails = new ArrayList<Email>();
@@ -214,11 +215,26 @@ public class Control {
 	}
 
 	/**
-	 * Le as regras e atribui valores aos falsos positivos e falsos negativos
-	 * @param Map<String, String>
-	 * @param String
-	 * @param String
-	 * @returnMap<String, String>
+	 * Permite calcular, com base num mapa de regras, qual o vetor de pesos o mais
+	 * adequado para o uso profissional com base nos falsos positivos e falsos
+	 * negativos de cada.
+	 * 
+	 * A função lê o ficheiro de tipo .rf e obtém os valores dos falsos positivos
+	 * e falsos negativos respetivamente, guardando-os num vetor. Para cada vetor,
+	 * é verificado se os valores do vetor são mais adequados em comparação aos
+	 * valores anteriormente armazenados. Caso o sejam, estes são substituidos pelos
+	 * valores do vetor.
+	 * 
+	 * Após a descoberta dos melhores falsos positivos e falsos negativos, procede-se
+	 * à leitura do ficheiro do tipo RS, onde estão armazenados os vários pesos, até se
+	 * chegar à linha do ficheiro correspondente à dos melhores falsos negativos e
+	 * falsos positivos. Deste modo, os pesos são armazenados num Map em que a chave
+	 * é a regra e o valor é o peso.
+	 * 
+	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
+	 * @param fileRF ficheiro do tipo .rf
+	 * @param fileRS ficheiro do tipo .rs
+	 * @return mapRules um mapa que tem como chave a regra e como valor o seu peso
 	 */
 	public Map<String, String> readAutomatic(Map<String, String> rules, String fileRF, String fileRS) {
 		int best_position=-1; //Posicao do melhor vetor
@@ -285,7 +301,7 @@ public class Control {
 	 * 
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
 	 * @param values uma lista de pesos
-	 * @return Map<String, String> um mapa que tem como chave a regra 
+	 * @return new_rules um mapa que tem como chave a regra 
 	 * e como valor o seu peso
 	 */
 	public Map<String, String> changeListToMap(Map<String, String> rules, List<Integer> values){
@@ -311,9 +327,9 @@ public class Control {
 	 * 
 	 * Caso os valores iniciais do fneg ou do fpos sejam -1, devolve true.
 	 * 
-	 * @param int falsos negativos
-	 * @param int falsos positivos
-	 * @param int[] com os falsos positivos e falsos negativos, respetivamente
+	 * @param fneg falsos negativos
+	 * @param fpos falsos positivos
+	 * @param falses com os falsos positivos e falsos negativos, respetivamente
 	 * @return true caso os valores do vetor sejam mais adequados; false caso
 	 * contrario
 	 */
@@ -336,6 +352,7 @@ public class Control {
 	 * 
 	 * @param file nome do ficheiro
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
+	 * @return true se conseguiu guardar com sucesso; false caso contrário
 	 */
 	public boolean saveConfigurations(String file, Map<String, String> rules) {
 		PrintWriter pw = null;
@@ -354,9 +371,15 @@ public class Control {
 	}
 
 	/**
-	 * Funcao para colocar todos os pesos das regras do ficheiro rules.cf com o valor 0 e depois guardar a nova configuracao.
+	 * Limpa os pesos das regras de um determinado ficheiro
 	 * 
-	 *
+	 * Ocorre a leitura do ficheiro file e as regras são armazenadas numa
+	 * lista de regras. Após a leitura, ocorre a escrita no mesmo ficheiro
+	 * que segue o formato "REGRA", não escrevendo os pesos que tinha
+	 * anteriormente.
+	 * 
+	 *@param file ficheiro de regras
+	 *@return true se removeu com sucesso; false caso contrário
 	 */
 	public boolean removeRowFile(String file){
 		List<String> rules = new ArrayList<String>();

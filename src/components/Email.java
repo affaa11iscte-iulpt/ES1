@@ -70,7 +70,7 @@ public class Email {
 	}
 
 	/**
-	 * public ArrayList<String> getEmailRules()
+	 * public ArrayList getEmailRules()
 	 * 
 	 * Retorna a lista de regras associadas ao email
 	 * 

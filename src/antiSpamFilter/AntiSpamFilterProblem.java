@@ -44,8 +44,9 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	  }
 
 	  /**
-	   * Calcula o número de falsos positivos e de falsos negativos 
-	   * @param DoubleSolution Vetor de doubles
+	   * Calcula o número de falsos positivos e de falsos negativos do modo au
+	   * 
+	   * @param DoubleSolution Vetor de pesos
 	   */
 	  public void evaluate(DoubleSolution solution){
 		//System.out.println("Tratando");

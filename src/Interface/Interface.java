@@ -371,7 +371,7 @@ public class Interface extends JFrame {
 
 	/**
 	 * Altera o valor das labels dos falsos positivos quando este e calculado, recebe um inteiro (numero de falsos positivos), que vai ser o valor a adicionar na label 
-	 * @param i
+	 * @param i valor a inserir
 	 */
 	public void setFp(int i) {
 		this.fp.setText("Falsos Positivos Gerados: "+i);
@@ -379,7 +379,7 @@ public class Interface extends JFrame {
 
 	/**
 	 * Altera o valor das labels dos falsos negativos quando este e calculado, recebe um inteiro (numero de falsos negativos), que vai ser o valor a adicionar na label 
-	 * @param i
+	 * @param i valor a inserir
 	 */
 	public void setFn(int i) {
 		this.fn.setText("Falsos Negativos Gerados: "+i);
@@ -393,6 +393,7 @@ public class Interface extends JFrame {
 	 *  para que as regras e respetivos pesos sejam adicionado a JTable
 	 *  
 	 * @param file - caminho do ficheiro onde se encontram listadas as regras
+	 * @return true caso adicione com sucesso; false caso contrário
 	 */
 	public boolean addRules(String file) {
 		Map<String,String> rules = Control.readRules(file);
@@ -442,6 +443,7 @@ public class Interface extends JFrame {
 	/**
 	 * Devolve as regras e os respetivos pesos num HashMap, sendo que a chave e a regra
 	 * e o valor o peso.
+	 * 
 	 * @return Lista de regras com os pesos
 	 */
 
@@ -463,7 +465,8 @@ public class Interface extends JFrame {
 
 	/**
 	 * Devolve a lista de e-mails
-	 * @return List<Email>
+	 * 
+	 * @return List lista de emails
 	 */
 	public List<Email> getEmails(){
 		return emails;

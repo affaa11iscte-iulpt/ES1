@@ -114,15 +114,18 @@ public class ControlTest {
 
 	@Test
 	public final void testReadRules() {
-		Map<String, String> list = Control.readRules("files/rules_example.cf");
-		//Número de regras é de 335
-		assertTrue(list.size()==335);
+
 		//Caso o argumento seja nulo
-		list = Control.readRules(null);
+		Map<String, String> list = Control.readRules(null);
 		assertNull(list);
+		
 		//Caso o argumento seja inválido, por inexistência do ficheiro
 		list = Control.readRules("files/bababa.cf");
 		assertNull(list);
+		
+		list = Control.readRules("files/rules_example.cf");
+		//Número de regras é de 335
+		assertTrue(list.size()==335);
 	}
 
 	@Test
@@ -271,10 +274,19 @@ public class ControlTest {
 		};
 
 		Control c = new Control();
-		c.saveConfigurations("files/rules_example.cf", rules);
+		c.saveConfigurations("files\rules_example2.cf", rules);
+		c.saveConfigurations(null, rules);
 		//c.saveConfigurations("aaaaa", rules);
 	}
 
+	@Test
+	public final void testRemoveRowFile() {
+		//ATENÇÃO MELHORAR VER COM O PROF
+		Control c = new Control();
+		c.removeRowFile("files\rules_example2.cf");
+		c.removeRowFile(null);
+	}
+	
 	@Test
 	public final void testEquals() {
 		fail("Not yet implemented"); // TODO

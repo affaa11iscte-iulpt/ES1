@@ -150,12 +150,10 @@ public class Control {
 			}
 			scanner.close();
 
-		} catch (FileNotFoundException e) {
+		} catch (NullPointerException | FileNotFoundException e) {
 			System.out.println("Error reading "+file);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
-		}finally {
-			scanner.close();
 		}
 
 		return rules;
@@ -196,11 +194,9 @@ public class Control {
 
 		} catch (NullPointerException |FileNotFoundException e) {
 			System.out.println("Error reading " + file);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
-		} finally{
-			scanner.close();
-		}
+		} 
 
 		return emails;
 
@@ -216,7 +212,7 @@ public class Control {
 			AntiSpamFilterAutomaticConfiguration.start(emails, rules);
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
+			//JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
 		}
 	}
 
@@ -246,41 +242,42 @@ public class Control {
 				}
 				line++;
 			}
+			scanner.close();
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRF);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+fileRF+" não existe.");
-			return null;
-		}finally {
-			scanner.close();
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+fileRF+" não existe.");
 		}
 
 		List<Integer> values = null;
 
-		try {
-			scanner = new Scanner(new File(fileRS));
+		if(scanner!=null) {
+			try {
+				scanner = new Scanner(new File(fileRS));
 
-			int line=1;
-			while(scanner.hasNextLine()) {
-				if(line==best_position) {
-					String[] tokens = scanner.nextLine().split(" ");
-					values = new ArrayList<Integer>();
-					for(int i=0; i<tokens.length; i++)
-						values.add((int)Double.parseDouble(tokens[i]));
-					fpos=best_fpos;
-					fneg=best_fneg;
-				}else
-					scanner.nextLine();
-				line++;
+				int line=1;
+				while(scanner.hasNextLine()) {
+					if(line==best_position) {
+						String[] tokens = scanner.nextLine().split(" ");
+						values = new ArrayList<Integer>();
+						for(int i=0; i<tokens.length; i++)
+							values.add((int)Double.parseDouble(tokens[i]));
+						fpos=best_fpos;
+						fneg=best_fneg;
+					}else
+						scanner.nextLine();
+					line++;
+				}
+				scanner.close();
+			}catch(FileNotFoundException e) {
+				e.printStackTrace();
+				System.out.println("Error reading  "+ fileRS);
+				//JOptionPane.showMessageDialog(null, "Ficheiro "+fileRS+" não existe.");
+
+				return null;
 			}
-		}catch(FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("Error reading  "+ fileRS);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+fileRS+" não existe.");
-
+		}else {
 			return null;
-		}finally {
-			scanner.close();
 		}
 		return changeListToMap(rules, values);
 	}
@@ -350,11 +347,10 @@ public class Control {
 			for(String rule: rules.keySet()) {
 				pw.println(rule+" "+rules.get(rule));
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
-		}finally {
 			pw.close();
+		} catch (NullPointerException | FileNotFoundException e) {
+			e.printStackTrace();
+			//JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
 		}
 	}
 
@@ -376,13 +372,12 @@ public class Control {
 
 				line++;
 			}
+			scanner.close();
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading "+file);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return;
-		}finally {
-			scanner.close();
 		}
 
 		PrintWriter pw = null;
@@ -393,10 +388,8 @@ public class Control {
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro ao guardar configuraÃ§Ã£o.");
+			//JOptionPane.showMessageDialog(null, "Erro ao guardar configuraÃ§Ã£o.");
 			return;
-		}finally {
-			pw.close();
 		}
 	}
 

@@ -62,6 +62,7 @@ public class Interface extends JFrame {
 
 	public Interface(){
 		c= new Control();
+		emails = new ArrayList<Email>();
 		setSize(700,700);
 		setTitle("AntiSpam Filter");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -183,14 +184,18 @@ public class Interface extends JFrame {
 						setFn(c.getFneg());
 					}else if(autoMode.isSelected()) {
 						c = new Control();
-						c.automaticMode(emails, getRules());
-						Map<String, String> rules = c.readAutomatic(getRules(), "experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
-								"experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
-						putRulesOnTable(rules);
-						System.out.println(rules.size());
-						setFp(c.getFpos());
-						setFn(c.getFneg());
-
+						try {
+							c.automaticMode(emails, getRules());
+							Map<String, String> rules = c.readAutomatic(getRules(), "experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
+									"experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rs");
+							putRulesOnTable(rules);
+							System.out.println(rules.size());
+							setFp(c.getFpos());
+							setFn(c.getFneg());
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
+							e1.printStackTrace();
+						}
 					}
 				}
 			}

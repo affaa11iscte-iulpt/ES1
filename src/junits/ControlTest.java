@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -175,7 +177,12 @@ public class ControlTest {
 			}
 		};
 		Control c = new Control();
-		c.automaticMode(emails, rules);
+		try {
+			c.automaticMode(emails, rules);
+		} catch (Exception e) {
+			//JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
+			e.printStackTrace();
+		}
 
 		//É preciso ver o que se mete aqui
 	}

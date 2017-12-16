@@ -37,8 +37,8 @@ public class Interface extends JFrame {
 	protected DefaultTableModel tableModel;
 	private boolean isEditable=true;
 	private List<Email> emails = new ArrayList<Email>();	
-	private JLabel fp = new JLabel("Falsos Positivos Gerados: ");
-	private JLabel fn = new JLabel("Falsos Negativos Gerados: ");
+	private JLabel fp ;
+	private JLabel fn ;
 	private JButton loadFile1;
 	private JButton loadFile2;
 	private JButton loadFile3;
@@ -67,7 +67,7 @@ public class Interface extends JFrame {
 	}
 
 	/** 	
-	 * Esta funcao junta todos os paines que constituem a interface, nomeadamente
+	 * Esta funcao junta todos os paineis que constituem a interface, nomeadamente
 	 * o painel para carregar os ficheiros, o painel onde é desenhada a tabela
 	 * e os modos automatico e manual e por fim o painel onde e possivel guardar e fazer
 	 * reset da configuracao.
@@ -86,8 +86,18 @@ public class Interface extends JFrame {
 
 
 	/**
-	 * Criacao do painel onde especifica a tabela e trata o modo, isto e, automatico e manual 
-	 * return @JPanel
+	 * 
+	 * Esta funcao cria um painel, onde é desenhada uma tabela do tipo DefaulTableModel,
+	 *  com 2 colunas (Regras e Pesos) e com a junção de uma scroll area. 
+	 * São criados sub Paineis, o primeiro tem o modo automatico e o manual onde neste e permitido editar uma coluna
+	 * esse controlo e definido pela variavel isEditable; Estes modos estao definidos em
+	 * JCheckBox onde esta definido que so e possivel ter um modo em simultaneo. O outro subPanel define o botao e a label,
+	 * no ActionListener do botao são lancadas as JOptionPane caso os botoes da funcao filePanel nao estejam selecionados.
+	 * Para alem disso e nesse ActionListener que e calculado os Falsos Positivos e os falsos negativos consoante o modo.
+	 *  
+	 
+	 * 
+	 * @return JPanel tablePanel
 	 */
 
 	@SuppressWarnings("serial")
@@ -280,10 +290,18 @@ public class Interface extends JFrame {
 
 	/**
 	 * Criacao do painel onde mostra os falsos positivos/negativos gerados e as opcoes de guardar e apagar as configuracoes
-	 * return @JPanel
+	 * 
+	 * Em cada subPanel e criado um botao com uma label associada
+	 * Tanto no botao que salva/reset a configuracao e invocada a funcao que faz esse mesmo tratamento
+	 * 
+	 * 
+	 * return @JPanel modePanel
 	 */
+	
 	private JPanel savePanel(){
 		JPanel modePanel = new JPanel();
+		fp= new JLabel("Falsos Positivos Gerados: ");
+		fn =  new JLabel("Falsos Negativos Gerados: ");
 		modePanel.setLayout(new GridLayout(5,1));
 
 

@@ -70,7 +70,6 @@ public class Control {
 	 * @param rules
 	 * @return boolean
 	 */
-
 	private boolean isGreaterThan5(Email email, Map<String, String> rules) {
 		int value=0;
 		for(String rule: email.getEmailRules()) {
@@ -122,7 +121,7 @@ public class Control {
 					rules.put(tokens[0], tokens[1]);
 			}
 
-		} catch (NullPointerException | FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println("Error reading "+file);
 			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;

@@ -459,14 +459,4 @@ public class Interface extends JFrame {
 		return emails;
 	}
 
-
-
-
-
-	public static void main (String[] args){
-		Interface t = new Interface();
-		t.open();
-
-	}
-
 }

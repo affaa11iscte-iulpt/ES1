@@ -21,7 +21,7 @@ public class Control {
 	private int fneg=0;
 
 	/**
-	 * Calcula o número de falsos positivos e falsos negativos
+	 * Calcula o nÃºmero de falsos positivos e falsos negativos
 	 * @param Lista de emails e Mapa das regras
 	 * @return falsos positivos e falsos negativos
 	 */
@@ -57,7 +57,7 @@ public class Control {
 	}
 
 	/**
-	 * percorre todas as regras e verifica se o seu peso é maior que 5
+	 * percorre todas as regras e verifica se o seu peso Ã© maior que 5
 	 * @param email
 	 * @param rules
 	 * @return boolean
@@ -77,7 +77,7 @@ public class Control {
 	}
 
 	/**
-	 * percorre todas as regras e verifica se o seu peso é menor que -5
+	 * percorre todas as regras e verifica se o seu peso Ã© menor que -5
 	 * @param email
 	 * @param rules
 	 * @return boolean
@@ -95,9 +95,9 @@ public class Control {
 		return false;
 	}
 
-	/** Lê o ficheiro rules.cf e guarda todas as regras num map <String, String> 
-	 * em que o nome da regra corresponde à chave e o peso corresponde ao peso.
-	 * Caso não esteja nenhum peso definido no ficheiro, este ficará vazio.
+	/** LÃª o ficheiro rules.cf e guarda todas as regras num map <String, String> 
+	 * em que o nome da regra corresponde Ã  chave e o peso corresponde ao peso.
+	 * Caso nÃ£o esteja nenhum peso definido no ficheiro, este ficarÃ¡ vazio.
 	 * @param file Nome do ficheiro
 	 * @return Lista de regras
 	 */
@@ -123,10 +123,10 @@ public class Control {
 	}
 
 	/**
-	 * Lê o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
+	 * Lé o ficheiro spam.log ou ham.log e guarda todos os emails lidos numa
 	 * ArrayList<Email>. Caso o parametro isSpam assuma o valor true, é criado um
-	 * email do tipo spam e adicionado à lista. Caso o parametro isSpam seja false,
-	 * é criado um Email do tipo spam e adicionado à lista de emails. Após a
+	 * email do tipo spam e adicionado Ã  lista. Caso o parametro isSpam seja false,
+	 * Ã© criado um Email do tipo spam e adicionado à lista de emails. Após a
 	 * criação do Email são adicionadas a regras associadas ao mesmo.
 	 * 
 	 * @param String
@@ -176,15 +176,15 @@ public class Control {
 	}
 
 	/**
-	 * Lê as regras e atribui valores aos falsos positivos e falsos negativos
+	 * Lé as regras e atribui valores aos falsos positivos e falsos negativos
 	 * @param Map<String, String>
 	 * @param String
 	 * @param String
 	 * @returnMap<String, String>
 	 */
 	public Map<String, String> readAutomatic(Map<String, String> rules, String fileRF, String fileRS) {
-		int best_position=-1; //Posição do melhor vetor
-		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITÁRIO porque é Professional
+		int best_position=-1; //PosiÃ§Ã£o do melhor vetor
+		int best_fneg=-1; //Valor do falso negativo mais baixo ---> PRIORITÃ�RIO porque Ã© Professional
 		int best_fpos=-1; //Valor do falso positivo mais baixo
 		try {
 			Scanner scanner = new Scanner(new File(fileRF));
@@ -192,7 +192,7 @@ public class Control {
 			int line=1;
 			while(scanner.hasNextLine()) {
 				String[] tokens = scanner.nextLine().split(" ");
-				System.out.println(tokens[0]+" "+tokens[1]);
+				//System.out.println(tokens[0]+" "+tokens[1]);
 				int[] falses = {(int)Double.parseDouble(tokens[0]), (int)Double.parseDouble(tokens[1])};
 				if(isBest(best_fneg, best_fpos, falses)) {
 					best_position=line;
@@ -221,14 +221,15 @@ public class Control {
 						values.add((int)Double.parseDouble(tokens[i]));
 					fpos=best_fpos;
 					fneg=best_fneg;
-				}
+				}else
+					scanner.nextLine();
+				line++;
 			}
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRS);
 			return null;
 		}
-
 		return changeListToMap(rules, values);
 	}
 
@@ -238,7 +239,7 @@ public class Control {
 	 * @param List<Integer>
 	 * @return Map<String, String>
 	 */
-	private Map<String, String> changeListToMap(Map<String, String> rules, List<Integer> values){
+	public Map<String, String> changeListToMap(Map<String, String> rules, List<Integer> values){
 		Map<String, String> new_rules = new HashMap<String, String>(); 
 		int j=0;
 		for(String key: rules.keySet()) {
@@ -276,7 +277,6 @@ public class Control {
 			PrintWriter pw = new PrintWriter(new FileOutputStream(file, false));
 			for(String rule: rules.keySet()) {
 				pw.println(rule+" "+rules.get(rule));
-				System.out.println("Escrevendo");
 			}
 			pw.close();
 		} catch (FileNotFoundException e) {
@@ -313,7 +313,7 @@ public class Control {
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
+			JOptionPane.showMessageDialog(null, "Erro ao guardar configuraÃ§Ã£o.");
 		}
 	}
 

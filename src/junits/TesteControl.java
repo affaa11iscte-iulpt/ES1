@@ -1,5 +1,8 @@
 package junits;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -43,24 +46,24 @@ class TesteControl {
 		Control control = new Control();
 		//No início, os falsos positivos são 0
 		assertTrue(control.getFpos()==0);
-		
+
 		Map<String, String> rules = new HashMap<String, String>() {
 			{
-		        put("BAYES_00","10");
-		        put("FREEMAIL_FROM","-5");
-		        put("RDNS_NONE","6");
-		        put("FREEMAIL_REPLYTO_END_DIGIT","2");
-		        put("MSOE_MID_WRONG_CASE","-7");
-		        put("DATE_IN_PAST_24_48","2");
-		        put("T_LOTS_OF_MONEY","-9");
-		}
+				put("BAYES_00","10");
+				put("FREEMAIL_FROM","-5");
+				put("RDNS_NONE","6");
+				put("FREEMAIL_REPLYTO_END_DIGIT","2");
+				put("MSOE_MID_WRONG_CASE","-7");
+				put("DATE_IN_PAST_24_48","2");
+				put("T_LOTS_OF_MONEY","-9");
+			}
 		};
-		
+
 		List<String> rulesOfEmailA = Arrays.asList("BAYES_00","FREEMAIL_FROM","RDNS_NONE",
 				"FREEMAIL_REPLYTO_END_DIGIT","MSOE_MID_WRONG_CASE", "NOT_RULE"); //6
 		List<String> rulesOfEmailB = Arrays.asList("RDNS_NONE","FREEMAIL_REPLYTO_END_DIGIT",
 				"MSOE_MID_WRONG_CASE","DATE_IN_PAST_24_48","T_LOTS_OF_MONEY", "NOT_RULE"); //-6
-		
+
 		//Caso em que há 1 FP e 1 FN
 		Email emailA = new Email("aa", Type.HAM);
 		Email emailB = new Email("bb", Type.SPAM);
@@ -68,28 +71,28 @@ class TesteControl {
 			emailA.addRule(s);
 		for(String s: rulesOfEmailB)
 			emailB.addRule(s);
-		
+
 		List<Email> emails = Arrays.asList(emailA, emailB);
 
 		control.calculate(emails, rules);
 		assertTrue(control.getFpos()==1);
 		assertTrue(control.getFneg()==1);
 
-		
-		//Caso em que há 0 FP e 0 FN
-				emailA = new Email("aa", Type.SPAM);
-				emailB = new Email("bb", Type.HAM);
-				for(String s: rulesOfEmailA)
-					emailA.addRule(s);
-				for(String s: rulesOfEmailB)
-					emailB.addRule(s);
-				
-				emails = Arrays.asList(emailA, emailB);
 
-				control = new Control();
-				control.calculate(emails, rules);
-				assertTrue(control.getFpos()==0);
-				assertTrue(control.getFneg()==0);
+		//Caso em que há 0 FP e 0 FN
+		emailA = new Email("aa", Type.SPAM);
+		emailB = new Email("bb", Type.HAM);
+		for(String s: rulesOfEmailA)
+			emailA.addRule(s);
+		for(String s: rulesOfEmailB)
+			emailB.addRule(s);
+
+		emails = Arrays.asList(emailA, emailB);
+
+		control = new Control();
+		control.calculate(emails, rules);
+		assertTrue(control.getFpos()==0);
+		assertTrue(control.getFneg()==0);
 	}
 
 	@Test
@@ -106,7 +109,7 @@ class TesteControl {
 
 	@Test
 	final void testReadRules() {
-		Map<String, String> list = Control.readRules("files/rules.cf");
+		Map<String, String> list = Control.readRules("files/rules_example.cf");
 		//Número de regras é de 335
 		assertTrue(list.size()==335);
 		//Caso o argumento seja nulo
@@ -126,21 +129,21 @@ class TesteControl {
 		//Numero de emails do tipo SPAM é de 239
 		assertTrue(spamList.size()==239);
 		//Caso o argumento da localizacao do fiheiro seja nulo
-			//Ham
-			hamList = Control.readEmails(null, false);
-			assertNull(hamList);
-			//Spam
-			spamList = Control.readEmails(null, true);
-			assertNull(spamList);
+		//Ham
+		hamList = Control.readEmails(null, false);
+		assertNull(hamList);
+		//Spam
+		spamList = Control.readEmails(null, true);
+		assertNull(spamList);
 		//Caso o argumento da localizacao do ficheiro seja invalido, por inexistência do fichiero
-			//Ham
-			hamList = Control.readEmails("files/xxx.log", false);
-			assertNull(hamList);
-			//Spam
-			spamList = Control.readEmails("files/xxx.log", true);
-			assertNull(spamList);
+		//Ham
+		hamList = Control.readEmails("files/xxx.log", false);
+		assertNull(hamList);
+		//Spam
+		spamList = Control.readEmails("files/xxx.log", true);
+		assertNull(spamList);
 	}
-	
+
 	@Test
 	final void testAutomaticMode() {
 		List<Email> emails = new ArrayList<Email>();
@@ -151,46 +154,124 @@ class TesteControl {
 		emails.add(new Email("eeeee", Type.SPAM));
 		emails.add(new Email("fffff", Type.SPAM));
 		emails.add(new Email("ggggg", Type.HAM));
-		
+
 		Map<String, String> rules = new HashMap<String, String>() {
 			{
-		        put("BAYES_00","10");
-		        put("FREEMAIL_FROM","-5");
-		        put("RDNS_NONE","6");
-		        put("FREEMAIL_REPLYTO_END_DIGIT","2");
-		        put("MSOE_MID_WRONG_CASE","-7");
-		        put("DATE_IN_PAST_24_48","2");
-		        put("T_LOTS_OF_MONEY","-9");
-		}
+				put("BAYES_00","10");
+				put("FREEMAIL_FROM","-5");
+				put("RDNS_NONE","6");
+				put("FREEMAIL_REPLYTO_END_DIGIT","2");
+				put("MSOE_MID_WRONG_CASE","-7");
+				put("DATE_IN_PAST_24_48","2");
+				put("T_LOTS_OF_MONEY","-9");
+			}
 		};
 		Control c = new Control();
 		c.automaticMode(emails, rules);
 
-		
+
 		assertTrue(1==1);		
 		//É preciso ver o que se mete aqui
 	}
-	
+
 	@Test
 	final void testReadAutomatic() {
 		Map<String, String> rules = new HashMap<String, String>() {
 			{
-		        put("BAYES_00","10");
-		        put("FREEMAIL_FROM","-5");
-		        put("RDNS_NONE","6");
-		        put("FREEMAIL_REPLYTO_END_DIGIT","2");
-		        put("MSOE_MID_WRONG_CASE","-7");
-		        put("DATE_IN_PAST_24_48","2");
-		        put("T_LOTS_OF_MONEY","-9");
-		}
+				put("BAYES_00","10");
+				put("FREEMAIL_FROM","-5");
+				put("RDNS_NONE","6");
+				put("FREEMAIL_REPLYTO_END_DIGIT","2");
+				put("MSOE_MID_WRONG_CASE","-7");
+				put("DATE_IN_PAST_24_48","2");
+				put("T_LOTS_OF_MONEY","-9");
+			}
 		};
-		
+
+		List<Integer> values = Arrays.asList(4, 0, 0, -4, 1, -2, -2);
+
 		Control c = new Control();
-		assertNull(c.readAutomatic(rules, "aa", "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rs"));
-		assertNull(c.readAutomatic(rules, "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem.NSGAII.rf", "bbb"));
+		assertNull(c.readAutomatic(rules, "aa", "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem_example.rs"));
+		assertNull(c.readAutomatic(rules, "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem_example.rf", "bbb"));
+		assertNotNull(c.readAutomatic(rules, "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem_example.rf",
+				"experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem_example.rs"));
+
+		Map<String, String> map = c.changeListToMap(rules, values);
+
+		assertEquals(c.readAutomatic(rules, "experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem_example.rf",
+				"experimentBaseDirectory/referenceFronts/AntiSpamFilterProblem_example.rs"),
+				map);
 
 	}
-	
+
+	@Test
+	final void testChangeListToMap() {
+		Map<String, String> rules = new HashMap<String, String>() {
+			{
+				put("BAYES_00","10");
+				put("FREEMAIL_FROM","-5");
+				put("RDNS_NONE","6");
+				put("FREEMAIL_REPLYTO_END_DIGIT","2");
+				put("MSOE_MID_WRONG_CASE","-7");
+				put("DATE_IN_PAST_24_48","2");
+				put("T_LOTS_OF_MONEY","-9");
+			}
+		};
+
+		List<Integer> values = Arrays.asList(4, 0, 0, -4, 1, -2, -2);
+
+		Map<String, String> map = new HashMap<String, String>() {
+			{
+				put("BAYES_00","4");
+				put("FREEMAIL_FROM","-4");
+				put("RDNS_NONE","0");
+				put("FREEMAIL_REPLYTO_END_DIGIT","-2");
+				put("MSOE_MID_WRONG_CASE","0");
+				put("DATE_IN_PAST_24_48","-2");
+				put("T_LOTS_OF_MONEY","1");
+			}
+		};
+
+		Control c = new Control();
+		assertEquals(map, c.changeListToMap(rules, values));
+
+
+	}
+
+	@Test
+	final void testIsBest() {
+		Control c = new Control();
+		assertTrue(c.isBest(-1, -1, new int[]{1,2}));
+		assertTrue(c.isBest(-1, 0, new int[]{1,2}));
+		assertTrue(c.isBest(0, -1, new int[]{1,2}));
+
+		assertFalse(c.isBest(1, 2, new int[]{0,2}));
+		assertTrue(c.isBest(2, 1, new int[]{0,2}));
+		assertTrue(c.isBest(2, 2, new int[]{1,1}));
+		assertTrue(c.isBest(2, 2, new int[]{2,1}));
+		assertFalse(c.isBest(2, 2, new int[]{3,1}));
+
+	}
+
+	@Test
+	final void testSaveConfigurations() {
+		Map<String, String> rules = new HashMap<String, String>() {
+			{
+				put("BAYES_00","10");
+				put("FREEMAIL_FROM","-5");
+				put("RDNS_NONE","6");
+				put("FREEMAIL_REPLYTO_END_DIGIT","2");
+				put("MSOE_MID_WRONG_CASE","-7");
+				put("DATE_IN_PAST_24_48","2");
+				put("T_LOTS_OF_MONEY","-9");
+			}
+		};
+
+		Control c = new Control();
+		c.saveConfigurations("files/rules_example.cf", rules);
+		//c.saveConfigurations("aaaaa", rules);
+	}
+
 	@Test
 	final void testEquals() {
 		fail("Not yet implemented"); // TODO

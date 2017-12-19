@@ -27,9 +27,6 @@ import components.Email;
 
 
 public class Interface extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	protected DefaultTableModel tableModel;
 	private boolean isEditable=true;
@@ -76,7 +73,7 @@ public class Interface extends JFrame {
 
 	/** 	
 	 * Esta funcao junta todos os paineis que constituem a interface, nomeadamente
-	 * o painel para carregar os ficheiros, o painel onde ï¿½ desenhada a tabela
+	 * o painel para carregar os ficheiros, o painel onde e desenhada a tabela
 	 * e os modos automatico e manual e por fim o painel onde e possivel guardar e fazer
 	 * reset da configuracao.
 	 * 
@@ -95,12 +92,12 @@ public class Interface extends JFrame {
 
 	/**
 	 * 
-	 * Esta funcao cria um painel, onde ï¿½ desenhada uma tabela do tipo DefaulTableModel,
-	 *  com 2 colunas (Regras e Pesos) e com a junï¿½ï¿½o de uma scroll area. 
-	 * Sï¿½o criados sub Paineis, o primeiro tem o modo automatico e o manual onde neste e permitido editar uma coluna
+	 * Esta funcao cria um painel, onde e desenhada uma tabela do tipo DefaulTableModel,
+	 *  com 2 colunas (Regras e Pesos) e com a juncao de uma scroll area. 
+	 * Sao criados sub Paineis, o primeiro tem o modo automatico e o manual onde neste e permitido editar uma coluna
 	 * esse controlo e definido pela variavel isEditable; Estes modos estao definidos em
 	 * JCheckBox onde esta definido que so e possivel ter um modo em simultaneo. O outro subPanel define o botao e a label,
-	 * no ActionListener do botao sï¿½o lancadas as JOptionPane caso os botoes da funcao filePanel nao estejam selecionados.
+	 * no ActionListener do botao sao lancadas as JOptionPane caso os botoes da funcao filePanel nao estejam selecionados.
 	 * Para alem disso e nesse ActionListener que e calculado os Falsos Positivos e os falsos negativos consoante o modo.
 	 *  
 
@@ -178,12 +175,10 @@ public class Interface extends JFrame {
 				}
 				else{
 					if(manualMode.isSelected()) {
-						c = new Control();
 						c.calculate(emails,getRules() );
 						setFp(c.getFpos());
 						setFn(c.getFneg());
 					}else if(autoMode.isSelected()) {
-						c = new Control();
 						try {
 							c.automaticMode(emails, getRules());
 							Map<String, String> rules = c.readAutomatic(getRules(), "experimentBaseDirectory\\referenceFronts\\AntiSpamFilterProblem.rf", 
@@ -352,13 +347,15 @@ public class Interface extends JFrame {
 				loadFile1.setEnabled(true);
 				loadFile2.setEnabled(true);
 				loadFile3.setEnabled(true);
-				setFp(0);
-				setFn(0);
+				c.resetFneg();
+				c.resetFpos();
+				setFp(c.getFpos());
+				setFn(c.getFneg());
 				if(autoMode.isSelected() || manualMode.isSelected()){
-					autoMode.setSelected(false);
 					manualMode.setSelected(false);
 				}
 				removeAllRowsOfTable();
+				emails.clear();
 				c.removeRowFile(fileRules);
 
 
@@ -375,27 +372,32 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Altera o valor das labels dos falsos positivos quando este e calculado, recebe um inteiro (numero de falsos positivos), que vai ser o valor a adicionar na label 
+	 * Altera o valor das labels dos falsos positivos quando este e calculado, 
+	 * recebe um inteiro (numero de falsos positivos), que vai ser o valor 
+	 * a adicionar na label 
 	 * @param i valor a inserir
 	 */
 	public void setFp(int i) {
-		this.fp.setText("Falsos Positivos Gerados: "+i);
+		this.fp.setText("Falsos Positivos Gerados: "+ i);
 	}
 
 	/**
-	 * Altera o valor das labels dos falsos negativos quando este e calculado, recebe um inteiro (numero de falsos negativos), que vai ser o valor a adicionar na label 
+	 * Altera o valor das labels dos falsos negativos quando este e calculado, 
+	 * recebe um inteiro (numero de falsos negativos), que vai ser o valor
+	 * a adicionar na label 
 	 * @param i valor a inserir
 	 */
 	public void setFn(int i) {
-		this.fn.setText("Falsos Negativos Gerados: "+i);
+		this.fn.setText("Falsos Negativos Gerados: "+ i);
 	}
 
 
 	/**
 	 * 	Funcao que recebe o caminho do ficheiro em que se encontram listadas as regras
-	 *  e cria um Map, que agrupa as regras com os respetivos pesos atraves da funcao readRules()
-	 *  da classe control. Apos a criacacao do Map, este e dado como parametro a funcao putRulesOnTable()
-	 *  para que as regras e respetivos pesos sejam adicionado a JTable
+	 *  e cria um Map, que agrupa as regras com os respetivos pesos atraves da funcao 
+	 *  readRules() da classe control. Apos a criacacao do Map, este e dado como 
+	 *  parametro a funcao putRulesOnTable() para que as regras e respetivos pesos
+	 *  sejam adicionados a JTable
 	 *  
 	 * @param file - caminho do ficheiro onde se encontram listadas as regras
 	 * @return true caso adicione com sucesso; false caso contrário
@@ -410,9 +412,9 @@ public class Interface extends JFrame {
 	}
 
 	/**
-	 * Funcao que recebe um Map de regras com os respetivos pesos associados, removendo, em primeiro lugar,
-	 * tudo o que esta contido na tableModel. Posteriormente adiciona linhas a tabela com as regras e pesos
-	 * contidos no Map.
+	 * Funcao que recebe um Map de regras com os respetivos pesos associados, removendo,
+	 * em primeiro lugar, tudo o que esta contido na tableModel. Posteriormente
+	 * adiciona linhas a tabela com as regras e pesos contidos no Map.
 	 * 
 	 * @param rules Mapa de regras <Regra,Peso>
 	 */

@@ -24,7 +24,8 @@ public class Email {
 	/**
 	 * public Email(String id, Type type)
 	 * 
-	 * Constroi um novo Email com um id unico e um tipo associado que podera ser HAM ou SPAM.
+	 * Constroi um novo Email com um id unico e um tipo associado que podera
+	 * ser HAM ou SPAM.
 	 * 
 	 * @param id - identificacao do email
 	 * @param type - tipo de email

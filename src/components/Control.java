@@ -31,6 +31,7 @@ import components.Email.Type;
 public class Control {
 	private int fpos=0;
 	private int fneg=0;
+	
 
 	/**
 	 * Calcula o numero de falsos positivos e o numero de falsos negativos
@@ -50,12 +51,30 @@ public class Control {
 				if(isGreaterThan5(email, rules))
 					fpos++;
 			}
-			if(email.getEmailType().equals(Type.SPAM))
-				if(isLessThanMinus5(email, rules)) 
+			if(email.getEmailType().equals(Type.SPAM)) {
+				if(isLessThan5(email, rules)) 
 					fneg++;
+			}
 		}
+		System.out.println("tamanho da lista de emails" + emails.size());
 	}
-
+	
+	/**
+	 * Faz reset do numero de falsos negativos da classe Control
+	 * fneg passa a assumir o valor 0
+	 */
+	public void resetFneg() {
+		this.fneg = 0;
+	}
+	
+	/**
+	 * Faz reset do numero de falsos positivos da classe Control
+	 * fpos passa a assumir o valor 0
+	 */
+	public void resetFpos() {
+		this.fpos = 0;
+	}
+	
 	/**
 	 * Devolve o numero de falsos positivos
 	 * @return int numero de falsos positivos
@@ -108,14 +127,13 @@ public class Control {
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
 	 * @return true se o total de pesos for menor que -5; falso caso contrario 
 	 */
-	private boolean isLessThanMinus5(Email email, Map<String, String> rules) {
+	private boolean isLessThan5(Email email, Map<String, String> rules) {
 		int value=0;
 		for(String rule: email.getEmailRules()) {
 			if(rules.get(rule)!=null)
 				value += Integer.parseInt(rules.get(rule));
 		}
-
-		if(value < -5) {
+		if(value < 5) {
 			return true;
 		}
 		return false;
@@ -294,8 +312,8 @@ public class Control {
 	}
 
 	/**
-	 * Permite agrupar as regras que estão num Map com os pesos que proveem da lista de pesos,
-	 * devolvendo um novo Map com as regras e os novos pesos.
+	 * Permite agrupar as regras que estão num Map com os pesos que proveem da lista
+	 * de pesos, devolvendo um novo Map com as regras e os novos pesos.
 	 * 
 	 * @param rules um mapa que tem como chave a regra e como valor o seu peso
 	 * @param values uma lista de pesos
@@ -372,7 +390,7 @@ public class Control {
 	 * Limpa os pesos das regras de um determinado ficheiro
 	 * 
 	 * Ocorre a leitura do ficheiro file e as regras são armazenadas numa
-	 * lista de regras. Após a leitura, ocorre a escrita no mesmo ficheiro
+	 * lista de regras. Apos a leitura, ocorre a escrita no mesmo ficheiro
 	 * que segue o formato "REGRA", não escrevendo os pesos que tinha
 	 * anteriormente.
 	 * 

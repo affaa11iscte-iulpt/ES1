@@ -12,9 +12,7 @@ import components.Control;
 import components.Email;
 
 public class AntiSpamFilterProblem extends AbstractDoubleProblem {
-	  /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private List<Email> emails;
 	  private Map<String, String> rules;
@@ -44,7 +42,7 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	  }
 
 	  /**
-	   * Calcula o número de falsos positivos e de falsos negativos do modo au
+	   * Calcula o numero de falsos positivos e de falsos negativos do modo automatico
 	   * 
 	   * @param DoubleSolution Vetor de pesos
 	   */

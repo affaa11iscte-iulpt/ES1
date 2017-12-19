@@ -1,0 +1,56 @@
+
+
+Sprint Retrospective do Projeto 
+
+1º Sprint:
+Duração: 2 Semanas
+
+1º Sprint Backlog:
+  -Atualizar o ficheiro README.txt
+  -Desenho do mockup da interface gráfica 
+  -Leitura do ficheiro rules.cf
+  -Listar as regras na interface  
+  -Desenvolver a interface gráfica para o tratamento manual
+  - Fazer o JavaDoc de cada parte implementada
+
+Sprint Retrospective: 
+      Foi realizada a revisão do primeiro sprint, com todos os intervenientes, de forma a apresentar o que foi conseguido durante o Sprint e verificar quais as funcionalidades e respetivos requisitos que foram cumpridos. Podemos concluir que tudo o que foi planeado para este sprint, foi cumprido e não houve a necessidade de reduzir o objetivo.  
+      Após este sprint foi possível visualizar o mockup da interface assim como a codificação da mesma.
+
+2º Sprint:
+Duração: 2 Semanas
+
+2º Sprint Backlog:
+- Desenvolver a interface gráfica para o tratamento automático
+- Realizar o tratamento dos Falsos Positivos e Falsos Negativos
+-Desenvolver o algoritmo NSDA-II
+- Leitura dos e-mails spam.log e ham.log
+- Fazer o JavaDoc de cada parte implementada
+- Fazer os JUnit e testar as funcionalidades desenvolvidas
+
+
+Sprint Retrospective: 
+      O objetivo deste sprint não foi cumprido na sua totalidade uma vez que não se conseguiu desenvolver todos os JUnit de forma a testar todas as funcionalidades desenvolvidas. Em termos de funcionalidades, foi desenvolvido de forma eficaz o algoritmo NSDA-II, o tratamento dos Falsos positivos e falsos negativos.
+
+3 º Sprint:
+Duração: 4 Semanas
+
+3º Sprint Backlog:
+- Guardar a configuração
+- Reset da Configuração 
+- Fazer os JUnit do Projeto
+- Fazer JavaDoc do Projeto
+- Lançar e tratar exceções
+- Gerar gráficos R 
+-Gerar Diagrama de classes
+- Fazer o vídeo a demonstrar o funcionamento do software
+-Fazer o relatório de testes
+-Fazer a checklist
+- Fazer o code inspection
+- Elaborar o relatório final
+- Organizar o repositório de modo a cumprir os requisitos da entrega do trabalho 
+
+Sprint Retrospective:
+      Sendo o maior sprint e também o final, foram tratadas todas as funcionalidades de forma a poder ser feita a entrega do projeto na data programada.
+      Desta forma todas as funcionalidades foram desenvolvidas e devidamente testadas, sendo possível verificar que os requisitos do sistema foram cumpridos.
+  

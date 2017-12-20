@@ -47,7 +47,7 @@ class InterfaceTest {
 	@Test
 	void testAddPanels() {
 		fail("Not yet implemented");
-	}
+	} 
 
 	@Test
 	void testSetFp() {
@@ -68,7 +68,6 @@ class InterfaceTest {
 
 	@Test
 	void testGetRules() {
-		fail("Not yet implemented");
 	}
 
 	@Test

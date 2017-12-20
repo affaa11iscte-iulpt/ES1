@@ -169,7 +169,7 @@ public class Control {
 
 		} catch (NullPointerException | FileNotFoundException e) {
 			System.out.println("Error reading "+file);
-			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
 		}
 
@@ -212,7 +212,7 @@ public class Control {
 
 		} catch (NullPointerException |FileNotFoundException e) {
 			System.out.println("Error reading " + file);
-			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
 		} 
 

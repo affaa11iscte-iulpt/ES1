@@ -165,14 +165,14 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(loadFile1.isEnabled()){ 
-					//JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelRules.getText());
+					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelRules.getText());
 				}
 				else if(loadFile2.isEnabled()){
-					//JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelSpam.getText());
+					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelSpam.getText());
 
 				}
 				else if(loadFile3.isEnabled()){
-					//JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelHam.getText());
+					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelHam.getText());
 				}
 				else{
 					if(manualMode.isSelected()) {
@@ -189,7 +189,7 @@ public class Interface extends JFrame {
 							setFp(c.getFpos());
 							setFn(c.getFneg());
 						} catch (Exception e1) {
-							//JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
+							JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
 							e1.printStackTrace();
 						}
 					}

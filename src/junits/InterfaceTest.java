@@ -68,6 +68,7 @@ class InterfaceTest {
 
 	@Test
 	void testGetRules() {
+		fail("Not yet implemented");
 	}
 
 	@Test

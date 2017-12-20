@@ -24,7 +24,7 @@ public class Main {
 //		System.out.println("Erro a gerar os gráficos R");
 //	}
 //
-//  CÓDIGO PARA LATEX
+//  CÓDIGO PARA FICHEIROS LATEX
 //	String[] paramsLatex = new String[2];
 //	String[] envpLatex = new String[1];
 //
@@ -37,8 +37,6 @@ public class Main {
 //		} catch (IOException e) {
 //			System.out.println("Erros nos ficheiros latex");
 //		}
-	
-
-}
+	}
 
 }

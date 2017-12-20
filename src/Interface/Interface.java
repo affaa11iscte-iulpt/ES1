@@ -327,7 +327,7 @@ public class Interface extends JFrame {
 		modeSubPanel2.add(fn);
 
 		JPanel modeSubPanel3 = new JPanel();
-		JButton save = new JButton ("Guardar Configura��o");
+		JButton save = new JButton ("Guardar Configuracao");
 		modeSubPanel3.add(save);
 
 		save.addActionListener(new ActionListener() {
@@ -340,7 +340,7 @@ public class Interface extends JFrame {
 		});
 
 		JPanel modeSubPanel4 = new JPanel();
-		JButton reset = new JButton ("Reset Configura��o");
+		JButton reset = new JButton ("Reset Configuracao");
 		reset.addActionListener(new ActionListener() {
 
 			@Override

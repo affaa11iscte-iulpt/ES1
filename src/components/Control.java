@@ -169,7 +169,7 @@ public class Control {
 
 		} catch (NullPointerException | FileNotFoundException e) {
 			System.out.println("Error reading "+file);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
 		}
 
@@ -212,7 +212,7 @@ public class Control {
 
 		} catch (NullPointerException |FileNotFoundException e) {
 			System.out.println("Error reading " + file);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return null;
 		} 
 
@@ -275,7 +275,7 @@ public class Control {
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading  "+ fileRF);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+fileRF+" não existe.");
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+fileRF+" não existe.");
 		}
 
 		List<Integer> values = null;
@@ -301,7 +301,7 @@ public class Control {
 			}catch(FileNotFoundException e) {
 				e.printStackTrace();
 				System.out.println("Error reading  "+ fileRS);
-				JOptionPane.showMessageDialog(null, "Ficheiro "+fileRS+" não existe.");
+				//JOptionPane.showMessageDialog(null, "Ficheiro "+fileRS+" não existe.");
 
 				return null;
 			}
@@ -380,7 +380,7 @@ public class Control {
 			pw.close();
 		} catch (NullPointerException | FileNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
+			//JOptionPane.showMessageDialog(null, "Erro ao guardar configuração.");
 			return false;
 		}
 		return true;
@@ -414,7 +414,7 @@ public class Control {
 		}catch(NullPointerException | FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("Error reading "+file);
-			JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
+			//JOptionPane.showMessageDialog(null, "Ficheiro "+file+" não existe.");
 			return false;
 		}
 
@@ -426,7 +426,7 @@ public class Control {
 			pw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro ao guardar configuraÃ§Ã£o.");
+			//JOptionPane.showMessageDialog(null, "Erro ao guardar configuraÃ§Ã£o.");
 			return false;
 		}
 		return true;

@@ -33,9 +33,9 @@ public class Interface extends JFrame {
 	private List<Email> emails;	
 	private JLabel fp ;
 	private JLabel fn ;
-	private JButton loadFile1;
-	private JButton loadFile2;
-	private JButton loadFile3;
+	public JButton loadFile1;
+	public JButton loadFile2;
+	public JButton loadFile3;
 	private JLabel labelRules;
 	private JLabel labelSpam;
 	private JLabel labelHam;
@@ -46,6 +46,7 @@ public class Interface extends JFrame {
 	private JCheckBox autoMode;
 	private JCheckBox manualMode;
 
+	
 
 	/**
 	 * Constroi a interface onde vao estar os caminhos para os ficheiros,
@@ -164,14 +165,14 @@ public class Interface extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(loadFile1.isEnabled()){ 
-					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelRules.getText());
+					//JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelRules.getText());
 				}
 				else if(loadFile2.isEnabled()){
-					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelSpam.getText());
+					//JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelSpam.getText());
 
 				}
 				else if(loadFile3.isEnabled()){
-					JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelHam.getText());
+					//JOptionPane.showMessageDialog(null, "Falta leitura de ficheiro -  " + labelHam.getText());
 				}
 				else{
 					if(manualMode.isSelected()) {
@@ -188,7 +189,7 @@ public class Interface extends JFrame {
 							setFp(c.getFpos());
 							setFn(c.getFneg());
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
+							//JOptionPane.showMessageDialog(null, "Ocorreu um erro. Tente novamente.");
 							e1.printStackTrace();
 						}
 					}
@@ -326,7 +327,7 @@ public class Interface extends JFrame {
 		modeSubPanel2.add(fn);
 
 		JPanel modeSubPanel3 = new JPanel();
-		JButton save = new JButton ("Guardar Configuração");
+		JButton save = new JButton ("Guardar Configuraï¿½ï¿½o");
 		modeSubPanel3.add(save);
 
 		save.addActionListener(new ActionListener() {
@@ -339,7 +340,7 @@ public class Interface extends JFrame {
 		});
 
 		JPanel modeSubPanel4 = new JPanel();
-		JButton reset = new JButton ("Reset Configuração");
+		JButton reset = new JButton ("Reset Configuraï¿½ï¿½o");
 		reset.addActionListener(new ActionListener() {
 
 			@Override
@@ -400,7 +401,7 @@ public class Interface extends JFrame {
 	 *  sejam adicionados a JTable
 	 *  
 	 * @param file - caminho do ficheiro onde se encontram listadas as regras
-	 * @return true caso adicione com sucesso; false caso contrário
+	 * @return true caso adicione com sucesso; false caso contrï¿½rio
 	 */
 	public boolean addRules(String file) {
 		Map<String,String> rules = Control.readRules(file);

@@ -74,6 +74,7 @@ public class EmailTest {
 		rules.add("FB_GVR");
 		rules.add("HK_LOTTO");
 		assertEquals(rules, email.getEmailRules());
+
 	}
 
 	@Test

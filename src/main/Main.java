@@ -10,6 +10,8 @@ public class Main {
 	public static void main (String[] args){
 		Interface t = new Interface();
 		t.open();
+		
+		
 //  CÓDIGO PARA GERAR GRÁFICO R	
 //	String[] params = new String[2];
 //	String[] envp = new String[1];
